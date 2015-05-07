@@ -1,4 +1,4 @@
-![TelerikNEXT](telerik-next-logo175.png)
+![TelerikNEXT](telerik-next-sticky-logo.png)
 
 Thanks to all who attended [TelerikNEXT](http://teleriknext.com) in Boston on May 3-5. If you'd like to access slides and samples from the presentations, you can find the links below. *Note: Not all sessions have resources yet. We'll be updating this repository as we receive files and samples from our speakers*
 
