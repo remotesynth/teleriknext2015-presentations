@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>Media Queries (Header)</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="../styles/master.css" charset="utf-8" />
+    <script src="../scripts/app.js"></script>
+    <style media="screen">
+      @media only screen
+        and (max-width: 400px) {
+          body {
+            background: red;
+          }
+        }
+        @media only screen
+          and (min-width: 401px)
+          and (max-width: 600px) {
+            body {
+              background: blue;
+            }
+          }
+        @media only screen
+          and (min-width: 601px) {
+            body {
+              background: #efefef;
+            }
+          }
+    </style>
+  </head>
+  <body>
+    <p>Fun times with responsive design</p>
+  </body>
+</html>

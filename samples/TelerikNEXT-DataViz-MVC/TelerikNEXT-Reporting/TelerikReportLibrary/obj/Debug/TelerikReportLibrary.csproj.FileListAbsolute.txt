@@ -1,0 +1,8 @@
+C:\Users\bergenhem\documents\visual studio 2013\Projects\TelerikNEXT-Reporting\TelerikReportLibrary\bin\Debug\TelerikReportLibrary.dll.config
+C:\Users\bergenhem\documents\visual studio 2013\Projects\TelerikNEXT-Reporting\TelerikReportLibrary\bin\Debug\TelerikReportLibrary.dll
+C:\Users\bergenhem\documents\visual studio 2013\Projects\TelerikNEXT-Reporting\TelerikReportLibrary\bin\Debug\TelerikReportLibrary.pdb
+C:\Users\bergenhem\documents\visual studio 2013\Projects\TelerikNEXT-Reporting\TelerikReportLibrary\obj\Debug\TelerikReportLibrary.csprojResolveAssemblyReference.cache
+C:\Users\bergenhem\documents\visual studio 2013\Projects\TelerikNEXT-Reporting\TelerikReportLibrary\obj\Debug\TelerikReportLibrary.AnotherReport.resources
+C:\Users\bergenhem\documents\visual studio 2013\Projects\TelerikNEXT-Reporting\TelerikReportLibrary\obj\Debug\TelerikReportLibrary.csproj.GenerateResource.Cache
+C:\Users\bergenhem\documents\visual studio 2013\Projects\TelerikNEXT-Reporting\TelerikReportLibrary\obj\Debug\TelerikReportLibrary.dll
+C:\Users\bergenhem\documents\visual studio 2013\Projects\TelerikNEXT-Reporting\TelerikReportLibrary\obj\Debug\TelerikReportLibrary.pdb

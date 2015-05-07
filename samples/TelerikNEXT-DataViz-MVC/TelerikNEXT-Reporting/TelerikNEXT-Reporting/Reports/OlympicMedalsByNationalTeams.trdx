@@ -1,0 +1,693 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report Width="28.0999991420905cm" Name="OlympicMedals" xmlns="http://schemas.telerik.com/reporting/2012/3.7">
+  <Style>
+    <Font Name="Segoe UI" />
+  </Style>
+  <DataSources>
+    <CsvDataSource RecordSeparators="&#xD;&#xA;" FieldSeparators=",;" HasHeaders="True" Name="associationsData">
+      <Source>
+        <String>Id;Name&amp;#xD;
+1;Pan-American Sports Organization&amp;#xD;
+2;European Olympic Committees&amp;#xD;
+3;Olympic Council of Asia&amp;#xD;
+4;Oceania National Olympic Committees&amp;#xD;
+5;Association of National Olympic Committees of Africa</String>
+      </Source>
+      <Columns>
+        <DataColumn Name="Id" Type="Integer" />
+        <DataColumn Name="Name" />
+      </Columns>
+    </CsvDataSource>
+    <CsvDataSource RecordSeparators="&#xD;&#xA;" FieldSeparators="," HasHeaders="True" Name="medalsData">
+      <Source>
+        <String>Team,Latitude,Longitude,AssociationId,Place,Count&amp;#xD;
+United States,39.443256,-98.957336,1,1,1072&amp;#xD;
+United States,39.443256,-98.957336,1,2,860&amp;#xD;
+United States,39.443256,-98.957336,1,3,749&amp;#xD;
+Russia,63.125187,103.753983,2,1,655&amp;#xD;
+Russia,63.125187,103.753983,2,2,538&amp;#xD;
+Russia,63.125187,103.753983,2,3,532&amp;#xD;
+Germany,51.202465,10.382203,2,1,444&amp;#xD;
+Germany,51.202465,10.382203,2,2,425&amp;#xD;
+Germany,51.202465,10.382203,2,3,432&amp;#xD;
+Great Britain,54.560886,-2.212512,2,1,246&amp;#xD;
+Great Britain,54.560886,-2.212512,2,2,276&amp;#xD;
+Great Britain,54.560886,-2.212512,2,3,284&amp;#xD;
+Italy,42.766979,12.493823,2,1,235&amp;#xD;
+Italy,42.766979,12.493823,2,2,200&amp;#xD;
+Italy,42.766979,12.493823,2,3,228&amp;#xD;
+France,46.637280,2.338262,2,1,233&amp;#xD;
+France,46.637280,2.338262,2,2,254&amp;#xD;
+France,46.637280,2.338262,2,3,293&amp;#xD;
+Sweden,62.674973,16.798059,2,1,193&amp;#xD;
+Sweden,62.674973,16.798059,2,2,203&amp;#xD;
+Sweden,62.674973,16.798059,2,3,231&amp;#xD;
+China,36.553085,103.975433,3,1,213&amp;#xD;
+China,36.553085,103.975433,3,2,166&amp;#xD;
+China,36.553085,103.975433,3,3,147&amp;#xD;
+Australia,-25.585241,134.504120,4,1,143&amp;#xD;
+Australia,-25.585241,134.504120,4,2,156&amp;#xD;
+Australia,-25.585241,134.504120,4,3,181&amp;#xD;
+New Zealand,-44.056293,170.354156,4,1,42&amp;#xD;
+New Zealand,-44.056293,170.354156,4,2,19&amp;#xD;
+New Zealand,-44.056293,170.354156,4,3,39&amp;#xD;
+Japan,36.281647,139.077271,3,1,140&amp;#xD;
+Japan,36.281647,139.077271,3,2,143&amp;#xD;
+Japan,36.281647,139.077271,3,3,160&amp;#xD;
+Canada,62.832909,-95.913322,1,1,121&amp;#xD;
+Canada,62.832909,-95.913322,1,2,154&amp;#xD;
+Canada,62.832909,-95.913322,1,3,173&amp;#xD;
+Cuba,22.066336,-79.453148,1,1,72&amp;#xD;
+Cuba,22.066336,-79.453148,1,2,67&amp;#xD;
+Cuba,22.066336,-79.453148,1,3,69&amp;#xD;
+Brazil,-10.810452,-52.973118,1,1,23&amp;#xD;
+Brazil,-10.810452,-52.973118,1,2,30&amp;#xD;
+Brazil,-10.810452,-52.973118,1,3,55&amp;#xD;
+South Korea,36.097240,127.512703,3,1,107&amp;#xD;
+South Korea,36.097240,127.512703,3,2,99&amp;#xD;
+South Korea,36.097240,127.512703,3,3,90&amp;#xD;
+Kenya,0.576503,37.839890,5,1,25&amp;#xD;
+Kenya,0.576503,37.839890,5,2,32&amp;#xD;
+Kenya,0.576503,37.839890,5,3,29&amp;#xD;
+South Africa,-29.046185,25.062880,5,1,23&amp;#xD;
+South Africa,-29.046185,25.062880,5,2,26&amp;#xD;
+South Africa,-29.046185,25.062880,5,3,27</String>
+      </Source>
+      <Columns>
+        <DataColumn Name="Team" />
+        <DataColumn Name="Latitude" Type="Decimal" />
+        <DataColumn Name="Longitude" Type="Decimal" />
+        <DataColumn Name="AssociationId" Type="Integer" />
+        <DataColumn Name="Place" Type="Integer" />
+        <DataColumn Name="Count" Type="Integer" />
+      </Columns>
+      <CalculatedFields>
+        <CalculatedField Name="Medal" Expression="=IIF(Fields.Place = 1, 'Gold', &#xD;&#xA;IIF(Fields.Place = 2, 'Silver', &#xD;&#xA;IIF(Fields.Place = 3, 'Bronze', 'none')))">
+          <DataType>System.String</DataType>
+        </CalculatedField>
+      </CalculatedFields>
+    </CsvDataSource>
+  </DataSources>
+  <Items>
+    <DetailSection Height="17.2999997476737cm" Name="detailSection1">
+      <Items>
+        <Map DataSourceName="medalsData" Width="19.9999995962779cm" Height="17.2999997476737cm" Left="0cm" Top="0cm" Name="map1">
+          <PlotAreaStyle LineWidth="0cm" LineColor="LightGray" />
+          <Style>
+            <Font Name="Segoe UI Light" />
+          </Style>
+          <SeriesGroups>
+            <MapGroup Name="seriesGroup">
+              <ChildGroups>
+                <MapGroup Name="medalGroup">
+                  <Groupings>
+                    <Grouping Expression="=Fields.Place" />
+                  </Groupings>
+                  <Sortings>
+                    <Sorting Expression="=Fields.Place" Direction="Asc" />
+                  </Sortings>
+                </MapGroup>
+              </ChildGroups>
+            </MapGroup>
+          </SeriesGroups>
+          <GeoLocationGroups>
+            <GeoLocationMapGroup Name="teamGroup">
+              <Groupings>
+                <Grouping Expression="=Fields.Team" />
+              </Groupings>
+              <Sortings>
+                <Sorting Expression="=Fields.Team" Direction="Asc" />
+              </Sortings>
+              <Filters>
+                <Filter Expression="=Fields.AssociationId" Operator="In" Value="=Parameters.associationParam.Value" />
+              </Filters>
+            </GeoLocationMapGroup>
+          </GeoLocationGroups>
+          <Series>
+            <PointMapSeries GeoLocationGroup="teamGroup" SeriesGroup="seriesGroup" Longitude="= Fields.Longitude" Latitude="= Fields.Latitude" Size="=Sum(Fields.Count)" MarkerMinSize="1cm" MarkerMaxSize="2cm" MarkerType="Circle" DataPointLabelOffset="-1px" DataPointLabel="=Fields.Team">
+              <DataPointStyle Visible="True" BackgroundColor="White" LineColor="DarkSlateBlue" />
+              <DataPointLabelStyle Color="64, 64, 64" TextAlign="Center">
+                <Font Name="Segoe UI Symbol" Size="8pt" />
+              </DataPointLabelStyle>
+              <DataPointLabelConditionalFormatting>
+                <FormattingRule>
+                  <Style>
+                    <Font Bold="True" />
+                  </Style>
+                  <Filters>
+                    <Filter Expression="=Fields.Team" Operator="Equal" Value="=Parameters.teamParam.Value" />
+                  </Filters>
+                </FormattingRule>
+              </DataPointLabelConditionalFormatting>
+              <DataPointConditionalFormatting>
+                <FormattingRule>
+                  <Style LineWidth="2pt" LineColor="255, 128, 0" />
+                  <Filters>
+                    <Filter Expression="=Fields.Team" Operator="Equal" Value="=Parameters.teamParam.Value" />
+                  </Filters>
+                </FormattingRule>
+              </DataPointConditionalFormatting>
+              <LegendItem Value="=Fields.Medal">
+                <Style BackgroundColor="Transparent" LineWidth="0cm" LineColor="Transparent" />
+              </LegendItem>
+              <ColorPalette>
+                <ColorPalette>
+                  <Colors>
+                    <Color>30, 0, 0, 200</Color>
+                    <Color>110, 255, 128, 0</Color>
+                  </Colors>
+                </ColorPalette>
+              </ColorPalette>
+            </PointMapSeries>
+            <BarGraphMapSeries GeoLocationGroup="teamGroup" SeriesGroup="seriesGroup" Longitude="= Fields.Longitude" Latitude="= Fields.Latitude" Size="=Sum(Fields.Count)" MarkerMinSize="6mm" MarkerMaxSize="10mm" MarkerType="Circle" Name="columnMapSeries1">
+              <DataPointStyle Visible="True" />
+              <LegendItem Value="= Fields.Medal">
+                <Style BackgroundColor="Transparent" LineWidth="0cm" LineColor="Transparent" />
+                <MarkStyle LineWidth="1px" LineColor="LightSlateGray" />
+              </LegendItem>
+            </BarGraphMapSeries>
+          </Series>
+          <TileProvider>
+            <GenericTileProvider UrlTemplate="http://{subdomain}.mqcdn.com/tiles/1.0.0/map/{zoom}/{X}/{Y}.jpg" Attribution="Tiles courtesy of MapQuest" LogoUrl="http://developer.mapquest.com/content/osm/mq_logo.png">
+              <UrlSubdomains>
+                <String>otile1</String>
+                <String>otile2</String>
+                <String>otile3</String>
+                <String>otile4</String>
+              </UrlSubdomains>
+            </GenericTileProvider>
+          </TileProvider>
+          <LocationProvider>null</LocationProvider>
+          <Projection>
+            <MercatorProjection />
+          </Projection>
+          <Legends>
+            <MapLegend Position="TopRight">
+              <TitleStyle>
+                <Font Bold="True" />
+              </TitleStyle>
+              <Style LineWidth="0cm" LineColor="LightGray">
+                <Font Name="Segoe UI" />
+              </Style>
+            </MapLegend>
+          </Legends>
+          <Titles>
+            <MapTitle Text="Countries with the most medals in the Olympic Games" Position="TopLeft">
+              <Style LineWidth="0cm" LineColor="LightGray">
+                <Font Size="14pt" />
+              </Style>
+            </MapTitle>
+          </Titles>
+          <Parallels>
+            <Style LineColor="LightGray" />
+          </Parallels>
+          <Meridians>
+            <Style LineColor="LightGray" />
+          </Meridians>
+          <ColorPalette>
+            <ColorPalette>
+              <Colors>
+                <Color>255, 204, 51</Color>
+                <Color>Silver</Color>
+                <Color>DarkGoldenrod</Color>
+              </Colors>
+            </ColorPalette>
+          </ColorPalette>
+          <ScaleLegend ScaleUnits="Both">
+            <Style VerticalAlign="Bottom">
+              <Font Name="Segoe UI" Size="8pt" />
+            </Style>
+            <ItemStyle TextAlign="Center" LineWidth="2px" LineColor="DodgerBlue">
+              <BorderColor Default="White" />
+              <Padding Left="5px" Right="5px" />
+            </ItemStyle>
+          </ScaleLegend>
+        </Map>
+        <Crosstab DataSourceName="medalsData" Width="6.10583318026664cm" Height="1.84708326972618cm" Left="20.4999997476737cm" Top="28px" Name="crosstab1" StyleName="">
+          <Body>
+            <Cells>
+              <TableCell RowIndex="0" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="1.57666720251469cm" Height="0.61750780670013cm" Left="0cm" Top="0cm" Value="=Sum(Fields.Count)" Name="textBox6" StyleName="">
+                    <Style TextAlign="Center" VerticalAlign="Middle">
+                      <BorderWidth Default="0cm" />
+                      <Font Size="9pt" />
+                    </Style>
+                    <ConditionalFormatting>
+                      <FormattingRule>
+                        <Style BackgroundColor="255, 219, 202">
+                          <Font Bold="True" />
+                        </Style>
+                        <Filters>
+                          <Filter Expression="=Fields.Team" Operator="Equal" Value="=Parameters.teamParam.Value" />
+                        </Filters>
+                      </FormattingRule>
+                    </ConditionalFormatting>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="1.47083206566095cm" Height="0.61750780670013cm" Left="0cm" Top="0cm" Value="=Sum(Fields.Count)" Name="textBox7">
+                    <Style TextAlign="Center" VerticalAlign="Middle">
+                      <BorderWidth Default="0cm" />
+                      <Font Name="Segoe UI" Size="9pt" Bold="False" />
+                    </Style>
+                    <ConditionalFormatting>
+                      <FormattingRule>
+                        <Style BackgroundColor="255, 219, 202">
+                          <Font Bold="True" />
+                        </Style>
+                        <Filters>
+                          <Filter Expression="=Fields.Team" Operator="Equal" Value="=Parameters.teamParam.Value" />
+                        </Filters>
+                      </FormattingRule>
+                    </ConditionalFormatting>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="1" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="1.57666717318804cm" Height="0.642292136787643cm" Left="0cm" Top="0cm" Value="=Sum(Fields.Count)" Name="textBox8" StyleName="">
+                    <Style Visible="False" TextAlign="Center" VerticalAlign="Middle">
+                      <BorderWidth Default="0cm" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="1" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="1.47083221217958cm" Height="0.642292136787651cm" Left="0cm" Top="0cm" Value="=Sum(Fields.Count)" Name="textBox9" StyleName="">
+                    <Style Visible="False" TextAlign="Center" VerticalAlign="Middle">
+                      <BorderWidth Default="0cm" />
+                      <Font Name="Segoe UI" Bold="False" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+            </Cells>
+            <Columns>
+              <Column Width="1.57666727241594cm" />
+              <Column Width="1.47083203988601cm" />
+            </Columns>
+            <Rows>
+              <Row Height="0.617507920798262cm" />
+              <Row Height="0.6422922289088cm" />
+            </Rows>
+          </Body>
+          <Corner>
+            <Cells>
+              <TableCell RowIndex="0" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="3.05833387029879cm" Height="0.587283130548975cm" Left="0cm" Top="0cm" Value="Team" Name="textBox5" StyleName="Normal.TableHeader">
+                    <Style VerticalAlign="Middle">
+                      <BorderColor Bottom="Gray" />
+                      <BorderWidth Default="0cm" Bottom="1px" />
+                      <Font Name="Segoe UI" Size="10pt" Bold="True" />
+                    </Style>
+                    <Action>null</Action>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+            </Cells>
+          </Corner>
+          <RowGroups>
+            <TableGroup Name="Team1">
+              <ReportItem>
+                <TextBox Width="3.05833364294701cm" Height="0.61750780670013cm" Left="0cm" Top="0cm" Value="=Fields.Team" Name="textBox3" StyleName="">
+                  <Style VerticalAlign="Middle">
+                    <BorderWidth Default="0cm" />
+                    <Font Name="Segoe UI" Size="9pt" Underline="True" />
+                    <Padding Left="5px" Right="0cm" />
+                  </Style>
+                  <ConditionalFormatting>
+                    <FormattingRule>
+                      <Style BackgroundColor="255, 219, 202">
+                        <Font Bold="True" />
+                      </Style>
+                      <Filters>
+                        <Filter Expression="=Fields.Team" Operator="Equal" Value="=Parameters.teamParam.Value" />
+                      </Filters>
+                    </FormattingRule>
+                  </ConditionalFormatting>
+                  <Action>
+                    <NavigateToReportAction>
+                      <ReportSource>
+                        <UriReportSource Uri="OlympicMedalsByNationalTeams.trdx">
+                          <Parameters>
+                            <Parameter Name="associationParam">
+                              <Value>
+                                <String>=Parameters.associationParam.Value</String>
+                              </Value>
+                            </Parameter>
+                            <Parameter Name="teamParam">
+                              <Value>
+                                <String>=ReportItem.Text</String>
+                              </Value>
+                            </Parameter>
+                          </Parameters>
+                        </UriReportSource>
+                      </ReportSource>
+                    </NavigateToReportAction>
+                  </Action>
+                </TextBox>
+              </ReportItem>
+              <Groupings>
+                <Grouping Expression="=Fields.Team" />
+              </Groupings>
+              <Sortings>
+                <Sorting Expression="=Sum(Fields.Count)" Direction="Desc" />
+              </Sortings>
+              <Filters>
+                <Filter Expression="=Fields.AssociationId" Operator="In" Value="=Parameters.associationParam.Value" />
+              </Filters>
+            </TableGroup>
+            <TableGroup>
+              <ReportItem>
+                <TextBox Width="3.05833387029879cm" Height="0.642292155929438cm" Left="0cm" Top="0cm" Value="Total" Name="textBox4" StyleName="">
+                  <Style Visible="False" VerticalAlign="Middle">
+                    <BorderWidth Default="0cm" />
+                    <Font Name="Segoe UI" />
+                    <Padding Left="5px" />
+                  </Style>
+                </TextBox>
+              </ReportItem>
+            </TableGroup>
+          </RowGroups>
+          <ColumnGroups>
+            <TableGroup Name="Medal1">
+              <ReportItem>
+                <TextBox Width="1.57666717318804cm" Height="0.587283113046576cm" Left="0cm" Top="0cm" Value="= Fields.Medal" Name="textBox1" StyleName="Normal.TableHeader">
+                  <Style TextAlign="Center" VerticalAlign="Middle">
+                    <BorderColor Bottom="Gray" />
+                    <BorderWidth Default="0cm" Bottom="1px" />
+                    <Font Name="Segoe UI" Size="10pt" Bold="True" />
+                  </Style>
+                  <ConditionalFormatting>
+                    <FormattingRule>
+                      <Style BackgroundColor="White" Color="245, 184, 1">
+                        <Font Bold="True" />
+                      </Style>
+                      <Filters>
+                        <Filter Expression="=Fields.Place" Operator="Equal" Value="=1" />
+                      </Filters>
+                    </FormattingRule>
+                    <FormattingRule>
+                      <Style BackgroundColor="White" Color="DimGray">
+                        <Font Bold="True" />
+                      </Style>
+                      <Filters>
+                        <Filter Expression="=Fields.Place" Operator="Equal" Value="=2" />
+                      </Filters>
+                    </FormattingRule>
+                    <FormattingRule>
+                      <Style BackgroundColor="White" Color="DarkGoldenrod">
+                        <Font Bold="True" />
+                      </Style>
+                      <Filters>
+                        <Filter Expression="=Fields.Place" Operator="Equal" Value="=3" />
+                      </Filters>
+                    </FormattingRule>
+                  </ConditionalFormatting>
+                </TextBox>
+              </ReportItem>
+              <Groupings>
+                <Grouping Expression="=Fields.Place" />
+              </Groupings>
+              <Sortings>
+                <Sorting Expression="=Fields.Place" Direction="Asc" />
+              </Sortings>
+            </TableGroup>
+            <TableGroup>
+              <ReportItem>
+                <TextBox Width="1.47083221217958cm" Height="0.587283113046584cm" Left="0cm" Top="0cm" Value="Total" Name="textBox2" StyleName="Normal.GrandTotal">
+                  <Style TextAlign="Center" VerticalAlign="Middle">
+                    <BorderColor Bottom="Gray" />
+                    <BorderWidth Default="0cm" Bottom="1px" />
+                    <Font Name="Segoe UI" Size="10pt" Bold="True" />
+                  </Style>
+                </TextBox>
+              </ReportItem>
+            </TableGroup>
+          </ColumnGroups>
+          <Filters>
+            <Filter Expression="=Fields.AssociationId" Operator="In" Value="=Parameters.associationParam.Value" />
+          </Filters>
+        </Crosstab>
+        <Graph DataSourceName="medalsData" Width="5.1350013448993cm" Height="4.3997999556915cm" Left="19.9999995962779cm" Top="12.9000003532569cm" Anchoring="Top" Name="graph1">
+          <PlotAreaStyle LineWidth="0cm" LineColor="LightGray" />
+          <Axes>
+            <GraphAxis Name="graphAxis2" LabelPlacement="None">
+              <Style Visible="False" />
+              <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+              <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+              <Scale>
+                <CategoryScale />
+              </Scale>
+            </GraphAxis>
+            <GraphAxis Name="GraphAxis2" MajorTickMarkDisplayType="None" LabelPlacement="NextToAxis">
+              <Style Visible="False" />
+              <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+              <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+              <Scale>
+                <NumericalScale Minimum="0" />
+              </Scale>
+            </GraphAxis>
+          </Axes>
+          <CoordinateSystems>
+            <CartesianCoordinateSystem XAxis="graphAxis2" YAxis="GraphAxis2" Name="cartesianCoordinateSystem1" />
+          </CoordinateSystems>
+          <Style>
+            <Font Size="9pt" />
+          </Style>
+          <SeriesGroups>
+            <GraphGroup Name="medalGroup1">
+              <Groupings>
+                <Grouping Expression="=Fields.Place" />
+              </Groupings>
+              <Sortings>
+                <Sorting Expression="=Fields.Place" Direction="Asc" />
+              </Sortings>
+            </GraphGroup>
+          </SeriesGroups>
+          <CategoryGroups>
+            <GraphGroup Name="categoryGroup" />
+          </CategoryGroups>
+          <Series>
+            <BarSeries CoordinateSystem="cartesianCoordinateSystem1" CategoryGroup="categoryGroup" SeriesGroup="medalGroup1" DataPointLabelAlignment="InsideEnd" DataPointLabelOffset="10px" Y="=Sum(Fields.Count)" DataPointLabel="=Sum(Fields.Count)" Name="barSeries1">
+              <DataPointStyle Visible="True" LineWidth="0pt" />
+              <DataPointLabelStyle Visible="True" />
+              <LegendItem Value="=Fields.Medal">
+                <Style BackgroundColor="Transparent" LineWidth="0cm" LineColor="Transparent" />
+              </LegendItem>
+            </BarSeries>
+          </Series>
+          <Legend>
+            <Style Visible="False" LineWidth="0cm" LineColor="LightGray" />
+          </Legend>
+          <Titles>
+            <GraphTitle Text="= Fields.Team+'''s medals'" Position="TopLeft">
+              <Style LineWidth="0pt" LineColor="LightGray">
+                <Font Size="10pt" />
+                <Padding Left="20px" />
+              </Style>
+            </GraphTitle>
+          </Titles>
+          <ColorPalette>
+            <ColorPalette>
+              <Colors>
+                <Color>255, 204, 51</Color>
+                <Color>DarkGray</Color>
+                <Color>DarkGoldenrod</Color>
+              </Colors>
+            </ColorPalette>
+          </ColorPalette>
+          <Filters>
+            <Filter Expression="=Fields.Team" Operator="Equal" Value="=Parameters.teamParam.Value" />
+          </Filters>
+        </Graph>
+      </Items>
+    </DetailSection>
+  </Items>
+  <StyleSheet>
+    <StyleRule>
+      <Style>
+        <Padding Left="2pt" Right="2pt" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextItemBase" />
+        <TypeSelector Type="HtmlTextBox" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style Color="58, 29, 20">
+        <BorderStyle Default="Solid" />
+        <BorderColor Default="Black" />
+        <BorderWidth Default="1px" />
+        <Font Name="Gill Sans MT" Size="9pt" />
+      </Style>
+      <Selectors>
+        <StyleSelector Type="Table" StyleName="Solstice.TableNormal" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style BackgroundColor="231, 222, 201" Color="58, 29, 20">
+        <BorderStyle Default="Solid" />
+        <BorderColor Default="Black" />
+        <BorderWidth Default="1px" />
+        <Font Name="Gill Sans MT" Size="9pt" />
+      </Style>
+      <Selectors>
+        <DescendantSelector>
+          <Selectors>
+            <TypeSelector Type="Table" />
+            <StyleSelector Type="ReportItem" StyleName="Solstice.TableGroup" />
+          </Selectors>
+        </DescendantSelector>
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style BackgroundColor="213, 202, 189" Color="58, 29, 20">
+        <BorderStyle Default="Solid" />
+        <BorderColor Default="Black" />
+        <BorderWidth Default="1px" />
+        <Font Name="Gill Sans MT" Size="10pt" Bold="True" Italic="False" Underline="False" Strikeout="False" />
+      </Style>
+      <Selectors>
+        <DescendantSelector>
+          <Selectors>
+            <TypeSelector Type="Table" />
+            <StyleSelector Type="ReportItem" StyleName="Solstice.GrandTotal" />
+          </Selectors>
+        </DescendantSelector>
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style BackgroundColor="79, 39, 28" Color="231, 222, 201" VerticalAlign="Middle">
+        <BorderStyle Default="Solid" />
+        <BorderColor Default="Black" />
+        <BorderWidth Default="1px" />
+        <Font Name="Gill Sans MT" Size="10pt" />
+      </Style>
+      <Selectors>
+        <DescendantSelector>
+          <Selectors>
+            <TypeSelector Type="Table" />
+            <StyleSelector Type="ReportItem" StyleName="Solstice.TableHeader" />
+          </Selectors>
+        </DescendantSelector>
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style Color="58, 29, 20">
+        <BorderStyle Default="Solid" />
+        <BorderColor Default="Black" />
+        <BorderWidth Default="1px" />
+        <Font Name="Gill Sans MT" Size="9pt" />
+      </Style>
+      <Selectors>
+        <DescendantSelector>
+          <Selectors>
+            <TypeSelector Type="Table" />
+            <StyleSelector Type="ReportItem" StyleName="Solstice.TableBody" />
+          </Selectors>
+        </DescendantSelector>
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style Color="Black">
+        <BorderStyle Default="Solid" />
+        <BorderColor Default="Black" />
+        <BorderWidth Default="1px" />
+        <Font Name="Tahoma" Size="9pt" />
+      </Style>
+      <Selectors>
+        <StyleSelector Type="Table" StyleName="Normal.TableNormal" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style>
+        <BorderStyle Default="Solid" />
+        <BorderColor Default="Black" />
+        <BorderWidth Default="1px" />
+        <Font Name="Tahoma" Size="9pt" />
+      </Style>
+      <Selectors>
+        <DescendantSelector>
+          <Selectors>
+            <TypeSelector Type="Table" />
+            <StyleSelector Type="ReportItem" StyleName="Normal.TableGroup" />
+          </Selectors>
+        </DescendantSelector>
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style VerticalAlign="Middle">
+        <BorderStyle Default="Solid" />
+        <BorderColor Default="Black" />
+        <BorderWidth Default="1px" />
+        <Font Name="Tahoma" Size="10pt" />
+      </Style>
+      <Selectors>
+        <DescendantSelector>
+          <Selectors>
+            <TypeSelector Type="Table" />
+            <StyleSelector Type="ReportItem" StyleName="Normal.TableHeader" />
+          </Selectors>
+        </DescendantSelector>
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style>
+        <BorderStyle Default="Solid" />
+        <BorderColor Default="Black" />
+        <BorderWidth Default="1px" />
+        <Font Name="Tahoma" Size="9pt" />
+      </Style>
+      <Selectors>
+        <DescendantSelector>
+          <Selectors>
+            <TypeSelector Type="Table" />
+            <StyleSelector Type="ReportItem" StyleName="Normal.TableBody" />
+          </Selectors>
+        </DescendantSelector>
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style>
+        <BorderStyle Default="Solid" />
+        <BorderColor Default="Black" />
+        <BorderWidth Default="1px" />
+        <Font Name="Tahoma" Size="10pt" Bold="True" Italic="False" Underline="False" Strikeout="False" />
+      </Style>
+      <Selectors>
+        <DescendantSelector>
+          <Selectors>
+            <TypeSelector Type="Table" />
+            <StyleSelector Type="ReportItem" StyleName="Normal.GrandTotal" />
+          </Selectors>
+        </DescendantSelector>
+      </Selectors>
+    </StyleRule>
+  </StyleSheet>
+  <PageSettings>
+    <PageSettings PaperKind="Letter" Landscape="False">
+      <Margins>
+        <MarginsU Left="1in" Right="1in" Top="1in" Bottom="1in" />
+      </Margins>
+    </PageSettings>
+  </PageSettings>
+  <ReportParameters>
+    <ReportParameter Name="associationParam" Text="Association" Visible="True" MultiValue="True" AutoRefresh="True">
+      <AvailableValues DataSourceName="associationsData" DisplayMember="= Fields.Name" ValueMember="= Fields.Id" />
+      <Value>
+        <String>=Array(1)</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="teamParam" AllowNull="True" AutoRefresh="True">
+      <Value>
+        <String>United States</String>
+      </Value>
+    </ReportParameter>
+  </ReportParameters>
+</Report>

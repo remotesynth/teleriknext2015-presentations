@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report Width="6.73228327433268in" Name="PopulationDensity" xmlns="http://schemas.telerik.com/reporting/2012/3.7">
+  <Style>
+    <Font Name="Segoe UI" Size="9pt" />
+  </Style>
+  <DataSources>
+    <CsvDataSource RecordSeparators="&#xD;&#xA;" FieldSeparators=";" HasHeaders="True" ThousandSeparator="," DateTimeFormat="MMMM dd, yyyy" Name="populationData">
+      <Source>
+        <String>Pos.;Country;Area (km2);Area (mi2);Population;Density (pop./km2);Density (pop./mi2);Date;Population source&amp;#xD;
+1;Bangladesh;143,998;55,598;157,131,172;1,091.2;2,826.2;October 13, 2014;Official population clock&amp;#xD;
+2;South Korea;100,210;38,691;50,423,955;503;1,303;July 1, 2014;Official estimate&amp;#xD;
+3;Rwanda;25,314;9,774;10,537,222;416;1,077;August 15, 2012;Preliminary 2012 census result&amp;#xD;
+4;Netherlands;41,526;16,033;16,872,017;406.3;1,052.31;October 13, 2014;Official population clock&amp;#xD;
+5;Haiti;27,065;10,450;10,745,665;397;1,028;2014;Official projection&amp;#xD;
+6;Dominican Republic;24,596;9,497;9,445,281;384;995;December 1, 2013;Final 2010 census result&amp;#xD;
+7;India;3,287,240;1,269,211;1,260,885,250;383.57;993.44;October 13, 2014;India Population clock&amp;#xD;
+8;Israel;22,072;8,522;8,259,768;374.22;969.22;October 13, 2014;Official population clock[14]&amp;#xD;
+9;Belgium;30,528;11,787;11,203,787;367;951;July 1, 2014;Monthly official estimate&amp;#xD;
+10;Burundi;27,816;10,740;9,420,248;339;878;July 1, 2013;UN Estimate&amp;#xD;
+11;Japan;377,915;145,914;127,100,000;336;870;May 1, 2014;Monthly official estimate&amp;#xD;
+12;Philippines;300,000;115,831;100,385,633;334.62;866.66;October 13, 2014;Official population clock&amp;#xD;
+13;Sri Lanka;65,610;25,332;20,277,597;309;800;March 21, 2012;Preliminary 2012 census result&amp;#xD;
+14;Vietnam;331,212;127,882;88,780,000;268;694;2012;Official estimate&amp;#xD;
+15;United Kingdom;242,910;93,788;64,105,700;262;679;July 1, 2013;Annual official estimate&amp;#xD;
+16;Pakistan;803,940;310,403;187,833,837;233.64;605.13;October 13, 2014;Official population clock&amp;#xD;
+17;Germany;357,123;137,886;80,781,000;226;585;November 30, 2013;Monthly official estimate&amp;#xD;
+18;Italy;301,308;116,336;60,762,320;202;523;February 28, 2014;Monthly official estimate&amp;#xD;
+19;Switzerland;41,285;15,940;8,160,900;198;513;March 31, 2014;Quarterly provisional figure&amp;#xD;
+20;Dominican Republic;47,875;18,485;9,445,281;197;510;December 1, 2010;Final 2010 census result&amp;#xD;
+21;North Korea;122,762;47,399;24,052,231;196;508;October 1, 2008;Final 2008 census result&amp;#xD;
+22;Nigeria;923,768;356,669;178,517,000;193;500;July 1, 2014;UN projection&amp;#xD;
+23;Nepal;147,181;56,827;26,494,504;180;466;June 22, 2011;Final 2011 census result&amp;#xD;
+24;Guatemala;108,889;42,042;15,438,384;142;368;June 30, 2013;Official estimate&amp;#xD;
+25;China;9,640,821;3,722,342;1,367,268,800;141.82;367.31;October 13, 2014;Official estimate&amp;#xD;
+26;Uganda;241,551;93,263;34,131,400;141;365;July 1, 2012;Official estimate&amp;#xD;
+27;Czech Republic;78,867;30,451;10,517,400;133;344;April 1, 2014;Quarterly official estimate&amp;#xD;
+28;Indonesia;1,910,931;737,815;252,164,800;132;342;July 1, 2014;Official projection&amp;#xD;
+29;Thailand;513,120;198,117;65,926,261;128;332;September 1, 2010;2010 census result&amp;#xD;
+30;Poland;312,685;120,728;38,496,000;123;319;December 31, 2013;Official estimate&amp;#xD;
+31;Malawi;118,484;45,747;14,388,600;121;313;July 1, 2011;Official estimate&amp;#xD;
+32;France;543,965;210,026;63,970,000;118;306;March 1, 2014;Monthly official estimate&amp;#xD;
+33;Syria;185,180;71,498;21,377,000;115;298;December 31, 2011;Official estimate&amp;#xD;
+34;Portugal;92,090;35,556;10,562,178;115;298;March 21, 2011;Final 2011 census result&amp;#xD;
+35;Azerbaijan;86,600;33,436;9,477,100;109;282;December 31, 2013;Official estimate&amp;#xD;
+36;Hungary;93,029;35,919;9,879,000;106;275;January 1, 2014;Annual official estimate&amp;#xD;
+37;Ghana;238,533;92,098;24,658,823;103;267;September 26, 2010;Final 2010 census result&amp;#xD;
+38;Cuba;109,886;42,427;11,163,934;102;264;September 15, 2012;Preliminary 2012 census result&amp;#xD;
+39;Austria;83,879;32,386;8,504,850;101;262;January 1, 2014;Official quarterly estimate&amp;#xD;
+40;Turkey;783,562;302,535;76,667,864;100;259;December 31, 2013;Official estimate&amp;#xD;
+41;United Arab Emirates;83,600;32,278;8,264,070;99;256;2010;Official estimate&amp;#xD;
+42;Spain;503,783;194,512;46,609,700;93;241;July 1, 2013;Official estimate&amp;#xD;
+43;Benin;112,622;43,484;10,323,000;92;238;July 1, 2013;UN estimate&amp;#xD;
+44;Malaysia;330,803;127,724;30,395,000;92;238;October 13, 2014;Official population clock&amp;#xD;
+45;Egypt;1,002,450;387,048;87,309,367;87.1;225.58;October 13, 2014;Official population clock&amp;#xD;
+46;Romania;238,391;92,043;20,121,641;84;218;October 20, 2011;Final 2011 census result&amp;#xD;
+47;Cambodia;181,035;69,898;15,184,116;84;218;July 1,2014;Official annual projection&amp;#xD;
+48;Greece;131,957;50,949;11,123,034;84;218;December 31, 2012;Official estimate&amp;#xD;
+49;Ethiopia;1,063,652;410,678;87,952,991;83;215;July 1, 2014;Official projection&amp;#xD;
+50;Iraq;434,128;167,618;36,004,552;83;215;July 1, 2014;Annual official projection&amp;#xD;
+51;Burma;676,577;261,228;51,419,420;76;197;March 29, 2014;Preliminary 2014 census result&amp;#xD;
+52;Kenya;581,834;224,647;45,546,000;78;202;July 1, 2014;UN projection&amp;#xD;
+53;Ukraine;603,628;233,062;45,377,581;75;194;April 1, 2014;Monthly official estimate&amp;#xD;
+54;Honduras;112,088;43,277;8,385,072;75;194;2012;Official estimate&amp;#xD;
+55;Morocco;446,550;172,414;33,404,287;74.81;193.74;October 13, 2014;Official population clock&amp;#xD;
+56;Ivory Coast;322,921;124,680;23,202,000;72;186;2012;Official estimate&amp;#xD;
+57;Senegal;196,722;75,955;13,567,338;69;179;2013;Official estimate&amp;#xD;
+58;Uzbekistan;444,103;171,469;30,492,800;69;179;January 1, 2014;Official estimate&amp;#xD;
+59;Tunisia;163,610;63,170;10,777,500;66;171;July 1, 2012;Official estimate&amp;#xD;
+60;Bulgaria;111,002;42,858;7,282,041;66;171;December 31, 2012;Official estimate&amp;#xD;
+61;Burkina Faso;270,764;104,543;17,322,796;64;166;2013;Official estimate&amp;#xD;
+62;Ecuador;255,595;98,686;15,845,100;62;161;October 13, 2014;Official population clock&amp;#xD;
+63;Mexico;1,967,138;759,516;119,713,203;61;158;July 1, 2014;Official estimate&amp;#xD;
+64;Tajikistan;143,100;55,251;8,160,000;57;148;January 1, 2014;Official estimate&amp;#xD;
+65;Yemen;455,000;175,676;24,527,000;54;140;2012;Official estimate&amp;#xD;
+66;Tanzania;883,749;341,217;44,928,923;51;132;August 26, 2012;2012 census result&amp;#xD;
+67;Iran;1,648,195;636,372;77,811,855;47.21;122.27;October 13, 2014;Official population clock&amp;#xD;
+68;Belarus;207,600;80,155;9,469,200;46;119;July 1, 2014;Quarterly official estimate&amp;#xD;
+69;Guinea;245,857;94,926;10,824,200;44;114;2010;Official estimate&amp;#xD;
+70;Cameroon;466,050;179,943;20,386,799;44;114;2012;Official estimate&amp;#xD;
+71;South Africa;1,220,813;471,359;52,981,991;43;111;July 1, 2013;Official estimate&amp;#xD;
+72;Colombia;1,141,748;440,831;47,816,252;41.88;108.47;October 13, 2014;Official population clock&amp;#xD;
+73;Afghanistan;645,807;249,347;25,500,100;39;101;January 1, 2013;Official estimate&amp;#xD;
+74;Madagascar;587,041;226,658;20,696,070;35;91;2011;Official estimate&amp;#xD;
+75;Zimbabwe;390,757;150,872;12,973,808;33;85;August 17, 2012;Preliminary 2012 census result&amp;#xD;
+76;United States;9,826,675;3,794,101;318,900,926;32.45;84.05;October 13, 2014;Official population clock&amp;#xD;
+77;Venezuela;916,445;353,841;28,946,101;32;83;October 30, 2011;Preliminary 2011 census result&amp;#xD;
+78;Mozambique;799,380;308,642;23,700,715;30;78;2012;Official estimate&amp;#xD;
+79;Congo, DRC;2,345,095;905,446;69,360,000;29.6;77;July 1, 2014;UN projection&amp;#xD;
+80;Peru;1,285,216;496,225;30,475,144;24;62;June 30, 2013;Official estimate&amp;#xD;
+81;Brazil;8,515,767;3,287,956;203,283,914;23.87;61.83;October 13, 2014;Official population clock&amp;#xD;
+82;Chile;756,096;291,930;16,634,603;22;57;April 9, 2012;Final 2012 census result&amp;#xD;
+83;Sweden;449,964;173,732;9,684,858;21.5;56;May 31, 2014;Monthly official estimate&amp;#xD;
+84;South Sudan;644,329;248,777;11,296,000;18;47;July 1, 2013;UN estimate&amp;#xD;
+85;Zambia;752,612;290,585;13,092,666;17;44;October 16, 2010;Final 2010 census result&amp;#xD;
+86;Sudan;1,839,542;710,251;30,894,000;17;44;April 22, 2008;2008 census result&amp;#xD;
+87;Angola;1,246,700;481,354;20,609,294;17;44;2012;Official estimate&amp;#xD;
+88;Algeria;2,381,741;919,595;38,700,000;16;41;January 1, 2014;Official estimate&amp;#xD;
+89;Papua New Guinea;462,840;178,704;7,398,500;16;41;July 1, 2013;Annual official estimate&amp;#xD;
+90;Somalia;637,657;246,201;9,331,000;15;39;July 1, 2010;Official estimate&amp;#xD;
+91;Argentina;2,780,400;1,073,518;40,117,096;14;36;October 27, 2010;Final 2010 census result&amp;#xD;
+92;Niger;1,186,408;458,075;17,129,076;14;36;December 10, 2012;Preliminary 2012 census result&amp;#xD;
+93;Saudi Arabia;2,149,690;830,000;29,994,272;14;36;2013;Annual official estimate&amp;#xD;
+94;Mali;1,248,574;482,077;14,528,662;12;31;April 1, 2009;Final 2009 census result&amp;#xD;
+95;Bolivia;1,098,581;424,164;10,389,913;9;23;November 21, 2012;Preliminary 2012 census result&amp;#xD;
+96;Chad;1,284,000;495,755;11,274,106;9;23;May 20, 2009;Preliminary 2009 census result&amp;#xD;
+97;Russia;17,075,400;6,592,849;143,700,000;8;21;January 1,2014;Official estimate&amp;#xD;
+98;Kazakhstan;2,724,900;1,052,090;17,186,000;6;16;February 1, 2014;Monthly official estimate&amp;#xD;
+99;Canada;9,984,670;3,855,103;35,725,927;3.58;9.27;October 13, 2014;Official estimate&amp;#xD;
+100;Australia;7,692,024;2,969,907;23,628,884;3.07;7.96;October 13, 2014;Official estimate</String>
+      </Source>
+      <Columns>
+        <DataColumn Name="Pos." Type="Integer" />
+        <DataColumn Name="Country" />
+        <DataColumn Name="Area (km2)" Type="Float" />
+        <DataColumn Name="Area (mi2)" Type="Float" />
+        <DataColumn Name="Population" Type="Integer" />
+        <DataColumn Name="Density (pop./km2)" Type="Float" />
+        <DataColumn Name="Density (pop./mi2)" Type="Float" />
+        <DataColumn Name="Date" Type="DateTime" />
+        <DataColumn Name="Population source" />
+      </Columns>
+    </CsvDataSource>
+  </DataSources>
+  <Items>
+    <DetailSection Height="14.2000001009305cm" Name="detailSection1">
+      <Items>
+        <Map DataSourceName="populationData" Width="16.7000008579095cm" Height="13.5999995962779cm" Left="0.199999899069471cm" Top="0.300000050465265cm" Name="map2">
+          <PlotAreaStyle LineWidth="0cm" LineColor="LightGray" />
+          <Style>
+            <Padding Left="10px" Right="10px" Top="10px" Bottom="10px" />
+          </Style>
+          <SeriesGroups>
+            <MapGroup Name="seriesGroup1" />
+          </SeriesGroups>
+          <GeoLocationGroups>
+            <ShapeMapGroup Name="categoryGroup1">
+              <Groupings>
+                <Grouping Expression="= Fields.CNTRY_NAME" />
+              </Groupings>
+            </ShapeMapGroup>
+          </GeoLocationGroups>
+          <Series>
+            <ShapeMapSeries ShapeMapGroup="categoryGroup1" SeriesGroup="seriesGroup1" ColorData="= Sum(Fields.[Density (pop./km2)])" ColorsCount="8" RangeGrouping="EqualDistribution" DataPointLabel="{Fields.CNTRY_NAME}&#xD;&#xA;({Sum(Fields.[Density (pop./km2)])})" Name="shapeMapSeries1">
+              <DataPointStyle Visible="True" LineColor="Gray" />
+              <DataPointLabelStyle Visible="False" TextAlign="Center">
+                <Font Size="8pt" />
+              </DataPointLabelStyle>
+              <SourceType>
+                <EsriShapeFileSourceType FileName="Resources/world.shp">
+                  <RelationPairs>
+                    <MapRelationPair AnalyticalField="= Fields.Country" ShapeFileField="= Fields.CNTRY_NAME" />
+                  </RelationPairs>
+                </EsriShapeFileSourceType>
+              </SourceType>
+              <LegendItem Value="=Format('{0:N0} - {1:N0}', RangeMin, RangeMax)" />
+              <ColorPalette>
+                <GradientPalette BeginColor="255, 226, 213" EndColor="213, 106, 0" />
+              </ColorPalette>
+            </ShapeMapSeries>
+          </Series>
+          <Projection>
+            <MercatorProjection />
+          </Projection>
+          <Legends>
+            <MapLegend Title="people/km²">
+              <TitleStyle TextAlign="Center">
+                <Font Bold="True" />
+                <Padding Bottom="6px" />
+              </TitleStyle>
+              <Style LineWidth="0cm" LineColor="LightGray" />
+            </MapLegend>
+          </Legends>
+          <Titles>
+            <MapTitle Text="">
+              <Style LineWidth="0cm" LineColor="LightGray" />
+            </MapTitle>
+          </Titles>
+          <Parallels>
+            <Style LineColor="LightGray" />
+          </Parallels>
+          <Meridians>
+            <Style LineColor="LightGray" />
+          </Meridians>
+          <ColorPalette>null</ColorPalette>
+          <ScaleLegend>
+            <Style VerticalAlign="Bottom" />
+            <ItemStyle TextAlign="Center" LineWidth="2px" LineColor="DodgerBlue">
+              <BorderColor Default="White" />
+              <Padding Left="5px" Right="5px" />
+            </ItemStyle>
+          </ScaleLegend>
+        </Map>
+      </Items>
+    </DetailSection>
+    <ReportHeaderSection Height="2.19999954581262cm" Name="reportHeaderSection1">
+      <Items>
+        <TextBox Width="13.7999970730147cm" Height="0.8cm" Left="0.199999899069471cm" Top="0.300000050465265cm" Value="World population density" Name="textBox1">
+          <Style>
+            <Font Size="14pt" Bold="False" />
+          </Style>
+        </TextBox>
+        <TextBox Width="13.7999986879031cm" Height="0.50019979198218cm" Left="0.199999899069471cm" Top="1.60000020186106cm" Value="The choropleth below shows the 100 most populated countries" Name="textBox2" />
+      </Items>
+    </ReportHeaderSection>
+    <ReportFooterSection Height="1.19999863743786cm" Name="reportFooterSection1">
+      <Items>
+        <HtmlTextBox Width="13.7999973297119cm" Height="0.499800115823746cm" Left="0.199999899069471cm" Top="0.599998889764181cm" Value="The analytical data is obtained from &lt;a href=&quot;http://en.wikipedia.org/wiki/List_of_sovereign_states_and_dependent_territories_by_population_density&quot; target=&quot;_blank&quot;&gt;Wikipedia&lt;/a&gt;." Name="htmlTextBox1" />
+      </Items>
+    </ReportFooterSection>
+  </Items>
+  <StyleSheet>
+    <StyleRule>
+      <Style>
+        <Padding Left="2pt" Right="2pt" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextItemBase" />
+        <TypeSelector Type="HtmlTextBox" />
+      </Selectors>
+    </StyleRule>
+  </StyleSheet>
+  <PageSettings>
+    <PageSettings PaperKind="Letter" Landscape="False">
+      <Margins>
+        <MarginsU Left="1in" Right="1in" Top="1in" Bottom="1in" />
+      </Margins>
+    </PageSettings>
+  </PageSettings>
+</Report>

@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>Kendo UI Responsive Panel</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="../styles/master.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/kendo/kendo.common.min.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/kendo/kendo.flat.min.css" type="text/css" />
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/kendo/jquery.min.js"></script>
+    <script src="../scripts/kendo/kendo.all.min.js"></script>
+  </head>
+  <body>
+
+    <header>
+      <button class="k-rpanel-toggle"><i class="k-icon k-i-hbars"></i></button>
+      <h1>TelerikNEXT</h1>
+    </header>
+
+    <nav id="sidebar">
+          <a href="http://www.telerik.com">Telerik</a>
+          <a href="http://www.teleriknext.com">TelerikNEXT</a>
+    </nav>
+
+    <article id="content">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec volutpat nisl vel arcu tincidunt imperdiet. Morbi condimentum orci id diam mollis, et molestie felis aliquet. Curabitur quis scelerisque metus. Quisque ligula justo, euismod sed euismod ac, interdum nec ante. Donec malesuada dolor sed massa tincidunt, a bibendum nulla ultricies. Fusce in mauris at nisi feugiat interdum. Mauris quis arcu diam. Ut convallis sollicitudin nunc at malesuada. Curabitur ultrices dui quis condimentum pulvinar. Suspendisse dictum tincidunt lectus, ac tempus ex vestibulum non. Ut quam neque, viverra placerat aliquet at, rutrum a elit. Vivamus porta tempor leo in elementum. In in tincidunt justo. Morbi et posuere ex. Nulla dignissim porttitor purus vehicula maximus. In lobortis tempor porttitor.</p>
+      <p>Integer quam justo, rhoncus tincidunt felis vitae, posuere mollis erat. Pellentesque consectetur dapibus libero eu posuere. Nunc sit amet sapien at odio sagittis semper. Etiam pellentesque imperdiet mauris, ut egestas ipsum condimentum tristique. Cras luctus, risus id semper pellentesque, nunc velit imperdiet purus, eget consequat dui libero eu felis. Cras vitae eros magna. Sed et nulla condimentum lacus dictum rutrum sed at augue. Nam eget suscipit tortor. Mauris hendrerit ipsum eget volutpat pharetra. Nullam id efficitur purus. Vestibulum eget condimentum ex. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras nec turpis vehicula risus congue vulputate ultrices et turpis.</p>
+    </article>
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#sidebar")
+           .kendoResponsivePanel({
+             breakpoint: 768,
+             orientation: "left"
+           })
+           .on("click", "a", function(e) {
+             $("#sidebar").kendoResponsivePanel("close");
+           });
+      });
+    </script>
+  </body>
+</html>

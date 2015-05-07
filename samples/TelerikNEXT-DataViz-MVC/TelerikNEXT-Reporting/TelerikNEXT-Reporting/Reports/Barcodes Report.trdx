@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report Width="194.76mm" UnitOfMeasure="Mm" Name="BarcodesReport" SnapGridSize="0.1in" xmlns="http://schemas.telerik.com/reporting/2012/3.7">
+  <Items>
+    <DetailSection KeepTogether="False" Height="283.33mm" Name="detail">
+      <Items>
+        <Table Width="19.4000009407577cm" Height="27.7299972682047cm" Left="0mm" Top="0mm" Name="table1">
+          <Body>
+            <Cells>
+              <TableCell RowIndex="3" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000075660501cm" Height="0.749999987664266cm" Left="0in" Top="0in" Value="Codabar" Name="textBox22">
+                    <Style>
+                      <BorderStyle Top="None" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="3" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000075660501cm" Height="0.749999987664266cm" Left="0in" Top="0in" Value="Code11" Name="textBox23">
+                    <Style>
+                      <BorderStyle Top="None" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="3" ColumnIndex="4" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000075660501cm" Height="0.749999987664266cm" Left="0in" Top="0in" Value="Code25Standard" Name="textBox24">
+                    <Style>
+                      <BorderStyle Top="None" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="5" ColumnIndex="4" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000071339167cm" Height="0.750000009239937cm" Left="0in" Top="0in" Value="Code39Extended" Name="textBox12" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="5" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000071339167cm" Height="0.750000009239937cm" Left="0in" Top="0in" Value="Code39" Name="textBox11" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="5" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000071339167cm" Height="0.750000009239937cm" Left="0in" Top="0in" Value="Code25Interleaved" Name="textBox10" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="8" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.80000030807992cm" Height="2.49999993854978cm" Left="0in" Top="0in" Value="0123456789" Name="barcode7">
+                    <Encoder>
+                      <Code93Encoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="8" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.80000030807992cm" Height="2.49999993854978cm" Left="0in" Top="0in" Value="0123456789" Name="barcode8">
+                    <Encoder>
+                      <Code93ExtendedEncoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="8" ColumnIndex="4" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.80000030807992cm" Height="2.49999993854978cm" Left="0in" Top="0in" Value="0123456789" Name="barcode9">
+                    <Encoder>
+                      <Code128Encoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="7" ColumnIndex="4" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000067017833cm" Height="0.750000015023496cm" Left="0in" Top="0in" Value="Code128" Name="textBox18" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="7" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000067017833cm" Height="0.750000015023496cm" Left="0in" Top="0in" Value="Code93Extended" Name="textBox17" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="7" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000067017833cm" Height="0.750000015023496cm" Left="0in" Top="0in" Value="Code93" Name="textBox16" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="10" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.80000035129326cm" Height="2.49999993126517cm" Left="0in" Top="0in" Value="01234567" Name="barcode12">
+                    <Encoder>
+                      <Code128AEncoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="10" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.80000035129326cm" Height="2.49999993126517cm" Left="0in" Top="0in" Value="01234567" Name="barcode11">
+                    <Encoder>
+                      <Code128BEncoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="10" ColumnIndex="4" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.80000035129326cm" Height="2.49999993126517cm" Left="0in" Top="0in" Value="0123456789" Name="barcode10">
+                    <Encoder>
+                      <Code128CEncoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="9" ColumnIndex="4" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000062696499cm" Height="0.750000041977332cm" Left="0in" Top="0in" Value="Code128C" Name="textBox15" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="9" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000062696499cm" Height="0.750000041977332cm" Left="0in" Top="0in" Value="Code128B" Name="textBox14" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="9" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000062696499cm" Height="0.750000041977332cm" Left="0in" Top="0in" Value="Code128A" Name="textBox13" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="11" ColumnIndex="4" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000058375165cm" Height="0.75000006866779cm" Left="0in" Top="0in" Value="EAN13" Name="textBox33" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="11" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000058375165cm" Height="0.75000006866779cm" Left="0in" Top="0in" Value="EAN8" Name="textBox32" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="11" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000058375165cm" Height="0.75000006866779cm" Left="0in" Top="0in" Value="CodeMSI" Name="textBox31" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="12" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.8000003945066cm" Height="2.49999982329452cm" Left="0in" Top="0in" Value="012345678" Name="barcode13">
+                    <Encoder>
+                      <CodeMSIEncoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="12" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.8000003945066cm" Height="2.49999982329452cm" Left="0in" Top="0in" Value="0123456" Name="barcode14">
+                    <Encoder>
+                      <EAN8Encoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="12" ColumnIndex="4" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.8000003945066cm" Height="2.49999982329452cm" Left="0in" Top="0in" Value="012345678912" Name="barcode15">
+                    <Encoder>
+                      <EAN13Encoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="13" ColumnIndex="4" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000067017842cm" Height="0.750000032735321cm" Left="0in" Top="0in" Value="UPCA" Name="textBox21" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="13" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000067017842cm" Height="0.750000032735321cm" Left="0in" Top="0in" Value="Postnet" Name="textBox20" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="13" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000067017842cm" Height="0.750000032735321cm" Left="0in" Top="0in" Value="EAN128" Name="textBox19" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="14" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.80000043771993cm" Height="2.49999993666396cm" Left="0in" Top="0in" Value="0123456789" Name="barcode18">
+                    <Encoder>
+                      <EAN128Encoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="14" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.80000043771993cm" Height="2.49999993666396cm" Left="0in" Top="0in" Value="0123456789" Name="barcode17">
+                    <Encoder>
+                      <PostnetEncoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="14" ColumnIndex="4" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.80000043771993cm" Height="2.49999993666396cm" Left="0in" Top="0in" Value="0123456789" Name="barcode16">
+                    <Encoder>
+                      <UPCAEncoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="15" ColumnIndex="4" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000026486685cm" Height="0.749999996613545cm" Left="0in" Top="0in" Value="UPCSupplement5" Name="textBox30" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="15" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000026486685cm" Height="0.749999996613545cm" Left="0in" Top="0in" Value="UPCSupplement2" Name="textBox29" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="15" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000026486685cm" Height="0.749999996613545cm" Left="0in" Top="0in" Value="UPCE" Name="textBox28" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="6" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.80000026486659cm" Height="2.49999984048861cm" Left="0in" Top="0in" Value="0123456789" Name="barcode6">
+                    <Encoder>
+                      <Code25InterleavedEncoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="6" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.80000026486659cm" Height="2.49999984048861cm" Left="0in" Top="0in" Value="0123456" Name="barcode5">
+                    <Encoder>
+                      <Code39Encoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="6" ColumnIndex="4" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.80000026486659cm" Height="2.49999984048861cm" Left="0in" Top="0in" Value="0123456" Name="barcode4">
+                    <Encoder>
+                      <Code39ExtendedEncoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="4" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.80000022165325cm" Height="2.49999991378865cm" Left="0in" Top="0in" Value="0123456789" Name="barcode1">
+                    <Encoder>
+                      <CodabarEncoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="4" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.80000022165325cm" Height="2.49999991378865cm" Left="0in" Top="0in" Value="0123456789" Name="barcode2">
+                    <Encoder>
+                      <Code11Encoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="4" ColumnIndex="4" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.80000022165325cm" Height="2.49999991378865cm" Left="0in" Top="0in" Value="01234567" Name="barcode3">
+                    <Encoder>
+                      <Code25StandardEncoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="16" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.80000066757202cm" Height="2.5cm" Left="0in" Top="0in" Value="1200000789" Name="barcode19">
+                    <Encoder>
+                      <UPCEEncoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="16" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.80000066757202cm" Height="2.5cm" Left="0in" Top="0in" Value="12" Name="barcode20">
+                    <Encoder>
+                      <UPCSupplement2Encoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="16" ColumnIndex="4" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.80000066757202cm" Height="2.5cm" Left="0in" Top="0in" Value="01234" Name="barcode21">
+                    <Encoder>
+                      <UPCSupplement5Encoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="0" RowSpan="1" ColumnSpan="5">
+                <ReportItem>
+                  <Panel Width="194.000015139579mm" Height="17.2999989063994mm" Left="0in" Top="0in" Name="panel1">
+                    <Style>
+                      <Font Bold="True" />
+                    </Style>
+                    <Items>
+                      <Shape Width="194mm" Height="2pt" Left="0in" Top="0.6in" Stretch="True" Anchoring="Left, Right" Name="shape3">
+                        <Style Color="Transparent">
+                          <BorderStyle Top="Solid" Bottom="Solid" />
+                          <BorderWidth Top="1.5pt" Bottom="0.5pt" />
+                        </Style>
+                        <ShapeType>
+                          <LineShape Direction="EW" />
+                        </ShapeType>
+                      </Shape>
+                      <TextBox Width="7.64in" Height="0.6in" Left="0in" Top="0in" Value="Barcode Types" Name="textBoxReportEmployee" StyleName="Header" />
+                    </Items>
+                  </Panel>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="3" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="0.749999987664266cm" Left="0in" Top="0in" Name="textBox1" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="4" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="2.49999991378865cm" Left="0in" Top="0in" Name="textBox2" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="5" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="0.750000009239937cm" Left="0in" Top="0in" Name="textBox3" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="6" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="2.49999984048861cm" Left="0in" Top="0in" Name="textBox4" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="7" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="0.750000015023496cm" Left="0in" Top="0in" Name="textBox5" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="8" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="2.49999993854978cm" Left="0in" Top="0in" Name="textBox6" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="9" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="0.750000041977332cm" Left="0in" Top="0in" Name="textBox7" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="10" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="2.49999993126517cm" Left="0in" Top="0in" Name="textBox8" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="11" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="0.75000006866779cm" Left="0in" Top="0in" Name="textBox9" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="12" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="2.49999982329452cm" Left="0in" Top="0in" Name="textBox25" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="13" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10mm" Height="0.750000032735321cm" Left="0in" Top="0in" Name="textBox26" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="14" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="2.49999993666396cm" Left="0in" Top="0in" Name="textBox27" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="15" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10mm" Height="0.749999996613545cm" Left="0in" Top="0in" Name="textBox34" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="16" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="2.5cm" Left="0in" Top="0in" Name="textBox35" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="3" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="0.749999987664266cm" Left="0in" Top="0in" Name="textBox36" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="4" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="2.49999991378865cm" Left="0in" Top="0in" Name="textBox37" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="5" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="0.750000009239937cm" Left="0in" Top="0in" Name="textBox38" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="6" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="2.49999984048861cm" Left="0in" Top="0in" Name="textBox39" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="7" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="0.750000015023496cm" Left="0in" Top="0in" Name="textBox40" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="8" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="2.49999993854978cm" Left="0in" Top="0in" Name="textBox41" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="9" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="0.750000041977332cm" Left="0in" Top="0in" Name="textBox42" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="10" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="2.49999993126517cm" Left="0in" Top="0in" Name="textBox43" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="11" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="0.75000006866779cm" Left="0in" Top="0in" Name="textBox44" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="12" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="2.49999982329452cm" Left="0in" Top="0in" Name="textBox45" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="13" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10mm" Height="0.750000032735321cm" Left="0in" Top="0in" Name="textBox46" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="14" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="2.49999993666396cm" Left="0in" Top="0in" Name="textBox47" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="15" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10mm" Height="0.749999996613545cm" Left="0in" Top="0in" Name="textBox48" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="16" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="10.0000009536743mm" Height="2.5cm" Left="0in" Top="0in" Name="textBox49" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="2" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="1.00000006562903cm" Height="25.0000019073486mm" Left="0cm" Top="0cm" Name="textBox51" StyleName="" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="2" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="1.00000006562903cm" Height="25.0000019073486mm" Left="0cm" Top="0cm" Name="textBox53" StyleName="" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="1" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="1.00000007307961cm" Height="7.50000047683716mm" Left="0cm" Top="0cm" Name="textBox56" StyleName="" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="1" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="1.00000007307961cm" Height="7.50000047683716mm" Left="0cm" Top="0cm" Name="textBox58" StyleName="" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="1" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000026486633cm" Height="7.50000047683716mm" Left="0cm" Top="0cm" Value="QR Code" Name="textBox60">
+                    <Style>
+                      <BorderStyle Top="None" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="1" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000026486633cm" Height="7.50000047683716mm" Left="0cm" Top="0cm" Value="QR Code" Name="textBox55">
+                    <Style>
+                      <BorderStyle Top="None" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="1" ColumnIndex="4" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="5.80000026486633cm" Height="7.50000047683716mm" Left="0cm" Top="0cm" Value="PDF417" Name="textBox57">
+                    <Style>
+                      <BorderStyle Top="None" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="2" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.800000221653cm" Height="25.0000019073486mm" Left="0cm" Top="0cm" Value="http://demos.telerik.com/reporting" Stretch="True" Name="barcode22">
+                    <Style>
+                      <Padding Top="0cm" Bottom="0cm" />
+                    </Style>
+                    <Encoder>
+                      <QRCodeEncoder ErrorCorrectionLevel="H" />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="2" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.800000221653cm" Height="25.0000019073486mm" Left="0cm" Top="0cm" Value="http://www.telerik.com" Stretch="True" Name="barcode23">
+                    <Style>
+                      <Padding Top="0cm" Bottom="0cm" />
+                    </Style>
+                    <Encoder>
+                      <QRCodeEncoder Version="3" />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="2" ColumnIndex="4" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Barcode Width="5.800000221653cm" Height="25.0000019073486mm" Left="0cm" Top="0cm" Value="01234567890" Stretch="True" Name="barcode24">
+                    <Style>
+                      <Padding Top="0.25cm" Bottom="0.25cm" />
+                    </Style>
+                    <Encoder>
+                      <PDF417Encoder />
+                    </Encoder>
+                  </Barcode>
+                </ReportItem>
+              </TableCell>
+            </Cells>
+            <Columns>
+              <Column Width="5.8000004377196cm" />
+              <Column Width="1.0000001028819cm" />
+              <Column Width="5.8000004377196cm" />
+              <Column Width="1.0000001028819cm" />
+              <Column Width="5.8000004377196cm" />
+            </Columns>
+            <Rows>
+              <Row Height="1.73000152504242cm" />
+              <Row Height="0.75000006073834cm" />
+              <Row Height="2.49999920387237cm" />
+              <Row Height="0.75000006073834cm" />
+              <Row Height="2.49999920387237cm" />
+              <Row Height="0.75000006073834cm" />
+              <Row Height="2.49999941047694cm" />
+              <Row Height="0.75000006073834cm" />
+              <Row Height="2.49999920387237cm" />
+              <Row Height="0.75000006073834cm" />
+              <Row Height="2.49999920387237cm" />
+              <Row Height="0.75000006073834cm" />
+              <Row Height="2.49999941047694cm" />
+              <Row Height="0.75000006073834cm" />
+              <Row Height="2.49999941047694cm" />
+              <Row Height="0.75000006073834cm" />
+              <Row Height="2.50000003029066cm" />
+            </Rows>
+          </Body>
+          <Corner />
+          <RowGroups>
+            <TableGroup Name="Group1" />
+            <TableGroup Name="group1" />
+            <TableGroup Name="group" />
+            <TableGroup />
+            <TableGroup />
+            <TableGroup />
+            <TableGroup />
+            <TableGroup />
+            <TableGroup />
+            <TableGroup />
+            <TableGroup />
+            <TableGroup />
+            <TableGroup />
+            <TableGroup />
+            <TableGroup />
+            <TableGroup />
+            <TableGroup />
+          </RowGroups>
+          <ColumnGroups>
+            <TableGroup />
+            <TableGroup Name="Group2" />
+            <TableGroup />
+            <TableGroup Name="Group3" />
+            <TableGroup />
+          </ColumnGroups>
+        </Table>
+      </Items>
+    </DetailSection>
+  </Items>
+  <StyleSheet>
+    <StyleRule>
+      <Style>
+        <Padding Left="2pt" Right="2pt" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextItemBase" />
+        <TypeSelector Type="HtmlTextBox" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style Color="Black" TextAlign="Left">
+        <Font Name="Segoe UI Light" Size="25pt" Bold="True" />
+      </Style>
+      <Selectors>
+        <StyleSelector Type="ReportItemBase" StyleName="Header" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style BackgroundColor="Transparent" Color="177, 161, 82" TextAlign="Center" VerticalAlign="Middle">
+        <BorderStyle Default="None" Top="None" />
+        <BorderColor Default="Black" />
+        <Font Name="Segoe UI Light" Size="13pt" Bold="True" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextBox" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style TextAlign="Center" VerticalAlign="Bottom">
+        <BorderStyle Top="Solid" Bottom="Solid" />
+        <BorderWidth Default="0.5pt" />
+        <Font Name="Segoe UI" Size="9pt" Bold="True" />
+        <Padding Top="0.3cm" Bottom="0.5cm" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="Barcode" />
+      </Selectors>
+    </StyleRule>
+  </StyleSheet>
+  <PageSettings>
+    <PageSettings PaperKind="A4" Landscape="False">
+      <Margins>
+        <MarginsU Left="0.3in" Right="0.3in" Top="0.4in" Bottom="0.1in" />
+      </Margins>
+    </PageSettings>
+  </PageSettings>
+</Report>

@@ -1,0 +1,39 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+	background: #efefef;
+}
+
+header {
+	padding: 1em;
+	background: #efefef;
+}
+
+article {
+	overflow: hidden;
+}
+
+p {
+	padding: 2em;
+}
+
+nav #sidebar {
+	background: #efefef;
+	width: 150px;
+}
+
+nav a {
+	display: block;
+	border: 1px solid #ccc;
+	text-decoration: none;
+	padding: 0.5em;
+}
+
+.componentWrapper {
+  margin: 10 10 0 10;
+}

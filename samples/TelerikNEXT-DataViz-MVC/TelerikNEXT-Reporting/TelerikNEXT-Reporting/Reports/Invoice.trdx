@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report DataSourceName="Invoices" Width="8.1in" Name="Invoice" SnapGridSize="0.1in" xmlns="http://schemas.telerik.com/reporting/2012/3.2">
+  <Style BackgroundColor="White" />
+  <DataSources>
+    <SqlDataSource ConnectionString="Telerik.Reporting.Examples.CSharp.Properties.Settings.TelerikConnectionString" SelectCommand="--DECLARE @SalesOrderNumber nvarchar(100) = 'SO43659'&#xD;&#xA;&#xD;&#xA;SELECT&#xD;&#xA;&#x9;SOH.SalesOrderID&#xD;&#xA;&#x9;, S.Name AS Store&#xD;&#xA;&#x9;, SOH.OrderDate&#xD;&#xA;&#x9;, C.FirstName AS SalesFirstName&#xD;&#xA;&#x9;, C.LastName AS SalesLastName&#xD;&#xA;&#x9;, E.Title AS SalesTitle&#xD;&#xA;&#x9;, SOH.PurchaseOrderNumber&#xD;&#xA;&#x9;, SM.Name AS ShipMethod&#xD;&#xA;&#x9;, BA.AddressLine1 AS BillAddress1&#xD;&#xA;&#x9;, BA.AddressLine2 AS BillAddress2&#xD;&#xA;&#x9;, BA.City AS BillCity&#xD;&#xA;&#x9;, BA.PostalCode AS BillPostalCode&#xD;&#xA;&#x9;, BSP.Name AS BillStateProvince&#xD;&#xA;&#x9;, BCR.Name AS BillCountryRegion&#xD;&#xA;&#x9;, SA.AddressLine1 AS ShipAddress1&#xD;&#xA;&#x9;, SA.AddressLine2 AS ShipAddress2&#xD;&#xA;&#x9;, SA.City AS ShipCity&#xD;&#xA;&#x9;, SA.PostalCode AS ShipPostalCode&#xD;&#xA;&#x9;, SSP.Name AS ShipStateProvince&#xD;&#xA;&#x9;, SCR.Name AS ShipCountryRegion&#xD;&#xA;&#x9;, CC.Phone AS CustPhone&#xD;&#xA;&#x9;, CC.FirstName AS CustFirstName&#xD;&#xA;&#x9;, CC.LastName AS CustLastName&#xD;&#xA;&#x9;, SOH.SalesOrderNumber&#xD;&#xA;FROM&#xD;&#xA;&#x9;Person.Contact AS CC&#xD;&#xA;&#x9;RIGHT OUTER JOIN Sales.SalesOrderHeader AS SOH&#xD;&#xA;&#x9;INNER JOIN Sales.Customer ON SOH.CustomerID = Sales.Customer.CustomerID AND SOH.CustomerID = Sales.Customer.CustomerID&#xD;&#xA;&#x9;LEFT OUTER JOIN Sales.Store AS S ON Sales.Customer.CustomerID = S.CustomerID AND SOH.CustomerID = S.CustomerID ON CC.ContactID = SOH.ContactID&#xD;&#xA;&#x9;LEFT OUTER JOIN Person.Address AS BA&#xD;&#xA;&#x9;INNER JOIN Person.StateProvince AS BSP ON BA.StateProvinceID = BSP.StateProvinceID&#xD;&#xA;&#x9;INNER JOIN Person.CountryRegion AS BCR ON BSP.CountryRegionCode = BCR.CountryRegionCode ON SOH.BillToAddressID = BA.AddressID&#xD;&#xA;&#x9;LEFT OUTER JOIN Person.Address AS SA&#xD;&#xA;&#x9;INNER JOIN Person.StateProvince AS SSP ON SA.StateProvinceID = SSP.StateProvinceID&#xD;&#xA;&#x9;INNER JOIN Person.CountryRegion AS SCR ON SSP.CountryRegionCode = SCR.CountryRegionCode ON SOH.ShipToAddressID = SA.AddressID&#xD;&#xA;&#x9;LEFT OUTER JOIN Person.Contact AS C&#xD;&#xA;&#x9;RIGHT OUTER JOIN HumanResources.Employee AS E ON C.ContactID = E.ContactID ON SOH.SalesPersonID = E.EmployeeID&#xD;&#xA;&#x9;LEFT OUTER JOIN Purchasing.ShipMethod AS SM ON SOH.ShipMethodID = SM.ShipMethodID&#xD;&#xA;WHERE&#xD;&#xA;&#x9;(Sales.Customer.CustomerType = N'S')&#xD;&#xA;&#x9;AND (SOH.SalesOrderNumber = @SalesOrderNumber)&#xD;&#xA;ORDER BY SOH.SalesOrderNumber" Name="Invoices">
+      <Parameters>
+        <SqlDataSourceParameter DbType="String" Name="@SalesOrderNumber">
+          <Value>
+            <String>=Parameters.OrderNumber.Value</String>
+          </Value>
+        </SqlDataSourceParameter>
+      </Parameters>
+    </SqlDataSource>
+    <SqlDataSource ConnectionString="Telerik.Reporting.Examples.CSharp.Properties.Settings.TelerikConnectionString" SelectCommand="--DECLARE @ForYear integer&#xD;&#xA;--DECLARE @ForMonth integer&#xD;&#xA;--SET @ForYear = 2003&#xD;&#xA;--SET @ForMonth = 7&#xD;&#xA;&#xD;&#xA;SELECT&#xD;&#xA;&#x9;SOH.SalesOrderNumber&#xD;&#xA;FROM&#xD;&#xA;&#x9;Sales.Customer C&#xD;&#xA;&#x9;INNER JOIN Sales.SalesOrderHeader SOH ON C.CustomerID = SOH.CustomerID&#xD;&#xA;WHERE&#xD;&#xA;&#x9;C.CustomerType = N'S'&#xD;&#xA;&#x9;AND DATEPART(Year, SOH.OrderDate) = @ForYear&#xD;&#xA;&#x9;AND DATEPART(Month, SOH.OrderDate) = @ForMonth&#xD;&#xA;ORDER BY&#xD;&#xA;&#x9;SOH.SalesOrderNumber" Name="OrderNumbers">
+      <Parameters>
+        <SqlDataSourceParameter DbType="String" Name="@ForYear">
+          <Value>
+            <String>=Parameters.ForYear.Value</String>
+          </Value>
+        </SqlDataSourceParameter>
+        <SqlDataSourceParameter DbType="String" Name="@ForMonth">
+          <Value>
+            <String>=Parameters.ForMonth.Value</String>
+          </Value>
+        </SqlDataSourceParameter>
+      </Parameters>
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <DetailSection KeepTogether="False" Height="3.22in" Name="detail">
+      <Items>
+        <Panel Width="8.1in" Height="2.72in" Left="0in" Top="0in" KeepTogether="False" Name="panel4">
+          <Items>
+            <TextBox Width="1.79in" Height="0.2in" Left="2.9in" Top="0.59in" Value="=Fields.Store" Name="textBox14" />
+            <TextBox Width="2.28in" Height="0.29in" Left="0.01in" Top="1.57in" Value="=Fields.CustPhone" Name="textBox10">
+              <Style>
+                <Font Size="13pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="1.9in" Height="0.26in" Left="0in" Top="0.81in" Value="=Fields.CustFirstName + &quot; &quot; + Fields.CustLastName" Name="textBox9">
+              <Style>
+                <Font Size="13pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="0.72in" Height="0.2in" Left="0.01in" Top="0.61in" Value="CONTACT:" Name="textBox8">
+              <Style>
+                <Font Size="9pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="1.79in" Height="0.2in" Left="2.9in" Top="1.57in" Value="=Fields.BillCountryRegion" Name="textBox6" />
+            <TextBox Width="1.79in" Height="0.2in" Left="2.9in" Top="1.37in" Value="=Fields.BillPostalCode + &quot; &quot; + Fields.BillCity" Name="textBox4" />
+            <TextBox Width="1.88in" Height="0.2in" Left="2.9in" Top="1.17in" Value="=IsNull(Fields.BillAddress2, 'No secondary Address')" Name="textBox12" />
+            <TextBox Width="1.79in" Height="0.2in" Left="2.9in" Top="0.97in" Value="=Fields.BillAddress1" Name="textBox13" />
+            <TextBox Width="0.72in" Height="0.2in" Left="0in" Top="1.37in" Value="PHONE:" Name="textBox11">
+              <Style>
+                <Font Size="9pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="2.15in" Height="0.2in" Left="5.95in" Top="0.58in" Value="=Fields.Store" Name="textBox16" />
+            <TextBox Width="2.15in" Height="0.2in" Left="5.95in" Top="0.97in" Value="=Fields.ShipAddress1" Name="textBox17" />
+            <TextBox Width="2.15in" Height="0.2in" Left="5.95in" Top="1.17in" Value="=IsNull(Fields.ShipAddress2, 'No secondary Address')" Name="textBox18" />
+            <TextBox Width="2.15in" Height="0.2in" Left="5.95in" Top="1.37in" Value="=Fields.ShipPostalCode + &quot; &quot; + Fields.ShipCity + &quot;, &quot; + Fields.ShipStateProvince " Name="textBox19" />
+            <TextBox Width="2.15in" Height="0.2in" Left="5.95in" Top="1.57in" Value="=Fields.ShipCountryRegion" Name="textBox21" />
+            <Panel Width="8.1in" Height="0.55in" Left="0in" Top="2.03in" Name="panel1">
+              <Items>
+                <TextBox Width="1.14in" Height="0.34in" Left="0in" Top="0in" Value="DATE:" Name="textBox24">
+                  <Style VerticalAlign="Middle">
+                    <BorderStyle Top="Solid" Bottom="Solid" />
+                    <BorderWidth Default="0.5pt" />
+                    <Font Size="9pt" />
+                  </Style>
+                </TextBox>
+                <TextBox Width="1.76in" Height="0.34in" Left="1.14in" Top="0in" Value="ORDER DATE:" Name="textBox23">
+                  <Style VerticalAlign="Middle">
+                    <BorderStyle Top="Solid" Bottom="Solid" />
+                    <BorderWidth Default="0.5pt" />
+                    <Font Size="9pt" />
+                  </Style>
+                </TextBox>
+                <TextBox Width="1.68in" Height="0.34in" Left="2.9in" Top="0in" Value="SALES PERSON:" Name="textBox25">
+                  <Style VerticalAlign="Middle">
+                    <BorderStyle Top="Solid" Bottom="Solid" />
+                    <BorderWidth Default="0.5pt" />
+                    <Font Size="9pt" />
+                  </Style>
+                </TextBox>
+                <TextBox Width="1.38in" Height="0.34in" Left="4.58in" Top="0in" Value="PURCHASE ORDER:" Name="textBox26">
+                  <Style VerticalAlign="Middle">
+                    <BorderStyle Top="Solid" Bottom="Solid" />
+                    <BorderWidth Default="0.5pt" />
+                    <Font Size="9pt" />
+                  </Style>
+                </TextBox>
+                <TextBox Width="2.15in" Height="0.34in" Left="5.95in" Top="0in" Value="SHIPMENT METHOD" Name="textBox27">
+                  <Style TextAlign="Right" VerticalAlign="Middle">
+                    <BorderStyle Top="Solid" Bottom="Solid" />
+                    <BorderWidth Default="0.5pt" />
+                    <Font Size="9pt" />
+                  </Style>
+                </TextBox>
+                <TextBox Width="1.68in" Height="0.2in" Left="2.9in" Top="0.34in" Value="=Fields.SalesFirstName + &quot; &quot; + Fields.SalesLastName" Name="textBox30" />
+                <TextBox Width="1.38in" Height="0.2in" Left="4.58in" Top="0.34in" Value="=Fields.PurchaseOrderNumber" Name="textBox29" />
+                <TextBox Width="2.15in" Height="0.2in" Left="5.95in" Top="0.34in" Value="=Fields.ShipMethod" Name="textBox28">
+                  <Style TextAlign="Right" />
+                </TextBox>
+                <TextBox Width="1.76in" Height="0.2in" Left="1.14in" Top="0.34in" Value="=Fields.OrderDate" Format="{0:d}" Name="textBox32" />
+                <TextBox Width="1.14in" Height="0.2in" Left="0in" Top="0.34in" Value="=Now()" Format="{0:d}" Name="textBox31" />
+              </Items>
+            </Panel>
+            <Panel Width="8.1in" Height="0.45in" Left="0in" Top="0in" Name="panel2">
+              <Style>
+                <BorderStyle Bottom="Solid" />
+                <BorderWidth Default="0.5pt" />
+              </Style>
+              <Items>
+                <TextBox Width="2.9in" Height="0.45in" Left="0in" Top="0in" Value="Customer Details" Name="textBox7" StyleName="Header">
+                  <Style VerticalAlign="Middle" />
+                </TextBox>
+              </Items>
+            </Panel>
+            <TextBox Width="0.66in" Height="0.2in" Left="2.13in" Top="0.61in" Value="ADDRESS:" Name="textBox2">
+              <Style TextAlign="Right">
+                <Font Size="9pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="0.57in" Height="0.2in" Left="5.35in" Top="0.58in" Value="SHIP TO:" Name="textBox3">
+              <Style TextAlign="Right" VerticalAlign="Top">
+                <Font Size="9pt" />
+              </Style>
+            </TextBox>
+          </Items>
+        </Panel>
+        <SubReport Width="8.09in" Height="0.28in" Left="0.01in" Top="2.87in" KeepTogether="False" Name="subReport1">
+          <ReportSource>
+            <UriReportSource Uri="Sales Order Details.trdx">
+              <Parameters>
+                <Parameter Name="SaledOrderID">
+                  <Value>
+                    <String>=Fields.SalesOrderID</String>
+                  </Value>
+                </Parameter>
+              </Parameters>
+            </UriReportSource>
+          </ReportSource>
+        </SubReport>
+      </Items>
+    </DetailSection>
+    <PageFooterSection Height="0.23in" Name="pageFooterSection1">
+      <Style>
+        <BorderStyle Bottom="Solid" />
+      </Style>
+      <Items>
+        <TextBox Width="2.9in" Height="0.23in" Left="0in" Top="0in" Value="=PageExec(&quot;lineTotalDataTextBox&quot;,Count(Fields.ProductNumber)) + &quot; products, &quot; + PageExec(&quot;lineTotalDataTextBox&quot;,Sum(Fields.OrderQty)) + &quot; items on page  &quot; + PageNumber" Name="textBox5" />
+        <TextBox Width="2.13in" Height="0.23in" Left="5.97in" Top="0in" Value="=PageExec(&quot;lineTotalDataTextBox&quot;,sum(LineTotal))" Format="{0:C2}" Name="textBox22">
+          <Style TextAlign="Right" />
+        </TextBox>
+      </Items>
+    </PageFooterSection>
+  </Items>
+  <StyleSheet>
+    <StyleRule>
+      <Style>
+        <Padding Left="2pt" Right="2pt" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextItemBase" />
+        <TypeSelector Type="HtmlTextBox" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style>
+        <Font Name="Segoe UI" Size="10pt" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextBox" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style>
+        <Font Name="Segoe UI Light" Size="16pt" Bold="True" />
+        <Padding Left="0in" />
+      </Style>
+      <Selectors>
+        <StyleSelector Type="ReportItemBase" StyleName="Header" />
+      </Selectors>
+    </StyleRule>
+  </StyleSheet>
+  <PageSettings>
+    <PageSettings PaperKind="Letter" Landscape="False">
+      <Margins>
+        <MarginsU Left="0.2in" Right="0.2in" Top="0.3in" Bottom="0.4in" />
+      </Margins>
+      <Watermarks>
+        <TextWatermark Text="Original" Color="Black" Orientation="Diagonal" Position="Front" Opacity="0.02" PrintOnFirstPage="True" PrintOnLastPage="True">
+          <Font Name="Tahoma" Size="150pt" Bold="False" Italic="False" Underline="False" Strikeout="False" />
+        </TextWatermark>
+      </Watermarks>
+    </PageSettings>
+  </PageSettings>
+  <Filters>
+    <Filter Expression="=Fields.SalesOrderNumber" Operator="Equal" Value="=Parameters.OrderNumber.Value" />
+  </Filters>
+  <Groups>
+    <Group Name="group1">
+      <GroupHeader>
+        <GroupHeaderSection Height="1.45in" Name="groupHeaderSection1">
+          <Items>
+            <Panel Width="20.55cm" Height="3.67cm" Left="0.01in" Top="0in" Name="panel5">
+              <Items>
+                <TextBox Width="7.07cm" Height="1.39cm" Left="5.39cm" Top="0.74cm" Value="275 Grove St., Suite 2-400, Newton, MA 02466&#xD;&#xA;Phone: +1.888.365.2779&#xD;&#xA;Fax: +1.617.249.2116" CanGrow="False" Name="Text1">
+                  <Style>
+                    <Font Size="9pt" />
+                  </Style>
+                </TextBox>
+                <Barcode Width="5.45cm" Height="2.18cm" Left="15.1cm" Top="0cm" Value="=Fields.PurchaseOrderNumber" Name="barcode2">
+                  <Style TextAlign="Right" VerticalAlign="Bottom" />
+                </Barcode>
+                <PictureBox Value="/9j/4AAQSkZJRgABAQEAYABgAAD/4QA0RXhpZgAATU0AKgAAAAgAAQExAAIAAAARAAAAGgAAAABBZG9iZSBJbWFnZVJlYWR5AAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCABKALADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD+3T4NeEPCeqfDbw5fan4X8O6jfT/2x595faJpt3dTeVr2qQx+bcXFtJNJ5cMccSb3OyNERcKqgen/APCA+BP+hK8Jf+E5o/8A8h1yXwM/5JZ4W/7jf/qR6vXrVfS8RZhj4cQZ7CGNxcIQzjM4whHE1oxjGONrqMYxU0oxikkkkkkkkrHyvDOW5dU4b4fnPAYKc55JlU5znhaEpznLAYdylKTptylJ6uTbberdzkv+EB8Cf9CV4S/8JzR//kOv5Sf+C8f/AAX28Df8EyfHmn/sufsz/BT4Q/E/9p670HSvF/jfVvH+iJe/Dv4PaJrUNvqmgaTq+iaMdF1jxN4x8S6IYdXTSl8QaFY+H9C1XTdX1K4aDUbTd/XHX+W3/wAHZf7DXxq+D/8AwUe8e/tgS+F/EGrfAb9qHQPAGo6X8RLazkvPDfhzxz4A8DeFfhprvgPXdXthJD4f1eabwppPijQ4NRkto9Vs9baGwiuE0HWBb+P/AGlmP/Qfjf8Awqr/APyw9v8AsvLP+hdgP/CTD/8AyvyX3H1T/wAE+P8Ag7U+JmofHjwj4D/b++B/7Oeo/BLx54m0nQL/AOKPwq+Hg8DeKPhGNZupLaPxNrWn6nrXiLRPF/hPTp7i0m1m1itdB1PSdHgutViudcnQeHX/ANEmDwR8PbqCG5tfCHg25triKOe3uINA0SaCeCVFkimhljtGjlikjdZI5EZkdGVlJUgn/DD/AGav2cfi3+1l8b/AHwA+B3hDWPGfxI+IfiCx0PR9K0uwkuBai4uxHe61qlzbxzR6ZoulQFrjUdTuvKsbOBWkmmRQN/7Pf8FYP2i/+CgX7B3/AAUO+PX7P/w5/br/AGvdH0zwHP4EtYJtE/aO+MGmWWoXDfDzw7Nc39raW/jFI7S3luZbicQqqIVjkc8IxU/tLMf+g/G/+FVf/wCWB/ZeWf8AQuwH/hJh/wD5X5L7j/WiPgLwGBk+C/CIHqfDmjAfn9jpf+EB8Ccf8UV4S56f8U5o/P0/0Pmv8anwR/wXS/4K+fD7VLHU9A/4KEftJXs+mgtaweOPHJ+JVgyk4C3th4+sPFGmX6kEbjqFkQM9up+r/D//AAdK/wDBbTQBFFcftYaBr0fDbvEPwE+At02CepNh8N7M47jAOfzFH9pZj/0H43/wqr//ACwP7Lyz/oXYD/wkw/8A8r8l9x/rUf8ACAeBeP8AiifCXPT/AIpvR+fp/oVIfAPgMDJ8F+EQM4yfDmjAZxnHNn1xz9Oa/wAxLwt/weQ/8FVtHaMax4B/ZB8YgczNqnws+IWlXlypxhml8PfF/TooRhl+bauQQQMEZ/um/wCCL/8AwUn1n/gqj+xPov7TXiT4SyfCDxda+O/GPw28a6LayXN94M1nW/DCaZdN4k+HWq6gI73UvDGo6fq2mQ3yXqs2k+KtP1/wpcXGqPpVxrLJ5nmEVeWY4xLu8XXS+91B/wBlZZ0y7A/+EeH8v+nfp+B+o/8AwgPgT/oSvCX/AITmj/8AyHR/wgPgT/oSvCX/AITmj/8AyHXWZHqPz98fzIH1OOtLTWZ5i0mswxrT2axddp+j9oL+y8s/6F2A/wDCTD//ACvyX3HI/wDCBeA+f+KL8I8AE/8AFOaNwD0J/wBD4B7E9e1L/wAID4EwD/whXhLB6H/hHNHweM8H7H6c/SuD+OX7QXwk/Zv8Et8QPjL4xtPBvhg6lZaLb3c9vf397qGpX7TPFp2k6Lo0Goa5ql/HaQXF29tY2U8y21vNcGNY45Sln4LfHL4YftC+B7X4jfCHxXY+LvCt5fXGlSanaRXdhd2WqaZJbtd6Vqum6ikGp6Xfpa3VrctZX9tBdC2urad41iuoXPW/9ZY5cs4ms5jlEsS8HDMpfXaeAli04p4WOMlN0pVk5RTitm0nrJIX9m5TzKP1DL+a1+VYXDc1tNbezvbaztbTyOz/AOEB8Cf9CV4S/wDCc0f/AOQ6P+EB8Cf9CV4S/wDCc0f/AOQ662iuT+0sx/6D8b/4VV//AJYP+y8s/wChdgP/AAkw/wD8r8l9xyX/AAgPgT/oSvCX/hOaP/8AIdH/AAgPgT/oSvCX/hOaP/8AIddbRR/aWY/9B+N/8Kq//wAsD+y8s/6F2A/8JMP/APK/Jfccl/wgPgT/AKErwl/4Tmj/APyHR/wgPgT/AKErwl/4Tmj/APyHXW0Uf2lmP/Qfjf8Awqr/APywP7Lyz/oXYD/wkw//AMr8l9xyX/CA+BP+hK8Jf+E5o/8A8h15h8ZfCHhPS/ht4kvtM8L+HdOvoP7H8i8sdE020uofN17S4ZPKuLe2jmj8yGSSJ9jjfG7o2VZgffK8l+Of/JLPFP8A3BP/AFI9Ir2OHcwx8+IMihPG4ucJ5xlkZwlia0oyjLG0FKMoubUoyTaaaaabTVjxOJsty6nw3xBOGAwUJwyTNZQnDC0IyhKOAruMoyVNOMotJxaaaaTTukHwM/5JZ4W/7jf/AKker161XkvwM/5JZ4W/7jf/AKker16zkZxkZwTjPOAQCcegJAJ6AkA8muTiT/kos+/7HWaf+p1c7eF/+SZ4d/7EWUf+q/Di1yHjPwT4J+JXhXW/BPxE8G+GfHngvxLp50/xF4T8Y6HpHibw1r2nuyg6drGja3Be6VqcLsvMN7b3NsXH+vyAR1xIHUgcgckDlsYH1ORgd8jFflv/AMFhP+Ch/hz/AIJl/sJfFr9pK5m0u7+JItZvAHwF8OX/AJdyPEvxm8YaffWXg8S2VxIr3Ok+GIobzxx4rSNW+0+FPC+u20LR3F/alvDc4K15RXM2o3kldp2aWurT0aWqZ7r030vtfr/V195/LZ/wVa/4LkfCr/gkp+2lqf7LX/BMj9j/APY48G3vwrXw0/7SPjnRfg/4e8N3niLW9RtjrGtfBXSp/AGj+G5IIdO0OTQ7rX9du7y+aw1xdS0eWOK7srqMfqz8dv8Ag3z/AGHf+CvGseBf+Cgnx1n/AGmvgv8AF39pP4JfBvxv4w+HvhDxb4F0bTfCWpan4I8Pak2h32keJPhnr2s2viXTraSbSdXkub+PyLu2njmt4ZEaFP4uf+CA/wDwT78S/wDBWD/gph/wnHxyg1bx78IPhJ4hn/aW/am8WeIozqFt8QPEmr+JpNY8M+B9evGtDFd6p8WfHsl9qniGzvnhGr+D9C8f3zLbz2rxD/XDghtreFYIY0hgSOOCGGNY4ooIEXyoba3WBUhghijPlW6qVGfkDZGTX6q681pr6arXzQH8OH7V3/Bq/wD8EZP2OPgz4p/aJ/aG/bH/AGtPhR8J/B81lc6rrOs+K/g3qrzmcsmn+GfDmmaf8C/7Z8Qa/rMoEWm6Rp1td6jfStttrWTaxX+BL432vwbn+Mnji1/ZmT4lXfwZbxbqNj8KpPim2jXHxS1Pw/8Ab/J0G48VweEbSLR4/El4kgZrPRllRiECICSp/wBfj/gtx/wTEvv+CrX7E2tfs/eHvF9p4F+Jvg3xhpvxe+D+uawJH8M3nj7w1oniDRbXw340kis7rUbTw54k0vxNrNhLq2j202oaRc3NpqH2aa2tLrRtV/yyvgr40+PX/BH/APb90/XfjB+zr4f1D4t/ADxVe6X40+Cfxs8OWGsaDeWNwwjkksbqWK8sPst/bPb6h4Q8caAb3TNStb2C/wBHvbmzuUknV/eins73emmqX69mB/QF/wAEWf8Ag1u8d/tTW+jftEf8FCdO8bfBX9n5P7L1Xwl8E4o/+EX+KXxjsvtYuc+LNQa5g1f4d+B7y2gEc8S2sfjPV1mU+H9V8HPFHcH+8bQvjx/wT9/Yu+H3h34J+EviN8EPhX4I+G8MHhHQvhl4Gv7PV5vDCaeh8yyn8L+El1nX4LyNMDUdS1S0EkuoMReTC7kkRvyY/wCCePxc07/gu18PdU/aW8ffF+40n4NeGPFureB7r9kT4e67Noeo+HdTbSrC7tU+LWsaXPa6x9mv7Sae58ONbW9vPqVqkk1lr8mnrJoy/t/4N/Y2/ZR8AadZWXh79nv4RwjT4I9Oh1TUvAmgeIdddMrBuvvEOvWV9rl7dTTnfcXE168jEhpHwNx+0nl3BuUxw8c2zrMs8xk6NKrisJwvSo4bB4WVWnTrRpxznM6dSpi6tONSMcQsLk86FKq5UoYqtKMnHkVTE1XzU4RowWidbm5pN22jHbl633urdST4S/ti/sxfHLVrbw78MfjN4N8SeJrk3Mlj4Ya+k0fxbqEVnF9rurux8Ma/b6Zrd5Y2yHfPd21g9tCAfMkT5c/TdeS+HPgd8F/B2uW/inwj8Jvh14S8TWtvd2kHiDwx4M8OaBqttBewrbXNvFf6VpdjOouYyFMeCJFJHKtg+qS3Ntbwy3M9xBDbwJJJPPLLHHDDHFu82SWV2VI0j2t5jOwVNrbiMGvm8y/sh4q+S080o4SUaaVHN8ThsXi41ne9q+Eo0KNSE9HC1KM3Z3WzfRBz5f3rpqaV5KHNaNrXb5teur/K9j8Ef+C89zYD4YfAC1l1W6h1WTx34vls9GDzrYX1nH4Xtbe9v7l1TDXGnT3mlpYOw4k1C7SNt7yKLn/BB3SfFMHwf+OGtXupNL4P1P4i+HdJ8M6Y1xcEWut6J4ae/wDFuoQq0YGNUi13w9bM8fEjaRJGSWgIX4Y/bt+J+u/8FHf2vPB3wW/Z3soPGPhjwNHqnhbw/r8SzLo+o3eq39rN4x8az6xCJVh8B2EGi2dsdWyLTWTbTx6fdO3iXSvO/o9/Zp+DHhv9l79n7wB8K7e8sILbwZ4bWbxZrkszW1jqPia+d9X8Ya/JcXggaK21HXbjUJ7Ke9Kra6eljZoRGiCv6N4zx0eBvALhnw/zX2FPiHiPFw4kxWAqxh9ayrK62NlmVOvi4t82Eq1lh8LRjGTUputJ/BTkeRh6M8RnFatBPkp0/q0YpN1KlRcsbQitZc1/csnzPRan0juXGdwxjOcjGM4zn0zxnpmkLoMZdRkEjLAZAG4kc8gLySOg56V+MX7TH/Bb79kD4HXGpeGfh/f6r+0D42tIrqIwfD7ybfwNZ30SkRrqfxC1N4tIvbZ3I2SeErfxWXUHATINfjN4v/4K5/8ABSf9qrUNW8H/ALO3gJvCMV3FM66d8FfAXiLxl41h0m9P2a3W88XX0uqR25ij+f8Atix0TQtQAIkt4dExmv4G4g8buAshxEsBTzCtxBmUZOP9n8O0J5jXTTinCVRezwkZLmTfPiYXV1FNxkl/VfA/0UfGTjLB0s5xWS4PgfhycYzqZ9x7jafDmFjRd74ing8Rz5tUoTS/dVVl/sqjTVOpUSk4/wBm25cFty7QCS2RgAdSTnGB39O9Vmv7FHET3tokhG4Rtcwq5X+8ELhiPcDFfxQ6z/wT/wD+CznxwW0vfiDafGHxHCu26s7b4lfHvTcW6zj54Dp2rePo7m0kX+JLpFZcYIHIrzzVf+CMn/BSq0jNzJ8JrXVmjt9qrp3xV+HU07H0CXXilXJJ7AZ7818jX8a+MpNzy/wX4vxGGf8ADrVnjqbqLTaNHIcRTVr62rzWq17/AKdg/opeFsKcKWd/Sv8ACvA5ntUweClk+MoxaavyYvFcY5c57682HhbS5/dOk8MoLRzRSKBkskiOAPUlSQBT96f3l7fxDv079+1f52Xj79nb9ur9mdm1Pxt4A/aC+FdpYXXkr4gs49ft9BS4sz88sfivwtc6n4fubO4/5ZyrdtG/8LN1r134M/8ABWX9uv4M6jaSWvx0174g6RF5BuvDPxalj+IOk3MC32+ayGq6hGut6cVg/wBGe70/U5SjgJuDAY8uh9JnLsJjIYTirgriDhxznCHPOarypRd1OrUoYzDZVVlCD5Lew9s3zPm5LR9p9DjPoEZ3meVzzbw58WeB+N6EaMqkVClUw1GpUXLy4aGPyjH8R4GnWn79pYmrh8NDk/e4iF0z+/Hcv95e/cfwnDfkeD6HrXk3xz/5JZ4p/wC4J/6kekV+Mf7KP/BeL4D/ABc1Cy8JftA6GfgF4p1G7t7TTPEpv21/4Z6tLqL2dlY/b9bjtY9Q8GXkj3E0zrr8UWkxQwSMfEUiq+39kvjRfWWofCPxBeWF5a31peW3h28s7qzuIbm2urS51/R5ba6tp4XeKe2uIiJIJ4meKWMh42ZTmv6S8M+MeG+M82yHH8OZthsyoxznKnVp0+anisM/r9CLWJwtZU8TRu1aMqtCnGWvLKTUlH+HvGjwx478Lsu4hyfjrhzH5DiauQ5xLB18RGFXL8ypf2fW/f5ZmWHnWwOPovng+fDYio1zw54Qco81r4GcfCvwtnjP9t49/wDio9X6Va+MHxi+HXwJ8D6v8Rfih4msvC/hXR4R595cyutzd3MrpHZaTounw7rrVdb1O7kjtNO02xjmvb65kit7eKV3CGr8D5BH8KPDEhRpCn9uFUQbnP8AxUer9AMknnjAr4P+BfgPxB+138W/Gv7R/wAePDWsxfCjwZ4y13wZ+zH8E/Hnh+OysbbSdC+y6fqnxj8WeGPEXh3TNeTxF4n1C1vJvDWj+K9PhuvBsV1qdnZC507UdNvD+i4nK8FjOIOLMxzfEvD5NlGbY6pjYUZ01j8wrYrM8RSwmWZfCd+WviXGtWqYuUZUMDhsLXrVlL3KdT8/4alKPDPDihFSnLIsp5VJtR0y/DXu1tuJp/iT/goF+1Yp1nwDH4f/AGIvg/dRrP4f1fxv4Yg+Ivx88TW4+ezvNU8EaiLbwl4L0nUbG6i8/SJZm8S6ffWs8f8AbUW0xj/M3/4Lo/tP/Ez45ftv+P8A9nOH9oD4yftC/DX9m74gaz8LfCEvjfxDq2oWutfFPTtQudE8fa/4b8M3Gr6jZ2zXviiK50PQGtTcSjSLSFbYmLUgsn+whtVVxhdgRlI8s4SKLhUjij5yc/KozkAbQcKK/Gm9/wCCCn/BNHUP26m/4KD3nwRvz8bpPFT/ABGudD/4SnUm+E138WBqt3q0vxVufh4sMtrceML3UHGqTRy6k3hp9TK6wfDY8QN/aUnmZjxRVxOGqZbg8tynJMoqum3gsty+hLFVfZO0JYzOsbHF51jqkeZuM8Vjqip3nCjCnSapx9qFDlkpynOdR25pSk7SttaF+WG7vyrW+t7H5zf8Ehf+CRn7cv8AwS3/AGStP1z4QfEb4Waz8b/jJpnhv4ifHj4EfE/wXc6dpFl4lTRRNpPgvTPiLpWo3+qza/4L03UJ/DLSomh+FW1W41a4Zvl8x/3e/Z2/a5tPi14n1j4QfFPwRqPwI/aL8KWUep678JvFGp2d/LrGgzEhPFHgDxJZBdO8YeGRdxvb6jPo8l0uk3Ci2vXEiE19qV8e/tafsu2X7QXhXTda8MX8ngv48/C86j4h+BPxRsLi602/8HeL3hiaG0vJLOG5W+8La/LY2Gj+JdPudPu430G4vntkF5uNdOX5lkmbUsPknEmEwGAg4/V8DxPl+CpYXH5fVk4wpTzmjhIQoZ3gXf2WLr4jDSzahSm8ThsZUq0vqmKiVKVKTqUryvrOnOTcZWta3VW956dX2R9g7l4G5ckZAyORlRkeoy6j6so6kZ/lV/4Kof8ABLfwT/wXM/aE+JfhHR/EFh8H9Q/Y/wDAcXw+8N/HWy8IQ6xe+LfjL4gnk1ubwF4k1C0voovEngDwdD+41XSUuNN8ReC9bvNRns45IPELiH95/wBiv9onW/2i/hHd6v408PQeFPil8PfF+s/C34seGredbm1sfiD4PSxtteezf78djczv59sZFAZWyhK7RXzn/wAEori/174T/H/xxrVlNY+KPHX7WPxe8QeJrWe3lsb2x1W4t/DX2jTrm3ukjuIH095ZEW3lRJIyHUoCCK7sNkVfIst4+q5phqMszyNZZw/QjJxq0KeIz3FSm8dRV3zqeXYDEPC1VpGnjaNVNT5bTOt7SphVTb9lVlKopbN+y5LLtZqo/usn1P8AMG8AfED/AIKNf8G8v7eWqWUmn33w3+J/g2aCz8YeAtYmudX+Df7QHwza8me21F2tWsoPGHgjXY4JL3w14n01R4j0C6DrHLoOtW9xYD/T5/4JY/8ABWH9m7/gqz8C7f4mfBrUz4c+JPhm30+w+NfwU1nUrabxt8LfEssErNFcNE6/254I1iWC8/4RDxtawQ6ZrEEM8Fy+i+Jre70u11/+CoX/AASt/Zs/4Ko/Aaf4SfHDRH0XxtoEl5qXwg+N3h21s2+IHwp8SXaxpNe6Tfyqr6l4b1mOC2j8XeDdTd9E120t4Y42sdc0zw/rumfwwf8ABN3/AIImf8Fk/wBg7/gsL8D7fwj8PfGPhL4feAvinpr/ABH/AGlfDd1A/wABfiJ+zda69anxzp9xqhvltb3/AITfwtaS2ek/DTX7I+NdM8UyaLrS6barpg8RaT8Gdh/o8fF/48fCP4CeGbjxX8WPH3h3wVpNtGTbrq14Bf6hIgcxWOjaLE51DV9RfypfKs9Ptri6cxsFi2ozJ+EPxo/aS/am/wCClus6n8Ef2VfC+q/Dj9nO4a4sPGXxU8TrqPh6fxHpMC3kV5ea7rtqiWmieGtQQxonhLSrpvEOqRsv9rLBbyHQ39u/4Kp/EL9nr4UfEz4X674r/ZN8VftPfH3xN4J1fT/hxpQufEv/AAr7TNE0DWrSWRNY02wvZdL1C+kvtbZfs8ej3GpNbSA7vKwlfF9l+zF/wVX/AG9tMtdJ+Jt9of7HnwAiCiw+Heh6UfA2kjSJhmSxj8CeGr59c1KVcHM/i2WxVenHSlT8aeCfD2rTw3CvBXEXiV4r4anFxo1sHhqHC3CuMxF6uEryVariKOIxFGg4SeJx8oqjVjUUsHF2b/X+EvAzOOKcnwvFvF/GHCXhj4eYidR08+4hzONXNc6oUGqeIp5Hw5g1VzTHyhXU6NO3sI1Zwk3JR5b9v4e/a8/Yr/4JN+A9Z+Hnw9vIP2m/2iNcnhn8dat4Jv8AS7Hw3DePJZG28O3fjq3s7+zsdF0u4Ig0/TtMstdvYpsxXyLMMD5v1DwP/wAFVv8AgrleWd34ktrn4G/s46hPDeabp15NrXgT4cTac1wlzbXo0hEHjD4u3b2TIlvrN4kOhuGVrJtE3kt9v/Dr4H/8EuP+CcV7p0Hiu+T9on9oOzv9tibjR4viZ43tNf8AM0+BbHwx4GtZbzwl4T1P+03iQXJlm8SpcSGJtVeRgg+p9R+OH/BQ79o2Ca0/Zo+AWk/s1+ALu1vobL4m/tFTWtt4zuYy1nCh0b4d6VBrZ8PXkUYlktbnXPD/AIusmVT5QwCD8njvCfxs8ZMXW4r8Z+J6fC+R5zXqZjPLaWO/1cy3E4dOPscNjM5xSp47OIU4yhT+qZDgMbQnC31ZzVj9FwnjN4Q+DPLgfA7gqHE/FmGoqnHxO8QMOswxVOs0lPF8L8JU5UsuylpOX1XE5lB5jOPNTx1OpQnOnU80/Zw/4IkfsgfAu207xN8X5L747+MdPWHULq+8d3ceifDnTdRtUAuZNM8H6e9nbahp7ytgnxfd+KhgDcyEla+/9I/aZ/Yf+GtjZ+E/Dfxt/Zu8FaZpkJtrDQ/Dnjj4e6Pp9nbRLtSK2stFv4LGNAvCRwIyt2Ukmvzxk/4I/wDjb4v6pY+J/wBrD9sH4ofE7XBFc3T6ZoMUltZ6JqeogS31poeseJLnWbe00qJxttV0Pwp4SsSFCnRI2YCmeJ/+CE3wFutFnh8GfGD4t+H9dbPk6h4gh8G+J9GfHT7doOm+GPCl1Nk5x5erLjqa/ZOEvC36PnCFOhlsOLq2Dk5xp1cTwtwViVhqM4uTq1p5nmk3mGOpyco8rWEoOC5re1VSLh/P3G3if4m+ImOlmHGHEGccQznKUqdLMc0VXBYfn5U4YTK6EMPl2Ci1GKcMPhYc6jFybcFf9kPA3xc+FXxPsZL/AOHPxJ8CeP7KG4e0muPCHi/w/wCJI4buJY3ktppdF1C8SO4RJoneGRlkVZI2K4dc99vT++vUL94feYqFHXqxZQB1JZQOoz/E9+07+wP+0x+xHrMHjiaddX8Dabq1vPoHxo+H9xf6BFpFzDevcaXJq5iuxrPgbVpH0+21FkM0ul2ckkenaP4mu3Ijr9hv+CR37dvxP+Omq65+z98X7q48X+IPBvgtvFnhz4gTGIatd+GdP1Ox0JtI8XCFSr3yy3qTaXrcrJqniFbO5lv4ITbsV/QuMPBfD5fwpW484I4qwnGPC2GiqmMlHDxwmPwlFuFN1JKGIr0aip1atKNSnNYfFQVSLqYWF43+Hw+YynWjh8TQeHqzvy3leDcbcyu7fDzK789Ln7o3MMUsZR4RPGVAeJkLRt1wDC5ZGA/65n178/l9+1//AMElv2W/2q7PUNdtPDNt8H/ivL9pvYfiD8PNKs9N/tXVHQos/jDw4vlaN4mLTlZvttwlprYQZTVQAcfqbRX8155w7kvEmBq5dnuW4PNMHW+Kji8PSqRVvgdOSjGtRnT15K1CrSrwu1TrQTaf3fCPGfFnAWb0M94O4hzTh3NcPJSjissxMsO6lvs4mkk6ONpS/wCXlDHwxWHqac9F63/gI+PX/BKT9tX4KeO9Y8LW3wZ8b/FXQxLNb6N47+GfhbWfFugaxpzXRaGaWw0tr3UtDvZhy4ulQ2YBbIUhj/Th+wl8JPjf8FP+Ccmj+BfjxpmoaF4stdRbU9L8O6rcifUvDfhPV/Ful3mg6FqCLJNNaX2nW7mO50+/ZLiwdjbNHHIpQfsW23GAVH/AN/8AL/69eQ/HP/klnin/ALgn/qR6RXyXhD4L5BwB4iZbn2T5nm1SGKzDL8JSy3E1ovC4alVzLB1H70FGpX5HSSgq3MoXk42bd/1z6Q/0quN/GjwgxfBfFWTcO03luEx+a4jPMFSxsMwx+Lw+U46hGbpVMVPC4VVY16ksRGjTdOpKNFwhT9l7x8DP+SWeFv8AuN/+pHq9eqxxKowqqvzuxAdtm95vPlYqyJnfJkhvm5Y4PJJ8q+Bn/JLPC3/cb/8AUj1evWq/YeJbviLP1f3XnWa3XR/7diEvPS7+8/mDhf8A5Jnh3/sRZR/6r8OFFFFeMe6FFFFAH5e/B+2l+Fn/AAUw/aO+G+lXar4V+OPwY8JftDyaQtvcQW2neL9F1nT/AIe69e2ym6MXm60QNQ1J0jDNdbTKQ7YrT/Yclm+G3xl/bZ/Z6123ntNV0r4/6t8dPC8rxNDp+q+AvjbBa32itpMkuLjUINEvdNk0bVLm2jmtbPUlNlNNHcK0TN8Gunjb/gqj8X/E2j3MNzpvwZ/ZZ8FfC/xRHsuQ1t4x8deMX8eafBC2wxSRr4at4pLqMtuSWVGIG5TWt+2j8KPinoXiPwV+2D+zlo0uufGz4M6bfaN4h8AwQTC0+Mfwu1ZxBrfha9tbW8s7q91DwwLi48VeErCO6k1C+1VP7OtFa4dIW/XsZXwuOxeG4axmKo4TE8UcBcJRnjsW5RpUOJ8vwccTk1bHSv8Au6ONwfs8prYmq+TDvMKONrXp0LrzKScI1ayT9nhsTXtFLag+T4F9q1vdSVmr9j9GiyjqwHJHJHUDcR9QoJI9OelLXz/+zr+0P4B/aS+Hem+OvBd8Yp/3Fh4u8KXzXFv4l8BeL7by/wC2PCHibSbyK11Cx1LS78tbia5s7dbqFFmjUREA+/hlb7rBuSOCDypIYcdwQQR2IIPQ1+U43B4zLMbicuzHDVMFjsHWnh8ThK65a1GtSnKFSEo7NXjzRlG8ZRlGSbTTffTqRqRUotNPs7r5PqcZ430bX9Z8J+ItP8JatZ+GvGF3oWsW3hfxVfaNb+Ibfw74gudPkj0vW5tFneKLUYbHUVtLubThPCt4ISjMBk1+Z+of8E+/2ifivqc837SH7d3xT8XeGrqz8i58GfCbw9p/wh0q6c3G4x3QstR1vTXsNgUeQmiRzsvJkyoB/WSivVyTiTNuHPrMsnqYLC4jFKCljZ5TleLx9CMIKKWExmNweIxOEbtzSlQqQcnyt3cINTUoQqqMakqsoxi4qMajpxs5uduSmoQXvSm9Ipvm1bsj5b+B/wCxp+zd+zt9ouPhR8K9F0LWbudprrxVqkt54p8ZzMYrWMxJ4q8SXuq6zb6cWtY7j+y4b2LTRdDzU09WIx9REbVwpcKB5eMR4RMcGNIwB1wAcZA7AAYdRXmZhj8xzXEVMXmWYY3H4qry+0xGNxFTFVpNKzbq1nKfvfy83JG3uRjeXNpCEYR5YxjFf3YqN/W29ujCiiiuUowtc0HSPE2laloXiHSLHWtF1izuLHVdJ1K1t73T9Ss7gFLi2u7K6ElncwTrwouMSxqTjgkL5t8MP2fvgh8FH1if4S/CrwR8PLjXOdVuPCvhyy0qfUIhK0wt7qa0tkne2FwfOFormLcFkEf3cezUVtDE4ulh8RhKWKxNLCYvk+tYSniMRDC4nknGcHXw8ayo1JRnCMlKUL3SetlaXGPNzcsOZfDJxTcdbuzeqv111srhRRRWJQV5L8c/+SWeKf8AuCf+pHpFetV5L8c/+SWeKf8AuCf+pHpFe1w3/wAlFkH/AGOsq/8AU6geFxR/yTPEX/Yizf8A9V+ID4Gf8ks8Lf8Acb/9SPV69ar8l6K/W8y8LP7QzHH4/wDt32P17G4rGey/sz2nsvrNepW9n7T+0Ic/Jz8vPyQ5rc3LG9l+M5X4uf2blmXZd/q/7b6hgMJgvbf2t7P2v1XD06HtfZ/2bU9n7T2fPyc8+W/Lzytd/rRRX5L0Vxf8Qh/6qH/zE/8A4TO//iNP/VNf+Zn/APBR+tFFfkvRR/xCH/qof/MT/wDhMP8AiNP/AFTX/mZ//BR+kPhL4UfD/wAC+KfiB418K+FdN0jxR8T9W0/W/HevQCZ9S8S6npdiulafNfvKXHk2Gnr5FtDCUiVSQsY6n0ghSMEBw330flW47hgV4OOo5wO/NfktRV1PCavXn7TEcUVK9Tkp01Uq5W5zVOjTjRo0+aWaN8lGhCnRpx2hCnFJCj4zxjFRjwzZL/qc77f9Sq3m7dz2r4v/ALC2g+JvGc/xd+APj7xP+y98bZ/Nm1LxZ8PbCzuPBvja5urqS5uZviV8O5GtdB8Y3sklze+ZfTvbSMdQaW8OsfY0jj+pfgzpnxa0rwHpth8bfEfhfxT8QYLjVk1LX/BujXuiaJqGlf2pe/8ACPldM1FrqaC9GkNB/aKLJxdbhjawdvzwor1cb4f5rmWXYXLcx4phjaWBlBYKviMhoVMfhqFNtwwkMynmEswqYSLfNHD4jFVqNOblKhClzzi84+McYz51w01J/Eo5y1F22tD+y+WPW9t/kfrRRX5L0V4//EIf+qh/8xP/AOEzX/iNP/VNf+Zn/wDBR+tFFfkvRR/xCH/qof8AzE//AITD/iNP/VNf+Zn/APBR+tFFfkvRR/xCH/qof/MT/wDhMP8AiNP/AFTX/mZ//BR+tFFfkvRR/wAQh/6qH/zE/wD4TD/iNP8A1TX/AJmf/wAFH60UV+S9FH/EIf8Aqof/ADE//hMP+I0/9U1/5mf/AMFH60V5L8c/+SWeKf8AuCf+pHpFfnjRXblvhZ/Z+Y4DH/277b6jjcLjPZf2Z7P2v1avTrez9p/aE+Tn5OXn5J8t+bllaz4M08XP7SyzMcu/1f8AY/X8Bi8F7b+1vaey+tYepQ9r7P8As2n7T2ftOfk54c1uXnje6//Z" Width="1.89in" Height="0.86in" Left="0in" Top="0in" MimeType="image/jpeg" Name="pictureBox1" />
+                <TextBox Width="1.91in" Height="0.29in" Left="2.12in" Top="0in" Value="AdventureWorks" Name="textBox1">
+                  <Style Color="195, 47, 11" />
+                </TextBox>
+                <Panel Width="8.09in" Height="0.5in" Left="0in" Top="0.94in" Name="panel3">
+                  <Items>
+                    <TextBox Width="10.24cm" Height="0.45in" Left="0cm" Top="0cm" Value="Sales Order: {Fields.SalesOrderID}" CanGrow="False" Name="Id1" StyleName="Header">
+                      <Style BackgroundColor="">
+                        <BorderStyle Default="None" />
+                        <BorderColor Default="Black" />
+                      </Style>
+                    </TextBox>
+                    <TextBox Width="1.52cm" Height="0.45in" Left="13.57cm" Top="0cm" Value="Date:" CanGrow="False" Name="Text8" StyleName="Header">
+                      <Style Visible="True" BackgroundColor="" />
+                    </TextBox>
+                    <TextBox Width="5.41cm" Height="0.45in" Left="15.13cm" Top="0cm" Value="= Fields.OrderDate" Format="{0:d}" CanGrow="False" Name="Field6" StyleName="Header">
+                      <Style BackgroundColor="" TextAlign="Right" />
+                    </TextBox>
+                    <Shape Width="8.09in" Height="2pt" Left="0in" Top="0.48in" Stretch="True" Anchoring="Left, Right" Name="shape3">
+                      <Style Color="Transparent">
+                        <BorderStyle Top="Solid" Bottom="Solid" />
+                        <BorderWidth Top="1.5pt" Bottom="0.5pt" />
+                      </Style>
+                      <ShapeType>
+                        <LineShape Direction="EW" />
+                      </ShapeType>
+                    </Shape>
+                  </Items>
+                </Panel>
+              </Items>
+            </Panel>
+          </Items>
+        </GroupHeaderSection>
+      </GroupHeader>
+      <GroupFooter>
+        <GroupFooterSection Height="0.24in" Name="groupFooterSection1">
+          <Style Visible="False" />
+        </GroupFooterSection>
+      </GroupFooter>
+    </Group>
+  </Groups>
+  <ReportParameters>
+    <ReportParameter Name="OrderNumber" Text="Order #" Visible="True" AutoRefresh="True">
+      <AvailableValues DataSourceName="OrderNumbers" DisplayMember="SalesOrderNumber" ValueMember="SalesOrderNumber">
+        <Sortings>
+          <Sorting Expression="=Fields.SalesOrderNumber" Direction="Asc" />
+        </Sortings>
+      </AvailableValues>
+      <Value>
+        <String>=First(Fields.SalesOrderNumber)</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="ForYear" Type="Integer">
+      <Value>
+        <String>=2003</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="ForMonth" Type="Integer">
+      <Value>
+        <String>=7</String>
+      </Value>
+    </ReportParameter>
+  </ReportParameters>
+</Report>

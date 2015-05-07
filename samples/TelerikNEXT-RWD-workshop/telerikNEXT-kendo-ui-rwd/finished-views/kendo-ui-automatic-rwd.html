@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <title>Kendo UI Automatic RWD</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="../styles/master.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/kendo/kendo.common.min.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/kendo/kendo.flat.min.css" type="text/css" />
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/kendo/jquery.min.js"></script>
+    <script src="../scripts/kendo/kendo.all.min.js"></script>
+
+  </head>
+  <body>
+    <div class="componentWrapper">
+      <input id="myDatePicker" style="width: 100%" />
+    </div>
+
+    <div class="componentWrapper">
+      <ul id="sampleMenu" style="width: 100%">
+        <li>
+          Item 1
+          <ul>
+            <li>Item 1-1</li>
+            <li>Item 1-2</li>
+          </ul>
+        </li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+        <li>
+          Item 5
+          <ul>
+            <li>Item 5-1</li>
+            <li>Item 5-2</li>
+            <li>Item 5-3</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="componentWrapper">
+      <div id="sampleGrid" style="width: 100%" />
+    </div>
+
+    <div class="componentWrapper">
+      <div id="sampleScheduler" style="width: 100%" />
+    </div>
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#myDatePicker").kendoDatePicker();
+        $("#sampleMenu").kendoMenu();
+
+        $("#sampleGrid").kendoGrid({
+          dataSource: {
+            data: app.sampleGridData,
+            pageSize: 10
+          },
+          pageable: true
+        });
+
+        $("#sampleScheduler").kendoScheduler();
+
+      });
+    </script>
+
+  </body>
+</html>

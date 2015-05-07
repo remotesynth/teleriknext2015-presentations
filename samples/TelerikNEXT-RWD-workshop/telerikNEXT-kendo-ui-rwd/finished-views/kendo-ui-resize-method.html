@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <title>Kendo UI Resize Method</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="../styles/master.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/kendo/kendo.common.min.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/kendo/kendo.flat.min.css" type="text/css" />
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/kendo/jquery.min.js"></script>
+    <script src="../scripts/kendo/kendo.all.min.js"></script>
+  </head>
+  <body>
+
+    <div class="chart-wrapper">
+       <div id="chart" style="width:100%"></div>
+    </div>
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#chart").kendoChart({
+          theme: "flat",
+          title: {
+              text: "Overall RWD Workshop Entertainment Level"
+          },
+          legend: {
+              position: "bottom"
+          },
+          seriesDefaults: {
+              type: "area"
+          },
+          series: [{
+              name: "Fun",
+              data: [2, 5, 10]
+          }],
+          categoryAxis: {
+            categories: [1, 2, 3],
+            majorGridLines: {
+                visible: false
+            }
+          },
+          tooltip: {
+            visible: true,
+            template: "<strong>#= series.name #:</strong> #= value #!!!"
+          }
+        });
+
+        $(window).on("resize", function() {
+          kendo.resize($(".chart-wrapper"));
+        });
+      });
+    </script>
+
+  </body>
+</html>

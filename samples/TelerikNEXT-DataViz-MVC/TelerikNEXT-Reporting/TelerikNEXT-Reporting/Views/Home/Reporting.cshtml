@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "Telerik Reporting in ASP.NET MVC Example";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+  <script src="@Url.Content("~/ReportViewer/js/telerikReportViewer-9.0.15.324.js")"></script>
+}
+
+@section ReportingStyles
+{
+    <link href="@Url.Content("~/ReportViewer/styles/telerikReportViewer-9.0.15.324.css")" rel="stylesheet" />
+    <style>
+        #myReportViewer {
+            overflow: hidden;
+            width: 100%;
+            height: 900px;
+        }
+    </style>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+}
+
+@section ReportingScripts
+{
+    @(Html.TelerikReporting().DeferredScripts())
+}
+
+<h2>Telerik Reporting in ASP.NET MVC Example</h2>
+
+<div style="">
+    <button id="trdxButton" class="k-button">.trdx</button>
+    <button id="libraryButton" class="k-button">ReportLibrary</button>
+</div>
+
+<script>
+    $("#trdxButton").on("click", function (e) {
+        e.preventDefault();
+
+        var reportViewer = $("#myReportViewer").data("telerik_ReportViewer");
+
+        // Here we can just pass in the name of any of our .trdx files
+        reportViewer.reportSource({ report: "Barcodes Report.trdx" });
+    });
+
+    $("#libraryButton").on("click", function (e) {
+        var reportViewer = $("#myReportViewer").data("telerik_ReportViewer");
+
+        // To load something from an assembly we need to help Telerik Reporting a bit.
+        // Reporting uses the report's type assembly qualified name (https://msdn.microsoft.com/en-us/library/system.type.assemblyqualifiedname%28v=vs.110%29.aspx)
+        // This is the format it follows:
+        // <namespace>.<report_type_name>, <assembly_name>
+        // The assembly name can be found by right-clicking on the ReportLibrary project and look at the properties
+        // the namespace should just be the name of the ReportLibrary, and the report_type_name is just the name of the Report
+        reportViewer.reportSource({ report: "TelerikReportLibrary.AnotherReport,  TelerikReportLibrary" });
+    });
+</script>
+
+@*@(Html.TelerikReporting().ReportViewer()
+    .Id("myReportViewer")
+    .ServiceUrl("/api/reports/")
+    .TemplateUrl(@Url.Content("~/ReportViewer/templates/telerikReportViewerTemplate-9.0.15.324.html"))
+    .ReportSource(new UriReportSource() { Uri = "Barcodes Report.trdx"} )
+    .ViewMode(ViewModes.INTERACTIVE)
+    .ScaleMode(ScaleModes.SPECIFIC)
+    .Scale(1.0)
+    .PersistSession(false)
+    .Deferred()
+)*@
+
+@(Html.TelerikReporting().ReportViewer()
+    .Id("myReportViewer")
+    .ServiceUrl("/api/reports/")
+    .TemplateUrl(@Url.Content("~/ReportViewer/templates/telerikReportViewerTemplate-9.0.15.324.html"))
+    .ReportSource(new TypeReportSource() { TypeName = typeof(TelerikReportLibrary.AnotherReport).AssemblyQualifiedName })
+    .ViewMode(ViewModes.INTERACTIVE)
+    .ScaleMode(ScaleModes.SPECIFIC)
+    .Scale(1.0)
+    .PersistSession(false)
+    .Deferred()
+)

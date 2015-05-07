@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report Width="8.09999942779541in" Name="ListBoundReport" xmlns="http://schemas.telerik.com/reporting/2012/3.7">
+  <Style BackgroundColor="White">
+    <Font Size="12pt" />
+  </Style>
+  <DataSources>
+    <CsvDataSource RecordSeparators="&#xD;&#xA;" FieldSeparators="," HasHeaders="True" Name="csvDataSource1">
+      <Source>
+        <String>Model,Manufacturer,Year,ImageUrl,AvailableColor&amp;#xD;
+NSX GT,Honda,2003,http://www.telerik.com/images/reporting/cars/NSXGT_7.jpg,Black|Red|White|Orange&amp;#xD;
+Skyline R34 GT-R,Nissan,2005,http://www.telerik.com/images/reporting/cars/EVLR34_1.jpg,Black|White&amp;#xD;
+M3,BMW,2007,http://www.telerik.com/images/reporting/cars//m3_2.jpg,Black|Orange&amp;#xD;
+MX-5 SE,Mazda,2004,http://www.telerik.com/images/reporting/cars/MX5_1.jpg,Black&amp;#xD;
+S4,Audi,2006,http://www.telerik.com/images/reporting/cars/S4_3.jpg,Black|Red|White&amp;#xD;
+R5 Turbo,Renault,2006,http://www.telerik.com/images/reporting/cars/R5_2.jpg,Black|Red|White|Orange&amp;#xD;
+Exige,Lotus,2007,http://www.telerik.com/images/reporting/cars/Exige_1.jpg,Black|Red|White</String>
+      </Source>
+      <Columns>
+        <DataColumn Name="Model" />
+        <DataColumn Name="Manufacturer" />
+        <DataColumn Name="Year" Type="Integer" />
+        <DataColumn Name="ImageUrl" />
+        <DataColumn Name="AvailableColor" />
+      </Columns>
+    </CsvDataSource>
+  </DataSources>
+  <Items>
+    <DetailSection Height="1.90000021457672in" Name="detail">
+      <Items>
+        <List DataSourceName="csvDataSource1" Width="20.5737991333008cm" Height="1.80000007152557in" Left="0.00010002215276472cm" Top="0cm" Name="list1">
+          <Body>
+            <Cells>
+              <TableCell RowIndex="0" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Panel Width="20.5737991333008cm" Height="4.57200002670288cm" Left="0in" Top="0in" Name="panel1">
+                    <Style BackgroundColor="242, 241, 235">
+                      <BorderStyle Bottom="Solid" />
+                      <BorderColor Default="White" />
+                      <BorderWidth Bottom="13pt" />
+                    </Style>
+                    <Items>
+                      <TextBox Width="2.10000014305115in" Height="0.249999836087227in" Left="1.79992127418518in" Top="0.517712116241455in" Value="=Fields.Model" Name="txtModel" />
+                      <TextBox Width="1.34371066093445in" Height="0.25in" Left="0.15625in" Top="0.11458333581686in" Value="Manufacturer:" Name="textBox1" />
+                      <TextBox Width="1.34371066093445in" Height="0.25in" Left="0.15625in" Top="0.517712116241455in" Value="Model:" Name="txtProductNameLabel" />
+                      <TextBox Width="1.34371066093445in" Height="0.25in" Left="0.15625in" Top="0.938841819763184in" Value="Year:" Name="txtYearLabel">
+                        <Style>
+                          <Font Bold="False" />
+                        </Style>
+                      </TextBox>
+                      <TextBox Width="2.10000014305115in" Height="0.25in" Left="1.79996061325073in" Top="0.11458333581686in" Value="=Fields.Manufacturer" Name="txtManufacturer" />
+                      <TextBox Width="2.10000014305115in" Height="0.25in" Left="1.79992127418518in" Top="0.938841819763184in" Value="=Fields.Year" Name="txtYear" />
+                      <Panel Width="1.20896470546722in" Height="0.261158019304276in" Left="1.79992127418518in" Top="1.30999994277954in" Name="panelColorsInStock">
+                        <Items>
+                          <Shape Width="0.200000002980232in" Height="0.200000002980232in" Left="0.34405517578125in" Top="0.0500000007450581in" Name="shape1">
+                            <Style BackgroundColor="194, 46, 10" Color="Transparent" LineStyle="Solid" LineWidth="1pt">
+                              <BorderWidth Default="1pt" />
+                            </Style>
+                            <ShapeType>
+                              <EllipseShape />
+                            </ShapeType>
+                            <ConditionalFormatting>
+                              <FormattingRule>
+                                <Style Visible="False" />
+                                <Filters>
+                                  <Filter Expression="=Fields.AvailableColor.Contains('Red')" Operator="NotEqual" Value="=True" />
+                                </Filters>
+                              </FormattingRule>
+                            </ConditionalFormatting>
+                          </Shape>
+                          <Shape Width="0.200000002980232in" Height="0.200000002980232in" Left="0.949999988079071in" Top="0.0500000007450581in" Name="shape2">
+                            <Style BackgroundColor="255, 147, 30" Color="Transparent" />
+                            <ShapeType>
+                              <EllipseShape />
+                            </ShapeType>
+                            <ConditionalFormatting>
+                              <FormattingRule>
+                                <Style Visible="False" />
+                                <Filters>
+                                  <Filter Expression="= Fields.AvailableColor.Contains(&quot;Orange&quot;)" Operator="NotEqual" Value="= True" />
+                                </Filters>
+                              </FormattingRule>
+                            </ConditionalFormatting>
+                          </Shape>
+                          <Shape Width="0.200000002980232in" Height="0.200000002980232in" Left="0.0000394185371988in" Top="0.0499998740851879in" Name="shape3">
+                            <Style BackgroundColor="Black" Color="Transparent" />
+                            <ShapeType>
+                              <EllipseShape />
+                            </ShapeType>
+                            <ConditionalFormatting>
+                              <FormattingRule>
+                                <Style Visible="False" />
+                                <Filters>
+                                  <Filter Expression="= Fields.AvailableColor.Contains(&quot;Black&quot;)" Operator="NotEqual" Value="= True" />
+                                </Filters>
+                              </FormattingRule>
+                            </ConditionalFormatting>
+                          </Shape>
+                          <Shape Width="0.200000002980232in" Height="0.200000002980232in" Left="0.649999976158142in" Top="0.0500000007450581in" Name="shape4">
+                            <Style BackgroundColor="White" Color="Transparent" />
+                            <ShapeType>
+                              <EllipseShape />
+                            </ShapeType>
+                            <ConditionalFormatting>
+                              <FormattingRule>
+                                <Style Visible="False" />
+                                <Filters>
+                                  <Filter Expression="= Fields.AvailableColor.Contains(&quot;White&quot;)" Operator="NotEqual" Value="= True" />
+                                </Filters>
+                              </FormattingRule>
+                            </ConditionalFormatting>
+                          </Shape>
+                        </Items>
+                      </Panel>
+                      <TextBox Width="1.34371066093445in" Height="0.25in" Left="0.15625in" Top="1.33884191513062in" Value="Colors in Stock:" Name="txtColorsInStock" />
+                      <PictureBox Url="=Fields.ImageUrl" Width="2.59992122650146in" Height="4.5718994140625cm" Left="5.49996042251587in" Top="0in" Sizing="ScaleProportional" MimeType="" Anchoring="Top, Bottom" Name="pictureBox1" />
+                    </Items>
+                    <ConditionalFormatting>
+                      <FormattingRule>
+                        <Style BackgroundColor="225, 231, 203" />
+                        <Filters>
+                          <Filter Expression="=RowNumber() % 2" Operator="Equal" Value="=0" />
+                        </Filters>
+                      </FormattingRule>
+                    </ConditionalFormatting>
+                  </Panel>
+                </ReportItem>
+              </TableCell>
+            </Cells>
+            <Columns>
+              <Column Width="20.5737991333008cm" />
+            </Columns>
+            <Rows>
+              <Row Height="1.80000007152557in" />
+            </Rows>
+          </Body>
+          <Corner />
+          <RowGroups>
+            <TableGroup Name="RowGroup1">
+              <ChildGroups>
+                <TableGroup Name="Group1" />
+              </ChildGroups>
+              <Groupings>
+                <Grouping Expression="" />
+              </Groupings>
+            </TableGroup>
+          </RowGroups>
+          <ColumnGroups>
+            <TableGroup Name="ColumnGroup1" />
+          </ColumnGroups>
+        </List>
+      </Items>
+    </DetailSection>
+    <ReportHeaderSection Height="1.19999992847443in" Name="reportHeaderSection1">
+      <Items>
+        <TextBox Width="8.09996032714844in" Height="0.600000023841858in" Left="0in" Top="0in" Value="Dealer Inc." Name="textBox5">
+          <Style VerticalAlign="Top">
+            <BorderColor Default="Black" />
+            <Font Size="34pt" />
+          </Style>
+        </TextBox>
+        <TextBox Width="8.09992122650146in" Height="0.316577017307281in" Left="0.0000394185371988in" Top="0.800000011920929in" Value="Performance cars in stock" Name="textBox6">
+          <Style VerticalAlign="Bottom">
+            <BorderStyle Bottom="Solid" />
+            <BorderColor Default="Black" />
+            <Font Size="16pt" />
+          </Style>
+        </TextBox>
+        <Shape Width="8.09996032714844in" Height="3.75pt" Left="0in" Top="0.600117981433868in" Stretch="True" Anchoring="Left, Right" Name="shape5">
+          <Style Color="Transparent">
+            <BorderStyle Top="Solid" Bottom="Solid" />
+            <BorderWidth Top="3pt" />
+          </Style>
+          <ShapeType>
+            <LineShape Direction="EW" />
+          </ShapeType>
+        </Shape>
+      </Items>
+    </ReportHeaderSection>
+  </Items>
+  <StyleSheet>
+    <StyleRule>
+      <Style>
+        <Font Name="Segoe UI Light" Size="25pt" Bold="True" />
+      </Style>
+      <Selectors>
+        <StyleSelector Type="ReportItemBase" StyleName="Header" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style>
+        <Font Name="Segoe UI Light" Size="13pt" />
+        <Padding Left="2pt" Right="2pt" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextItemBase" />
+        <TypeSelector Type="HtmlTextBox" />
+      </Selectors>
+    </StyleRule>
+  </StyleSheet>
+  <PageSettings>
+    <PageSettings PaperKind="Letter" Landscape="False">
+      <Margins>
+        <MarginsU Left="0.200000002980232in" Right="0.200000002980232in" Top="0.300000011920929in" Bottom="0.400000005960464in" />
+      </Margins>
+    </PageSettings>
+  </PageSettings>
+</Report>

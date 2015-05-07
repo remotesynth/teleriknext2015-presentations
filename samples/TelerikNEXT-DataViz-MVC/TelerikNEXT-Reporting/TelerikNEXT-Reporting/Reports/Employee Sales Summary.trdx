@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report Width="8.1in" Name="EmployeeSalesSummary" SnapGridSize="0.1in" xmlns="http://schemas.telerik.com/reporting/2012/3.2">
+  <DataSources>
+    <SqlDataSource ConnectionString="Telerik.Reporting.Examples.CSharp.Properties.Settings.TelerikConnectionString" SelectCommand="SELECT&#xD;&#xA;&#x9;s.SalesPersonID&#xD;&#xA;&#x9;, c.FirstName + N' ' + c.LastName AS Employee&#xD;&#xA;FROM Sales.SalesPerson s&#xD;&#xA;&#x9;INNER JOIN HumanResources.Employee e ON e.EmployeeID = s.SalesPersonID&#xD;&#xA;&#x9;INNER JOIN Person.Contact c ON c.ContactID = e.ContactID&#xD;&#xA;ORDER BY&#xD;&#xA;&#x9;Employee" Name="Employees" />
+    <SqlDataSource ConnectionString="Telerik.Reporting.Examples.CSharp.Properties.Settings.TelerikConnectionString" SelectCommand="--DECLARE @ReportYear int&#xD;&#xA;--DECLARE @ReportMonth int&#xD;&#xA;--SET @ReportMonth = 7&#xD;&#xA;--SET @ReportYear = 2003&#xD;&#xA;--DECLARE @EmployeeID int&#xD;&#xA;--SET @EmployeeID = 283&#xD;&#xA;&#xD;&#xA;SELECT &#xD;&#xA;&#x9;C.FirstName + ' ' + COALESCE (C.MiddleName, '') + ' ' + C.LastName AS Employee&#xD;&#xA;&#x9;, SOD.LineTotal&#xD;&#xA;&#x9;, S.SalesPersonID&#xD;&#xA;&#x9;, SOH.OrderDate&#xD;&#xA;&#x9;, SOH.SalesOrderID&#xD;&#xA;&#x9;, SOH.SalesOrderNumber&#xD;&#xA;&#x9;, SOH.SubTotal&#xD;&#xA;&#x9;, P.Name AS Product&#xD;&#xA;&#x9;, PC.Name AS Category&#xD;&#xA;FROM &#xD;&#xA;&#x9;Sales.SalesPerson S&#xD;&#xA;&#x9;INNER JOIN Sales.SalesOrderHeader SOH          ON SOH.SalesPersonID = S.SalesPersonID&#xD;&#xA;&#x9;INNER JOIN Sales.SalesOrderDetail SOD          ON SOH.SalesOrderID = SOD.SalesOrderID&#xD;&#xA;&#x9;INNER JOIN HumanResources.Employee E           ON S.SalesPersonID = E.EmployeeID&#xD;&#xA;&#x9;INNER JOIN Person.Contact C                    ON C.ContactID = E.ContactID&#xD;&#xA;&#x9;INNER JOIN Production.Product P                ON SOD.ProductID = P.ProductID &#xD;&#xA;&#x9;INNER JOIN Production.ProductSubcategory PS    ON P.ProductSubcategoryID = PS.ProductSubcategoryID &#xD;&#xA;&#x9;INNER JOIN Production.ProductCategory PC       ON PS.ProductCategoryID = PC.ProductCategoryID&#xD;&#xA;WHERE&#xD;&#xA;&#x9;S.SalesPersonID = @EmployeeID&#xD;&#xA;&#xD;&#xA;" Name="mainDataSource">
+      <Parameters>
+        <SqlDataSourceParameter DbType="String" Name="@ReportYear" />
+        <SqlDataSourceParameter DbType="String" Name="@ReportMonth" />
+        <SqlDataSourceParameter DbType="Int32" Name="@EmployeeID">
+          <Value>
+            <String>=Parameters.Employee.Value</String>
+          </Value>
+        </SqlDataSourceParameter>
+      </Parameters>
+      <DefaultValues>
+        <SqlDataSourceParameter DbType="String" Name="@ReportYear" />
+        <SqlDataSourceParameter DbType="String" Name="@ReportMonth" />
+        <SqlDataSourceParameter DbType="String" Name="@EmployeeID">
+          <Value>
+            <String>283</String>
+          </Value>
+        </SqlDataSourceParameter>
+      </DefaultValues>
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <DetailSection KeepTogether="False" Height="6.8in" Name="detail">
+      <Items>
+        <Panel Width="8.1in" Height="6.7in" Left="0in" Top="0in" KeepTogether="False" Name="panelWrapper">
+          <Items>
+            <Crosstab DataSourceName="mainDataSource" Width="8.09in" Height="1.2in" Left="0in" Top="5.5in" KeepTogether="False" NoDataMessage="= &quot;No Sales for &quot; + Parameters.ReportDate.Value.ToString(&quot;MMMM, yyyy&quot;)" Name="crosstabEmployeeSales">
+              <Body>
+                <Cells>
+                  <TableCell RowIndex="1" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                    <ReportItem>
+                      <TextBox Width="0in" Height="0.24in" Left="0in" Top="0in" Name="textBox6" />
+                    </ReportItem>
+                  </TableCell>
+                  <TableCell RowIndex="0" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                    <ReportItem>
+                      <TextBox Width="0in" Height="0.48in" Left="0in" Top="0in" Name="textBox5">
+                        <Style>
+                          <BorderStyle Default="None" Left="None" />
+                        </Style>
+                      </TextBox>
+                    </ReportItem>
+                  </TableCell>
+                  <TableCell RowIndex="2" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                    <ReportItem>
+                      <TextBox Width="0in" Height="0.24in" Left="0in" Top="0in" Name="textBox9" />
+                    </ReportItem>
+                  </TableCell>
+                  <TableCell RowIndex="3" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                    <ReportItem>
+                      <TextBox Width="0in" Height="0.24in" Left="0in" Top="0in" Name="textBox13" />
+                    </ReportItem>
+                  </TableCell>
+                </Cells>
+                <Columns>
+                  <Column />
+                </Columns>
+                <Rows>
+                  <Row Height="0.48in" />
+                  <Row Height="0.24in" />
+                  <Row Height="0.24in" />
+                  <Row Height="0.24in" />
+                </Rows>
+              </Body>
+              <Corner />
+              <Style>
+                <BorderColor Default="137, 145, 164" />
+              </Style>
+              <RowGroups>
+                <TableGroup Name="RowGroup">
+                  <ReportItem>
+                    <TextBox Width="8.08in" Height="0.48in" Left="0in" Top="0in" Value="{Parameters.ReportDate.Value.ToString(&quot;MMMM yyyy&quot;)} Order Summary" Name="textBoxTableTitle">
+                      <Style>
+                        <BorderStyle Bottom="Solid" />
+                        <Font Size="16pt" />
+                        <Padding Bottom="0.08in" />
+                      </Style>
+                    </TextBox>
+                  </ReportItem>
+                  <Sortings>
+                    <Sorting Expression="1" Direction="Asc" />
+                  </Sortings>
+                </TableGroup>
+                <TableGroup Name="SalesOrder">
+                  <ChildGroups>
+                    <TableGroup Name="Group6">
+                      <ReportItem>
+                        <TextBox Width="1.21in" Height="0.24in" Left="0in" Top="0in" Value="=Fields.SalesOrderNumber" Name="textBoxSalesOrderNumber">
+                          <Style Color="0, 105, 104" VerticalAlign="Top">
+                            <Padding Top="0.05in" />
+                          </Style>
+                          <Action>
+                            <NavigateToReportAction>
+                              <ReportSource>
+                                <UriReportSource Uri="Invoice.trdx">
+                                  <Parameters>
+                                    <Parameter Name="OrderNumber">
+                                      <Value>
+                                        <String>=Fields.SalesOrderNumber</String>
+                                      </Value>
+                                    </Parameter>
+                                    <Parameter Name="ForYear">
+                                      <Value>
+                                        <String>=Parameters.ReportDate.Value.Year</String>
+                                      </Value>
+                                    </Parameter>
+                                    <Parameter Name="ForMonth">
+                                      <Value>
+                                        <String>=Parameters.ReportDate.Value.Month</String>
+                                      </Value>
+                                    </Parameter>
+                                  </Parameters>
+                                </UriReportSource>
+                              </ReportSource>
+                            </NavigateToReportAction>
+                          </Action>
+                        </TextBox>
+                      </ReportItem>
+                      <ChildGroups>
+                        <TableGroup Name="Category">
+                          <ReportItem>
+                            <TextBox Width="5.13in" Height="0.24in" Left="0in" Top="0in" Value="=Fields.Category" Name="textBoxCategory" />
+                          </ReportItem>
+                          <ChildGroups>
+                            <TableGroup Name="Detail">
+                              <ReportItem>
+                                <TextBox Width="1.75in" Height="0.24in" Left="0in" Top="0in" Value="=Sum(Fields.LineTotal)" Format="{0:N2}" Name="textBoxCategoryAmount">
+                                  <Style TextAlign="Right" />
+                                </TextBox>
+                              </ReportItem>
+                            </TableGroup>
+                          </ChildGroups>
+                          <Groupings>
+                            <Grouping Expression="=Fields.Category" />
+                          </Groupings>
+                          <Sortings>
+                            <Sorting Expression="=Fields.Category" Direction="Asc" />
+                          </Sortings>
+                        </TableGroup>
+                      </ChildGroups>
+                    </TableGroup>
+                    <TableGroup Name="Group7">
+                      <ReportItem>
+                        <TextBox Width="1.21in" Height="0.24in" Left="0in" Top="0in" Name="textBox12">
+                          <Style>
+                            <BorderStyle Bottom="Solid" />
+                          </Style>
+                        </TextBox>
+                      </ReportItem>
+                      <ChildGroups>
+                        <TableGroup Name="Group1">
+                          <ReportItem>
+                            <TextBox Width="5.13in" Height="0.24in" Left="0in" Top="0in" Name="textBox4">
+                              <Style>
+                                <BorderStyle Top="Solid" Bottom="Solid" />
+                                <BorderColor Default="Black" Top="230, 230, 230" />
+                              </Style>
+                            </TextBox>
+                          </ReportItem>
+                          <ChildGroups>
+                            <TableGroup Name="Group2">
+                              <ReportItem>
+                                <TextBox Width="1.75in" Height="0.24in" Left="0in" Top="0in" Value="=Sum(Fields.LineTotal)" Format="{0:N2}" Name="textBoxOrderTotal">
+                                  <Style TextAlign="Right">
+                                    <BorderStyle Top="Solid" Bottom="Solid" />
+                                    <BorderColor Default="Black" Top="230, 230, 230" />
+                                  </Style>
+                                </TextBox>
+                              </ReportItem>
+                            </TableGroup>
+                          </ChildGroups>
+                        </TableGroup>
+                      </ChildGroups>
+                    </TableGroup>
+                  </ChildGroups>
+                  <Groupings>
+                    <Grouping Expression="=Fields.SalesOrderID" />
+                  </Groupings>
+                  <Sortings>
+                    <Sorting Expression="=Fields.SalesOrderNumber" Direction="Asc" />
+                  </Sortings>
+                </TableGroup>
+                <TableGroup Name="Group3">
+                  <ReportItem>
+                    <TextBox Width="1.21in" Height="0.24in" Left="0in" Top="0in" Name="textBox10">
+                      <Style>
+                        <BorderStyle Bottom="Solid" />
+                        <BorderWidth Bottom="2pt" />
+                      </Style>
+                    </TextBox>
+                  </ReportItem>
+                  <ChildGroups>
+                    <TableGroup Name="Group5">
+                      <ReportItem>
+                        <TextBox Width="5.13in" Height="0.24in" Left="0in" Top="0in" Value="Total:" Name="textBoxTotalLabel">
+                          <Style>
+                            <BorderStyle Bottom="Solid" />
+                            <BorderWidth Bottom="2pt" />
+                          </Style>
+                        </TextBox>
+                      </ReportItem>
+                      <ChildGroups>
+                        <TableGroup Name="Group4">
+                          <ReportItem>
+                            <TextBox Width="1.75in" Height="0.24in" Left="0in" Top="0in" Value="=Sum(Fields.LineTotal)" Format="{0:N2}" Name="textBoxEmployeeSalesTotal">
+                              <Style TextAlign="Right">
+                                <BorderStyle Bottom="Solid" />
+                                <BorderWidth Bottom="2pt" />
+                                <Font Bold="True" />
+                              </Style>
+                            </TextBox>
+                          </ReportItem>
+                        </TableGroup>
+                      </ChildGroups>
+                    </TableGroup>
+                  </ChildGroups>
+                </TableGroup>
+              </RowGroups>
+              <ColumnGroups>
+                <TableGroup />
+              </ColumnGroups>
+              <Filters>
+                <Filter Expression="= Fields.OrderDate.Year" Operator="Equal" Value="=Parameters.ReportDate.Value.Year" />
+                <Filter Expression="= Fields.OrderDate.Month" Operator="Equal" Value="=Parameters.ReportDate.Value.Month" />
+              </Filters>
+              <NoDataStyle Color="Red" />
+            </Crosstab>
+            <Graph DataSourceName="mainDataSource" Width="8.1in" Height="2.4in" Left="0in" Top="0in" Name="graph1">
+              <Axes>
+                <GraphAxis Name="graphAxis2" MajorTickMarkDisplayType="None" LabelAngle="-90">
+                  <Scale>
+                    <CategoryScale>
+                      <CrossAxisPositions>
+                        <CategoryScaleCrossAxisPosition Position="Auto" />
+                      </CrossAxisPositions>
+                    </CategoryScale>
+                  </Scale>
+                  <Style Visible="True">
+                    <Font Name="Segoe UI" Size="8pt" />
+                  </Style>
+                  <MajorGridLineStyle Visible="True" LineWidth="1px" LineColor="LightGray" />
+                  <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                </GraphAxis>
+                <GraphAxis Name="graphAxis1" MajorTickMarkDisplayType="None" LabelFormat="{0:C0}K">
+                  <Scale>
+                    <NumericalScale>
+                      <CrossAxisPositions>
+                        <NumericalScaleCrossAxisPosition Value="0" Position="Auto" />
+                      </CrossAxisPositions>
+                    </NumericalScale>
+                  </Scale>
+                  <Style Visible="True">
+                    <Font Name="Segoe UI" Size="8pt" />
+                  </Style>
+                  <MajorGridLineStyle Visible="True" LineWidth="1px" LineColor="LightGray" />
+                  <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                </GraphAxis>
+              </Axes>
+              <CoordinateSystems>
+                <CartesianCoordinateSystem XAxis="graphAxis2" YAxis="graphAxis1" Name="cartesianCoordinateSystem1" />
+              </CoordinateSystems>
+              <Style>
+                <Font Name="Segoe UI" />
+                <Padding Left="10px" Right="10px" Top="10px" Bottom="10px" />
+              </Style>
+              <SeriesGroups>
+                <GraphGroup Name="orderDate.YearGroup1">
+                  <Groupings>
+                    <Grouping Expression="=Fields.OrderDate.Year" />
+                  </Groupings>
+                  <Sortings>
+                    <Sorting Expression="=Fields.OrderDate.Year" Direction="Asc" />
+                  </Sortings>
+                </GraphGroup>
+              </SeriesGroups>
+              <CategoryGroups>
+                <GraphGroup Label="= Fields.OrderDate.ToString(&quot;MMMM&quot;)" Name="orderDate.MonthGroup1">
+                  <Groupings>
+                    <Grouping Expression="=Fields.OrderDate.Month" />
+                  </Groupings>
+                  <Sortings>
+                    <Sorting Expression="=Fields.OrderDate.Month" Direction="Asc" />
+                  </Sortings>
+                </GraphGroup>
+              </CategoryGroups>
+              <Series>
+                <AreaSeries CoordinateSystem="cartesianCoordinateSystem1" CategoryGroup="orderDate.MonthGroup1" SeriesGroup="orderDate.YearGroup1" MarkerSize="2mm" Y="=ISNULL(Sum(Fields.LineTotal), 0) / 1000.0" ArrangeMode="Stacked" DataPointLabel="=Sum(Fields.LineTotal)" Legend="=Fields.OrderDate.Year" LegendFormat="" Name="lineSeries1">
+                  <AreaStyle LineWidth="1px" />
+                  <DataPointLabelStyle Visible="False" />
+                  <DataPointStyle Visible="False" />
+                </AreaSeries>
+              </Series>
+              <Legend Position="RightCenter">
+                <Style LineWidth="0in" LineColor="LightGray" />
+              </Legend>
+              <Titles>
+                <GraphTitle Text="Yearly Sales Comparison" Position="TopCenter">
+                  <Style LineWidth="0in" LineColor="LightGray">
+                    <Font Size="14pt" />
+                  </Style>
+                </GraphTitle>
+              </Titles>
+              <PlotAreaStyle LineWidth="0in" LineColor="LightGray" />
+              <ColorPalette>
+                <ColorPalette>
+                  <Colors>
+                    <Color>247, 150, 70</Color>
+                    <Color>75, 172, 198</Color>
+                    <Color>128, 100, 162</Color>
+                    <Color>182, 87, 8</Color>
+                    <Color>39, 106, 124</Color>
+                    <Color>77, 59, 98</Color>
+                  </Colors>
+                </ColorPalette>
+              </ColorPalette>
+            </Graph>
+            <Graph DataSourceName="mainDataSource" Width="8.1in" Height="2.4in" Left="0in" Top="2.7in" Name="graph2">
+              <Axes>
+                <GraphAxis Name="graphAxis6" MajorTickMarkDisplayType="None">
+                  <Scale>
+                    <CategoryScale>
+                      <CrossAxisPositions>
+                        <CategoryScaleCrossAxisPosition Position="Auto" />
+                      </CrossAxisPositions>
+                    </CategoryScale>
+                  </Scale>
+                  <Style>
+                    <Font Name="Segoe UI" Size="8pt" />
+                  </Style>
+                  <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                  <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                </GraphAxis>
+                <GraphAxis Name="graphAxis5" MajorTickMarkDisplayType="None" LabelFormat="{0:C0}K">
+                  <Scale>
+                    <NumericalScale>
+                      <CrossAxisPositions>
+                        <NumericalScaleCrossAxisPosition Value="0" Position="Auto" />
+                      </CrossAxisPositions>
+                    </NumericalScale>
+                  </Scale>
+                  <Style>
+                    <Font Name="Segoe UI" Size="8pt" />
+                  </Style>
+                  <MajorGridLineStyle LineWidth="1px" LineColor="LightGray" />
+                  <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                </GraphAxis>
+              </Axes>
+              <CoordinateSystems>
+                <CartesianCoordinateSystem XAxis="graphAxis6" YAxis="graphAxis5" Name="cartesianCoordinateSystem3" />
+              </CoordinateSystems>
+              <Style>
+                <Padding Left="10px" Right="10px" Top="10px" Bottom="10px" />
+              </Style>
+              <SeriesGroups>
+                <GraphGroup Name="orderDate.YearGroup2">
+                  <Groupings>
+                    <Grouping Expression="=Fields.OrderDate.Year" />
+                  </Groupings>
+                  <Sortings>
+                    <Sorting Expression="=Fields.OrderDate.Year" Direction="Asc" />
+                  </Sortings>
+                </GraphGroup>
+              </SeriesGroups>
+              <CategoryGroups>
+                <GraphGroup Name="categoryGroup1">
+                  <Groupings>
+                    <Grouping Expression="=Fields.Category" />
+                  </Groupings>
+                  <Sortings>
+                    <Sorting Expression="=Fields.Category" Direction="Asc" />
+                  </Sortings>
+                </GraphGroup>
+              </CategoryGroups>
+              <Series>
+                <BarSeries CoordinateSystem="cartesianCoordinateSystem3" CategoryGroup="categoryGroup1" SeriesGroup="orderDate.YearGroup2" Y="=Sum(Fields.LineTotal) / 1000.0" DataPointLabel="=Sum(Fields.LineTotal)" Legend="=Fields.OrderDate.Year" LegendFormat="">
+                  <DataPointLabelStyle Visible="False" />
+                  <DataPointStyle Visible="True" LineWidth="0in" />
+                  <ColorPalette>
+                    <ColorPalette>
+                      <Colors>
+                        <Color>247, 150, 70</Color>
+                        <Color>75, 172, 198</Color>
+                        <Color>128, 100, 162</Color>
+                        <Color>182, 87, 8</Color>
+                        <Color>39, 106, 124</Color>
+                        <Color>77, 59, 98</Color>
+                      </Colors>
+                    </ColorPalette>
+                  </ColorPalette>
+                </BarSeries>
+              </Series>
+              <Legend Position="RightCenter" IsInsidePlotArea="False">
+                <Style LineWidth="0in" LineColor="LightGray">
+                  <Font Name="Segoe UI" />
+                </Style>
+              </Legend>
+              <Titles>
+                <GraphTitle Text="Category Sales Comparison" Position="TopCenter">
+                  <Style LineWidth="0in" LineColor="LightGray">
+                    <Font Name="Segoe UI" Size="14pt" />
+                  </Style>
+                </GraphTitle>
+              </Titles>
+              <PlotAreaStyle LineWidth="0in" LineColor="LightGray" />
+              <ColorPalette>
+                <ColorPalette>
+                  <Colors>
+                    <Color>247, 150, 70</Color>
+                    <Color>75, 172, 198</Color>
+                    <Color>128, 100, 162</Color>
+                    <Color>182, 87, 8</Color>
+                    <Color>39, 106, 124</Color>
+                    <Color>77, 59, 98</Color>
+                  </Colors>
+                </ColorPalette>
+              </ColorPalette>
+            </Graph>
+          </Items>
+        </Panel>
+      </Items>
+    </DetailSection>
+  </Items>
+  <StyleSheet>
+    <StyleRule>
+      <Style>
+        <Padding Left="2pt" Right="2pt" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextItemBase" />
+        <TypeSelector Type="HtmlTextBox" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style VerticalAlign="Top">
+        <Font Name="Segoe UI Light" Size="25pt" Bold="True" />
+        <Padding Left="0in" />
+      </Style>
+      <Selectors>
+        <StyleSelector Type="ReportItemBase" StyleName="Header" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style VerticalAlign="Top">
+        <Font Name="Segoe UI Light" Size="16pt" />
+        <Padding Left="0in" />
+      </Style>
+      <Selectors>
+        <StyleSelector Type="ReportItemBase" StyleName="Category" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style VerticalAlign="Bottom">
+        <Font Name="Segoe UI" />
+        <Padding Bottom="0.04in" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextBox" />
+      </Selectors>
+    </StyleRule>
+  </StyleSheet>
+  <PageSettings>
+    <PageSettings PaperKind="Letter" Landscape="False">
+      <Margins>
+        <MarginsU Left="0.2in" Right="0.2in" Top="0.3in" Bottom="0.4in" />
+      </Margins>
+    </PageSettings>
+  </PageSettings>
+  <Groups>
+    <Group Name="group1">
+      <GroupHeader>
+        <GroupHeaderSection PrintOnEveryPage="True" Height="1in" Name="groupHeaderSection1">
+          <Items>
+            <TextBox Width="2.2in" Height="0.2in" Left="0in" Top="0in" Value="SALES REPORT" Name="textBoxLogo">
+              <Style Color="195, 47, 11">
+                <Font Size="9pt" Bold="True" />
+              </Style>
+            </TextBox>
+            <TextBox Width="2.5in" Height="0.2in" Left="5.6in" Top="0in" Value="=Parameters.ReportDate.Value" Format="{0:Y}" Name="textBoxDataRange">
+              <Style TextAlign="Right">
+                <Font Size="9pt" Bold="True" />
+              </Style>
+            </TextBox>
+            <TextBox Width="8.1in" Height="0.6in" Left="0in" Top="0.2in" Value="=Parameters.Employee.Label" Name="textBoxReportEmployee" StyleName="Header" />
+            <Shape Width="8.1in" Height="2pt" Left="0in" Top="0.8in" Stretch="True" Anchoring="Left, Right" Name="shape3">
+              <Style Color="Transparent">
+                <BorderStyle Top="Solid" Bottom="Solid" />
+                <BorderWidth Top="1.5pt" Bottom="0.5pt" />
+              </Style>
+              <ShapeType>
+                <LineShape Direction="EW" />
+              </ShapeType>
+            </Shape>
+          </Items>
+        </GroupHeaderSection>
+      </GroupHeader>
+      <GroupFooter>
+        <GroupFooterSection Height="0.13in" Name="groupFooterSection1">
+          <Style Visible="False" />
+        </GroupFooterSection>
+      </GroupFooter>
+      <Groupings>
+        <Grouping Expression="" />
+      </Groupings>
+    </Group>
+  </Groups>
+  <ReportParameters>
+    <ReportParameter Name="ReportDate" Type="DateTime" Text="Report Date" Visible="True" AutoRefresh="True">
+      <Value>
+        <String>=#2003-07-01#</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="Employee" Type="Integer" Text="Employee" Visible="True" AutoRefresh="True">
+      <AvailableValues DataSourceName="Employees" DisplayMember="= Fields.Employee" ValueMember="= Fields.SalesPersonID" />
+      <Value>
+        <String>=283</String>
+      </Value>
+    </ReportParameter>
+  </ReportParameters>
+</Report>

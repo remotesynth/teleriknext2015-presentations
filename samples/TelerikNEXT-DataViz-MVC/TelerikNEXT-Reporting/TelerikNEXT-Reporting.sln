@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelerikNEXT-Reporting", "TelerikNEXT-Reporting\TelerikNEXT-Reporting.csproj", "{39DC6F26-351B-4907-AAD1-2647EA2E1F20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelerikReportLibrary", "TelerikReportLibrary\TelerikReportLibrary.csproj", "{F6AF5255-E562-4B19-A5AE-E14C361C6FC5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{39DC6F26-351B-4907-AAD1-2647EA2E1F20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39DC6F26-351B-4907-AAD1-2647EA2E1F20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39DC6F26-351B-4907-AAD1-2647EA2E1F20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39DC6F26-351B-4907-AAD1-2647EA2E1F20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6AF5255-E562-4B19-A5AE-E14C361C6FC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6AF5255-E562-4B19-A5AE-E14C361C6FC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6AF5255-E562-4B19-A5AE-E14C361C6FC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6AF5255-E562-4B19-A5AE-E14C361C6FC5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

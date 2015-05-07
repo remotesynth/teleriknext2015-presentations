@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report Width="7.64in" Name="ProductSales" SnapGridSize="0.1in" xmlns="http://schemas.telerik.com/reporting/2012/3.2">
+  <Style>
+    <Font Name="Segoe UI" />
+  </Style>
+  <DataSources>
+    <SqlDataSource ConnectionString="Telerik.Reporting.Examples.CSharp.Properties.Settings.TelerikConnectionString" SelectCommand="SELECT     &#xD;&#xA;&#x9;PC.Name AS ProductCategory&#xD;&#xA;&#x9;, PS.Name AS ProductSubCategory&#xD;&#xA;&#x9;, P.Name AS ProductName&#xD;&#xA;&#x9;, SOD.LineTotal&#xD;&#xA;&#x9;, SOH.OrderDate&#xD;&#xA;FROM         &#xD;&#xA;&#x9;Production.Product AS P &#xD;&#xA;&#x9;INNER JOIN Production.ProductSubcategory AS PS &#xD;&#xA;&#x9;INNER JOIN Production.ProductCategory AS PC &#xD;&#xA;&#x9;&#x9;ON PS.ProductCategoryID = PC.ProductCategoryID &#xD;&#xA;&#x9;&#x9;ON P.ProductSubcategoryID = PS.ProductSubcategoryID &#xD;&#xA;&#x9;INNER JOIN Sales.SalesOrderDetail AS SOD &#xD;&#xA;&#x9;&#x9;ON P.ProductID = SOD.ProductID &#xD;&#xA;&#x9;INNER JOIN Sales.SalesOrderHeader AS SOH &#xD;&#xA;&#x9;&#x9;ON SOD.SalesOrderID = SOH.SalesOrderID" Name="sqlDataSource1">
+      <CalculatedFields>
+        <CalculatedField Name="Qtr" Expression="= Quarter(Fields.OrderDate)">
+          <DataType>System.Int32</DataType>
+        </CalculatedField>
+      </CalculatedFields>
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <DetailSection Height="2.2in" Name="detail">
+      <Items>
+        <Crosstab DataSourceName="sqlDataSource1" Width="7.1in" Height="1.7in" Left="0mm" Top="0in" RowHeadersPrintOnEveryPage="True" ColumnHeadersPrintOnEveryPage="True" Name="crosstab1">
+          <Body>
+            <Cells>
+              <TableCell RowIndex="0" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.35in" Left="0in" Top="0in" Value="=Sum(Fields.LineTotal)/1000.0" Format="{0:N1}" Name="textBoxFact" StyleName="ItemDetails">
+                    <Style TextAlign="Right" VerticalAlign="Middle">
+                      <BorderStyle Default="Solid" />
+                      <BorderColor Default="230, 230, 230" />
+                      <BorderWidth Default="1px" />
+                    </Style>
+                    <ConditionalFormatting>
+                      <FormattingRule>
+                        <Style>
+                          <Font Underline="True" />
+                        </Style>
+                        <Filters>
+                          <Filter Expression="Fields.ProductCategory IS NULL" Operator="NotEqual" Value="=True" />
+                        </Filters>
+                      </FormattingRule>
+                    </ConditionalFormatting>
+                    <Action>
+                      <NavigateToReportAction>
+                        <ReportSource>
+                          <UriReportSource Uri="Product Line Sales.trdx">
+                            <Parameters>
+                              <Parameter Name="ProductCategory">
+                                <Value>
+                                  <String>=Fields.ProductCategory</String>
+                                </Value>
+                              </Parameter>
+                              <Parameter Name="ProductSubcategory">
+                                <Value>
+                                  <String>=Fields.ProductSubCategory</String>
+                                </Value>
+                              </Parameter>
+                              <Parameter Name="FromDate">
+                                <Value>
+                                  <String>=Min(Fields.OrderDate)</String>
+                                </Value>
+                              </Parameter>
+                              <Parameter Name="ToDate">
+                                <Value>
+                                  <String>=Max(Fields.OrderDate)</String>
+                                </Value>
+                              </Parameter>
+                            </Parameters>
+                          </UriReportSource>
+                        </ReportSource>
+                      </NavigateToReportAction>
+                    </Action>
+                    <Bindings>
+                      <Binding Path="Action" Expression="=IIF(Fields.ProductCategory IS NULL, NULL, ReportItem.ItemDefinition.Action)" />
+                    </Bindings>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.35in" Left="0cm" Top="0in" Value="=Sum(Fields.LineTotal)/1000.0" Format="{0:N1}" Name="textBoxTotalYear" StyleName="">
+                    <Style BackgroundColor="Ivory" TextAlign="Right" VerticalAlign="Middle">
+                      <BorderStyle Default="Solid" />
+                      <BorderColor Default="230, 230, 230" />
+                      <BorderWidth Default="1px" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="1.06in" Height="0.35in" Left="0cm" Top="0in" Value="=Sum(Fields.LineTotal)/1000.0" Format="{0:N1}" Name="textBoxGrandTotalSubCategoryYear" StyleName="ItemTotal">
+                    <Style BackgroundColor="255, 248, 219" TextAlign="Right" VerticalAlign="Middle">
+                      <BorderStyle Default="Solid" />
+                      <BorderColor Default="230, 230, 230" />
+                      <BorderWidth Default="1px" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Graph DataSourceName="sqlDataSource1" Width="0.98in" Height="0.35in" Left="4.7in" Top="2.5in" Name="graph1" StyleName="">
+                    <Axes>
+                      <GraphAxis Name="graphAxis4">
+                        <Scale>
+                          <NumericalScale MajorStep="1" Minimum="0" Maximum="12" SpacingSlotCount="0.5">
+                            <CrossAxisPositions>
+                              <NumericalScaleCrossAxisPosition Value="0" Position="Auto" />
+                            </CrossAxisPositions>
+                          </NumericalScale>
+                        </Scale>
+                        <Style Visible="False" />
+                        <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                        <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                      </GraphAxis>
+                      <GraphAxis Name="graphAxis3">
+                        <Scale>
+                          <NumericalScale>
+                            <CrossAxisPositions>
+                              <NumericalScaleCrossAxisPosition Value="0" Position="Auto" />
+                            </CrossAxisPositions>
+                          </NumericalScale>
+                        </Scale>
+                        <Style Visible="False" />
+                        <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                        <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                      </GraphAxis>
+                    </Axes>
+                    <CoordinateSystems>
+                      <CartesianCoordinateSystem XAxis="graphAxis4" YAxis="graphAxis3" Name="cartesianCoordinateSystem2" />
+                    </CoordinateSystems>
+                    <Style BackgroundColor="Ivory" VerticalAlign="Middle">
+                      <BorderStyle Default="Solid" />
+                      <BorderColor Default="230, 230, 230" />
+                      <BorderWidth Default="1px" />
+                      <Padding Left="3px" Right="3px" Top="6px" Bottom="6px" />
+                    </Style>
+                    <SeriesGroups>
+                      <GraphGroup Name="productCategoryGroup2">
+                        <ChildGroups>
+                          <GraphGroup Name="productSubCategoryGroup1">
+                            <Groupings>
+                              <Grouping Expression="=Fields.ProductSubCategory" />
+                            </Groupings>
+                            <Sortings>
+                              <Sorting Expression="=Fields.ProductSubCategory" Direction="Asc" />
+                            </Sortings>
+                          </GraphGroup>
+                        </ChildGroups>
+                        <Groupings>
+                          <Grouping Expression="=Fields.ProductCategory" />
+                        </Groupings>
+                        <Sortings>
+                          <Sorting Expression="=Fields.ProductCategory" Direction="Asc" />
+                        </Sortings>
+                      </GraphGroup>
+                    </SeriesGroups>
+                    <CategoryGroups>
+                      <GraphGroup Name="orderDate.MonthGroup2">
+                        <Groupings>
+                          <Grouping Expression="=Fields.OrderDate.Month" />
+                        </Groupings>
+                        <Sortings>
+                          <Sorting Expression="=Fields.OrderDate.Month" Direction="Asc" />
+                        </Sortings>
+                      </GraphGroup>
+                    </CategoryGroups>
+                    <Series>
+                      <LineSeries CoordinateSystem="cartesianCoordinateSystem2" CategoryGroup="orderDate.MonthGroup2" SeriesGroup="productSubCategoryGroup1" Size="null" MarkerSize="5px" MarkerMinSize="5px" MarkerMaxSize="50px" X="= Fields.OrderDate.Month" Y="=Sum(Fields.LineTotal)" DataPointLabel="=Sum(Fields.LineTotal)" Legend="=Fields.ProductCategory + '/' + Fields.ProductSubCategory" LegendFormat="">
+                        <LineStyle LineWidth="1px" />
+                        <DataPointLabelStyle Visible="False" />
+                        <DataPointStyle Visible="False" LineWidth="0in" />
+                      </LineSeries>
+                    </Series>
+                    <Legend IsInsidePlotArea="True">
+                      <Style Visible="False" LineWidth="0in" LineColor="LightGray" />
+                    </Legend>
+                    <PlotAreaStyle LineWidth="0in" LineColor="LightGray" />
+                    <ColorPalette>
+                      <ColorPalette>
+                        <Colors>
+                          <Color>192, 80, 77</Color>
+                          <Color>128, 100, 162</Color>
+                          <Color>247, 150, 70</Color>
+                          <Color>119, 44, 42</Color>
+                          <Color>77, 59, 98</Color>
+                          <Color>182, 87, 8</Color>
+                        </Colors>
+                      </ColorPalette>
+                    </ColorPalette>
+                    <Bindings>
+                      <Binding Path="DataSource" Expression="= ReportItem.DataObject" />
+                    </Bindings>
+                  </Graph>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="1" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.35in" Left="0cm" Top="0in" Value="=Sum(Fields.LineTotal)/1000.0" Format="{0:N1}" Name="textBoxTotalCategory" StyleName="">
+                    <Style BackgroundColor="Ivory" TextAlign="Right" VerticalAlign="Middle">
+                      <BorderStyle Default="Solid" />
+                      <BorderColor Default="230, 230, 230" />
+                      <BorderWidth Default="1px" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="1" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.35in" Left="0cm" Top="0in" Value="=Sum(Fields.LineTotal)/1000.0" Format="{0:N1}" Name="textBoxTotalCategoryYear">
+                    <Style BackgroundColor="Ivory" TextAlign="Right" VerticalAlign="Middle">
+                      <BorderStyle Default="Solid" />
+                      <BorderColor Default="230, 230, 230" />
+                      <BorderWidth Default="1px" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="1" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="1.06in" Height="0.35in" Left="0cm" Top="0in" Value="=Sum(Fields.LineTotal)/1000.0" Format="{0:N1}" Name="textBoxGrandTotalYearCategory" StyleName="ItemTotal">
+                    <Style BackgroundColor="255, 248, 219" TextAlign="Right" VerticalAlign="Middle">
+                      <BorderStyle Default="Solid" />
+                      <BorderColor Default="230, 230, 230" />
+                      <BorderWidth Default="1px" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="1" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Graph DataSourceName="sqlDataSource1" Width="0.98in" Height="0.35in" Left="4.7in" Top="2.5in" Name="graph2" StyleName="">
+                    <Axes>
+                      <GraphAxis Name="graphAxis4">
+                        <Scale>
+                          <NumericalScale MajorStep="1" Minimum="0" Maximum="13" SpacingSlotCount="0.5">
+                            <CrossAxisPositions>
+                              <NumericalScaleCrossAxisPosition Value="0" Position="Auto" />
+                            </CrossAxisPositions>
+                          </NumericalScale>
+                        </Scale>
+                        <Style Visible="False" />
+                        <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                        <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                      </GraphAxis>
+                      <GraphAxis Name="graphAxis3">
+                        <Scale>
+                          <NumericalScale>
+                            <CrossAxisPositions>
+                              <NumericalScaleCrossAxisPosition Value="0" Position="Auto" />
+                            </CrossAxisPositions>
+                          </NumericalScale>
+                        </Scale>
+                        <Style Visible="False" />
+                        <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                        <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                      </GraphAxis>
+                    </Axes>
+                    <CoordinateSystems>
+                      <CartesianCoordinateSystem XAxis="graphAxis4" YAxis="graphAxis3" Name="cartesianCoordinateSystem2" />
+                    </CoordinateSystems>
+                    <Style BackgroundColor="Ivory" VerticalAlign="Middle">
+                      <BorderStyle Default="Solid" />
+                      <BorderColor Default="230, 230, 230" />
+                      <BorderWidth Default="1px" />
+                      <Padding Left="3px" Right="3px" Top="6px" Bottom="6px" />
+                    </Style>
+                    <SeriesGroups>
+                      <GraphGroup Name="productCategoryGroup3">
+                        <ChildGroups>
+                          <GraphGroup Name="productSubCategoryGroup1">
+                            <Groupings>
+                              <Grouping Expression="=Fields.ProductSubCategory" />
+                            </Groupings>
+                            <Sortings>
+                              <Sorting Expression="=Fields.ProductSubCategory" Direction="Asc" />
+                            </Sortings>
+                          </GraphGroup>
+                        </ChildGroups>
+                        <Groupings>
+                          <Grouping Expression="=Fields.ProductCategory" />
+                        </Groupings>
+                        <Sortings>
+                          <Sorting Expression="=Fields.ProductCategory" Direction="Asc" />
+                        </Sortings>
+                      </GraphGroup>
+                    </SeriesGroups>
+                    <CategoryGroups>
+                      <GraphGroup Name="orderDate.MonthGroup2">
+                        <Groupings>
+                          <Grouping Expression="=Fields.OrderDate.Month" />
+                        </Groupings>
+                        <Sortings>
+                          <Sorting Expression="=Fields.OrderDate.Month" Direction="Asc" />
+                        </Sortings>
+                      </GraphGroup>
+                    </CategoryGroups>
+                    <Series>
+                      <BarSeries CoordinateSystem="cartesianCoordinateSystem2" CategoryGroup="orderDate.MonthGroup2" SeriesGroup="productCategoryGroup3" X="= Fields.OrderDate.Month" Y="=Sum(Fields.LineTotal)" DataPointLabel="=Sum(Fields.LineTotal)" Legend="=Fields.ProductCategory + '/' + Fields.ProductSubCategory" LegendFormat="">
+                        <DataPointLabelStyle Visible="False" />
+                        <DataPointStyle Visible="True" LineWidth="0in" />
+                      </BarSeries>
+                    </Series>
+                    <Legend IsInsidePlotArea="True">
+                      <Style Visible="False" LineWidth="0in" LineColor="LightGray" />
+                    </Legend>
+                    <PlotAreaStyle LineWidth="0in" LineColor="LightGray" />
+                    <Bindings>
+                      <Binding Path="DataSource" Expression="= ReportItem.DataObject" />
+                    </Bindings>
+                  </Graph>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="2" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.35in" Left="0cm" Top="0in" Value="=Sum(Fields.LineTotal)/1000.0" Format="{0:N1}" Name="textBoxGrandTotalCategoryQtr">
+                    <Style BackgroundColor="255, 248, 219" TextAlign="Right" VerticalAlign="Middle">
+                      <BorderStyle Default="Solid" Top="Solid" Bottom="Solid" />
+                      <BorderColor Default="230, 230, 230" Top="Black" Bottom="Black" />
+                      <BorderWidth Default="1px" Top="1pt" Bottom="2pt" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="2" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.35in" Left="0cm" Top="0in" Value="=Sum(Fields.LineTotal)/1000.0" Format="{0:N1}" Name="GrandTotalCategoryYear">
+                    <Style BackgroundColor="255, 248, 219" TextAlign="Right" VerticalAlign="Middle">
+                      <BorderStyle Default="Solid" Top="Solid" Bottom="Solid" />
+                      <BorderColor Default="230, 230, 230" Top="Black" Bottom="Black" />
+                      <BorderWidth Default="1px" Top="1pt" Bottom="2pt" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="2" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="1.06in" Height="0.35in" Left="0cm" Top="0in" Value="=Sum(Fields.LineTotal)/1000.0" Format="{0:N1}" Name="textBoxGrandTotal" StyleName="ItemTotal">
+                    <Style BackgroundColor="255, 248, 219" TextAlign="Right" VerticalAlign="Middle">
+                      <BorderStyle Default="Solid" Top="Solid" Bottom="Solid" />
+                      <BorderColor Default="230, 230, 230" Top="Black" Bottom="Black" />
+                      <BorderWidth Default="1px" Top="1pt" Bottom="2pt" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="2" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <Graph DataSourceName="sqlDataSource1" Width="0.98in" Height="0.35in" Left="4.7in" Top="2.5in" Name="graph3" StyleName="">
+                    <Axes>
+                      <GraphAxis Name="graphAxis4">
+                        <Scale>
+                          <NumericalScale MajorStep="1" Minimum="0" Maximum="13" SpacingSlotCount="0.5">
+                            <CrossAxisPositions>
+                              <NumericalScaleCrossAxisPosition Value="0" Position="Auto" />
+                            </CrossAxisPositions>
+                          </NumericalScale>
+                        </Scale>
+                        <Style Visible="False" />
+                        <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                        <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                      </GraphAxis>
+                      <GraphAxis Name="graphAxis3">
+                        <Scale>
+                          <NumericalScale>
+                            <CrossAxisPositions>
+                              <NumericalScaleCrossAxisPosition Value="0" Position="Auto" />
+                            </CrossAxisPositions>
+                          </NumericalScale>
+                        </Scale>
+                        <Style Visible="False" />
+                        <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                        <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                      </GraphAxis>
+                    </Axes>
+                    <CoordinateSystems>
+                      <CartesianCoordinateSystem XAxis="graphAxis4" YAxis="graphAxis3" Name="cartesianCoordinateSystem2" />
+                    </CoordinateSystems>
+                    <Style BackgroundColor="255, 248, 219" VerticalAlign="Middle">
+                      <BorderStyle Default="Solid" Top="Solid" Bottom="Solid" />
+                      <BorderColor Default="230, 230, 230" Top="Black" Bottom="Black" />
+                      <BorderWidth Default="1px" Top="1pt" Bottom="2pt" />
+                      <Padding Left="3px" Right="3px" Top="6px" Bottom="6px" />
+                    </Style>
+                    <SeriesGroups>
+                      <GraphGroup Name="graphGroup1" />
+                    </SeriesGroups>
+                    <CategoryGroups>
+                      <GraphGroup Name="orderDate.MonthGroup2">
+                        <Groupings>
+                          <Grouping Expression="=Fields.OrderDate.Month" />
+                        </Groupings>
+                        <Sortings>
+                          <Sorting Expression="=Fields.OrderDate.Month" Direction="Asc" />
+                        </Sortings>
+                      </GraphGroup>
+                    </CategoryGroups>
+                    <Series>
+                      <BarSeries CoordinateSystem="cartesianCoordinateSystem2" CategoryGroup="orderDate.MonthGroup2" SeriesGroup="graphGroup1" X="= Fields.OrderDate.Month" Y="=Sum(Fields.LineTotal)" DataPointLabel="=Sum(Fields.LineTotal)" Legend="=Fields.ProductCategory + '/' + Fields.ProductSubCategory" LegendFormat="">
+                        <DataPointLabelStyle Visible="False" />
+                        <DataPointStyle Visible="True" LineWidth="0in" />
+                      </BarSeries>
+                    </Series>
+                    <Legend IsInsidePlotArea="True">
+                      <Style Visible="False" LineWidth="0in" LineColor="LightGray" />
+                    </Legend>
+                    <PlotAreaStyle LineWidth="0in" LineColor="LightGray" />
+                    <ColorPalette>
+                      <MonochromaticPalette BaseColor="113, 137, 63" />
+                    </ColorPalette>
+                    <Bindings>
+                      <Binding Path="DataSource" Expression="= ReportItem.DataObject" />
+                    </Bindings>
+                  </Graph>
+                </ReportItem>
+              </TableCell>
+            </Cells>
+            <Columns>
+              <Column Width="0.8in" />
+              <Column Width="0.98in" />
+              <Column Width="0.8in" />
+              <Column Width="1.06in" />
+            </Columns>
+            <Rows>
+              <Row Height="0.35in" />
+              <Row Height="0.35in" />
+              <Row Height="0.35in" />
+            </Rows>
+          </Body>
+          <Corner>
+            <Cells>
+              <TableCell RowIndex="2" ColumnIndex="0" RowSpan="2" ColumnSpan="2">
+                <ReportItem>
+                  <TextBox Width="3.46in" Height="0.51in" Left="0cm" Top="0in" Value="(USD IN THOUSANDS)" Name="textBox3" StyleName="RedTextBox">
+                    <Style Color="195, 47, 11" TextAlign="Left" VerticalAlign="Top">
+                      <BorderStyle Default="Solid" />
+                      <BorderColor Default="230, 230, 230" />
+                      <BorderWidth Default="1px" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="0" RowSpan="1" ColumnSpan="2">
+                <ReportItem>
+                  <TextBox Width="3.46in" Height="0.04in" Left="0cm" Top="0in" Name="textBox5" StyleName="">
+                    <Style VerticalAlign="Bottom">
+                      <BorderStyle Top="Solid" Bottom="Solid" />
+                      <BorderColor Top="Black" Bottom="Black" />
+                      <BorderWidth Top="3pt" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="1" ColumnIndex="0" RowSpan="1" ColumnSpan="2">
+                <ReportItem>
+                  <TextBox Width="3.46in" Height="0.1in" Left="0cm" Top="0in" CanGrow="False" Name="textBox6" StyleName="">
+                    <Style>
+                      <BorderStyle Top="None" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+            </Cells>
+          </Corner>
+          <RowGroups>
+            <TableGroup Name="ProductCategory">
+              <ReportItem>
+                <TextBox Width="1.58in" Height="0.7in" Left="0cm" Top="0in" KeepTogether="False" Value="=Fields.ProductCategory" Name="textBoxCategory">
+                  <Style TextAlign="Left" VerticalAlign="Middle">
+                    <BorderStyle Default="Solid" />
+                    <BorderColor Default="230, 230, 230" />
+                    <BorderWidth Default="1px" />
+                  </Style>
+                  <Action>
+                    <ToggleVisibilityAction DisplayExpandedMark="False">
+                      <Targets>
+                        <Target ItemName="ProductSubCategory" />
+                        <Target ItemName="ProductSubCategoryTotal" />
+                      </Targets>
+                    </ToggleVisibilityAction>
+                  </Action>
+                </TextBox>
+              </ReportItem>
+              <ChildGroups>
+                <TableGroup Visible="False" Name="ProductSubCategory">
+                  <ReportItem>
+                    <TextBox Width="1.88in" Height="0.35in" Left="0cm" Top="0in" Value="=Fields.ProductSubCategory" Name="textBoxSubCategory" StyleName="ItemDetails">
+                      <Style TextAlign="Left" VerticalAlign="Middle">
+                        <BorderStyle Default="Solid" />
+                        <BorderColor Default="230, 230, 230" />
+                        <BorderWidth Default="1px" />
+                      </Style>
+                    </TextBox>
+                  </ReportItem>
+                  <Groupings>
+                    <Grouping Expression="=Fields.ProductSubCategory" />
+                  </Groupings>
+                  <Sortings>
+                    <Sorting Expression="=Fields.ProductSubCategory" Direction="Asc" />
+                  </Sortings>
+                </TableGroup>
+                <TableGroup Visible="False" Name="ProductSubCategoryTotal">
+                  <ReportItem>
+                    <TextBox Width="1.88in" Height="0.35in" Left="14.3cm" Top="6.23cm" Value="TOTAL" Name="textBox8">
+                      <Style TextAlign="Left" VerticalAlign="Middle">
+                        <BorderStyle Default="Solid" />
+                        <BorderColor Default="230, 230, 230" />
+                        <BorderWidth Default="1px" />
+                      </Style>
+                    </TextBox>
+                  </ReportItem>
+                </TableGroup>
+              </ChildGroups>
+              <Groupings>
+                <Grouping Expression="=Fields.ProductCategory" />
+              </Groupings>
+              <Sortings>
+                <Sorting Expression="=Fields.ProductCategory" Direction="Asc" />
+              </Sortings>
+            </TableGroup>
+            <TableGroup>
+              <ReportItem>
+                <TextBox Width="3.46in" Height="0.35in" Left="0cm" Top="0in" Value="GRAND TOTAL" Name="textBoxGrandTotalCategoryLabel">
+                  <Style TextAlign="Left" VerticalAlign="Middle">
+                    <BorderStyle Default="Solid" Top="Solid" Bottom="Solid" />
+                    <BorderColor Default="230, 230, 230" Top="Black" Bottom="Black" />
+                    <BorderWidth Default="1px" Top="1pt" Bottom="2pt" />
+                    <Font Size="11pt" />
+                  </Style>
+                </TextBox>
+              </ReportItem>
+            </TableGroup>
+          </RowGroups>
+          <ColumnGroups>
+            <TableGroup Name="Group4">
+              <ReportItem>
+                <TextBox Width="3.64in" Height="0.04in" Left="0cm" Top="0in" Value="" Name="textBox9" StyleName="RedTextBox">
+                  <Style TextAlign="Right" VerticalAlign="Bottom">
+                    <BorderStyle Top="Solid" Bottom="Solid" />
+                    <BorderColor Top="Black" Bottom="Black" />
+                    <BorderWidth Top="3pt" />
+                  </Style>
+                </TextBox>
+              </ReportItem>
+              <ChildGroups>
+                <TableGroup Name="Group1">
+                  <ReportItem>
+                    <TextBox Width="3.64in" Height="0.1in" Left="0cm" Top="0in" CanGrow="False" Name="textBox2" StyleName="">
+                      <Style>
+                        <BorderStyle Top="None" Bottom="None" />
+                      </Style>
+                    </TextBox>
+                  </ReportItem>
+                  <ChildGroups>
+                    <TableGroup Name="Year">
+                      <ReportItem>
+                        <TextBox Width="2.58in" Height="0.27in" Left="0cm" Top="0in" KeepTogether="False" Value="=Fields.OrderDate.Year" Name="textBoxYear">
+                          <Style VerticalAlign="Middle">
+                            <BorderStyle Default="Solid" />
+                            <BorderColor Default="230, 230, 230" />
+                            <BorderWidth Default="1px" />
+                          </Style>
+                          <Action>
+                            <ToggleVisibilityAction DisplayExpandedMark="False">
+                              <Targets>
+                                <Target ItemName="Quarter" />
+                                <Target ItemName="YearTotalGroup" />
+                                <Target ItemName="YearTrendGroup" />
+                              </Targets>
+                            </ToggleVisibilityAction>
+                          </Action>
+                        </TextBox>
+                      </ReportItem>
+                      <ChildGroups>
+                        <TableGroup Visible="False" Name="Quarter">
+                          <ReportItem>
+                            <TextBox Width="0.8in" Height="0.24in" Left="0cm" Top="0in" Value="Q{Fields.Qtr}" Name="textBoxQtr" StyleName="RedTextBox">
+                              <Style Color="195, 47, 11" VerticalAlign="Middle">
+                                <BorderStyle Default="Solid" />
+                                <BorderColor Default="230, 230, 230" />
+                                <BorderWidth Default="1px" />
+                              </Style>
+                            </TextBox>
+                          </ReportItem>
+                          <Groupings>
+                            <Grouping Expression="=Fields.Qtr" />
+                          </Groupings>
+                          <Sortings>
+                            <Sorting Expression="=Fields.Qtr" Direction="Asc" />
+                          </Sortings>
+                        </TableGroup>
+                        <TableGroup Visible="False" Name="YearTotalGroup">
+                          <ReportItem>
+                            <TextBox Width="0.98in" Height="0.24in" Left="0cm" Top="0in" Value="Monthly Trend" Name="textBox4" StyleName="RedTextBox">
+                              <Style Color="195, 47, 11" VerticalAlign="Middle">
+                                <BorderStyle Default="Solid" />
+                                <BorderColor Default="230, 230, 230" />
+                                <BorderWidth Default="1px" />
+                              </Style>
+                            </TextBox>
+                          </ReportItem>
+                        </TableGroup>
+                        <TableGroup Visible="False" Name="YearTrendGroup">
+                          <ReportItem>
+                            <TextBox Width="0.8in" Height="0.24in" Left="0cm" Top="0in" Value="Total" Name="textBoxTrendYearLabel" StyleName="RedTextBox">
+                              <Style Color="195, 47, 11" VerticalAlign="Middle">
+                                <BorderStyle Default="Solid" />
+                                <BorderColor Default="230, 230, 230" />
+                                <BorderWidth Default="1px" />
+                              </Style>
+                            </TextBox>
+                          </ReportItem>
+                        </TableGroup>
+                      </ChildGroups>
+                      <Groupings>
+                        <Grouping Expression="=Fields.OrderDate.Year" />
+                      </Groupings>
+                      <Sortings>
+                        <Sorting Expression="=Fields.OrderDate.Year" Direction="Asc" />
+                      </Sortings>
+                    </TableGroup>
+                    <TableGroup>
+                      <ReportItem>
+                        <TextBox Width="1.06in" Height="0.51in" Left="0cm" Top="0in" Value="GRAND TOTAL" Name="textBoxGrandTotalYearLabel">
+                          <Style VerticalAlign="Middle">
+                            <BorderStyle Default="Solid" />
+                            <BorderColor Default="230, 230, 230" />
+                            <BorderWidth Default="1px" />
+                            <Font Size="11pt" />
+                          </Style>
+                        </TextBox>
+                      </ReportItem>
+                    </TableGroup>
+                  </ChildGroups>
+                </TableGroup>
+              </ChildGroups>
+            </TableGroup>
+          </ColumnGroups>
+        </Crosstab>
+      </Items>
+    </DetailSection>
+    <ReportHeaderSection Height="0.5in" Name="reportHeaderSection1">
+      <Items>
+        <TextBox Width="6.64in" Height="0.5in" Left="0in" Top="0in" Value="Sales by Product Line per Period" Name="textBox1" StyleName="Header" />
+      </Items>
+    </ReportHeaderSection>
+  </Items>
+  <StyleSheet>
+    <StyleRule>
+      <Style>
+        <Font Name="Segoe UI Light" Size="25pt" Bold="True" />
+        <Padding Left="0in" />
+      </Style>
+      <Selectors>
+        <StyleSelector Type="ReportItemBase" StyleName="Header" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style>
+        <Padding Left="2pt" Right="2pt" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextItemBase" />
+        <TypeSelector Type="HtmlTextBox" />
+      </Selectors>
+    </StyleRule>
+  </StyleSheet>
+  <PageSettings>
+    <PageSettings PaperKind="A5" Landscape="True">
+      <Margins>
+        <MarginsU Left="0.2in" Right="0.2in" Top="0.3in" Bottom="0.4in" />
+      </Margins>
+      <Watermarks>
+        <PictureWatermark Image="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" Sizing="ScaleProportional" Position="Front" Opacity="0.17" />
+      </Watermarks>
+    </PageSettings>
+  </PageSettings>
+</Report>

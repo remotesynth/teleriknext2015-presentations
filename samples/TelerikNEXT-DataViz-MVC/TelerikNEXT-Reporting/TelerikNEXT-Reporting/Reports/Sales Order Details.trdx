@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report DataSourceName="sqlDataSource1" Width="8.09in" Name="SalesOrderDetails" SnapGridSize="0.1in" xmlns="http://schemas.telerik.com/reporting/2012/3.2">
+  <Style BackgroundColor="White" />
+  <DataSources>
+    <SqlDataSource ConnectionString="Telerik.Reporting.Examples.CSharp.Properties.Settings.TelerikConnectionString" SelectCommand="SELECT        SOD.SalesOrderDetailID, SOD.OrderQty, SOD.UnitPrice, CASE WHEN SOD.UnitPriceDiscount IS NULL &#xD;&#xA;                         THEN 0 ELSE SOD.UnitPriceDiscount END AS UnitPriceDiscount, SOD.LineTotal, SOD.CarrierTrackingNumber, SOD.SalesOrderID, P.Name, &#xD;&#xA;                         P.ProductNumber&#xD;&#xA;FROM            Sales.SalesOrderDetail AS SOD INNER JOIN&#xD;&#xA;                         Production.Product AS P ON SOD.ProductID = P.ProductID INNER JOIN&#xD;&#xA;                         Sales.SalesOrderHeader AS SOH ON SOD.SalesOrderID = SOH.SalesOrderID INNER JOIN&#xD;&#xA;                         Sales.Customer ON SOH.CustomerID = Sales.Customer.CustomerID&#xD;&#xA;WHERE        (Sales.Customer.CustomerType = N'S')&#xD;&#xA;&#x9;&#x9;AND (SOD.SalesOrderID = @SalesOrderID)&#xD;&#xA;ORDER BY SOD.SalesOrderDetailID" Name="sqlDataSource1">
+      <Parameters>
+        <SqlDataSourceParameter DbType="Int32" Name="@SalesOrderID">
+          <Value>
+            <String>=Parameters.SaledOrderID.Value</String>
+          </Value>
+        </SqlDataSourceParameter>
+      </Parameters>
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <DetailSection Height="0.48in" Name="detail">
+      <Items>
+        <TextBox Width="1.6in" Height="0.48in" Left="0in" Top="0in" Value="=Fields.ProductNumber" Name="productNumberDataTextBox" StyleName="Data">
+          <Style>
+            <BorderStyle Left="None" />
+          </Style>
+        </TextBox>
+        <TextBox Width="3.7in" Height="0.48in" Left="1.6in" Top="0in" Value="=Fields.Name" Name="nameDataTextBox" StyleName="Data" />
+        <TextBox Width="0.8in" Height="0.48in" Left="5.3in" Top="0in" Value="=Fields.OrderQty" Name="orderQtyDataTextBox" StyleName="Data">
+          <Style TextAlign="Right" />
+        </TextBox>
+        <TextBox Width="0.9in" Height="0.48in" Left="6.1in" Top="0in" Value="=Fields.UnitPrice" Format="{0:C2}" Name="unitPriceDataTextBox" StyleName="Data">
+          <Style TextAlign="Right" />
+        </TextBox>
+        <TextBox Width="1.09in" Height="0.48in" Left="7in" Top="0in" Value="=Fields.LineTotal" Format="{0:C2}" Name="lineTotalDataTextBox" StyleName="Data">
+          <Style TextAlign="Right" />
+        </TextBox>
+      </Items>
+    </DetailSection>
+    <ReportHeaderSection Height="0.5in" Name="reportHeaderSection1">
+      <Items>
+        <TextBox Width="8.09in" Height="0.5in" Left="0in" Top="0in" Value="Order Details" Name="textBox3" StyleName="Title" />
+      </Items>
+    </ReportHeaderSection>
+  </Items>
+  <StyleSheet>
+    <StyleRule>
+      <Style>
+        <Padding Left="2pt" Right="2pt" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextItemBase" />
+        <TypeSelector Type="HtmlTextBox" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style VerticalAlign="Middle">
+        <BorderStyle Bottom="Solid" />
+        <BorderWidth Default="0.5pt" />
+        <Font Name="Segoe UI Light" Size="16pt" Bold="True" />
+        <Padding Left="0in" />
+      </Style>
+      <Selectors>
+        <StyleSelector Type="ReportItemBase" StyleName="Title" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style Color="177, 161, 82" VerticalAlign="Bottom">
+        <BorderStyle Bottom="None" Left="Solid" />
+        <BorderColor Default="230, 230, 230" />
+        <Font Name="Segoe UI" Size="10pt" />
+        <Padding Left="0.1in" Right="0.1in" Bottom="0.08in" />
+      </Style>
+      <Selectors>
+        <StyleSelector Type="ReportItemBase" StyleName="Caption" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style VerticalAlign="Bottom">
+        <BorderStyle Top="Solid" Bottom="None" Left="Solid" />
+        <BorderColor Default="230, 230, 230" />
+        <Font Name="Segoe UI" Size="10pt" />
+        <Padding Left="0.1in" Right="0.1in" Bottom="0.08in" />
+      </Style>
+      <Selectors>
+        <StyleSelector Type="ReportItemBase" StyleName="Data" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style VerticalAlign="Bottom">
+        <BorderStyle Top="Solid" Bottom="Solid" Right="None" />
+        <BorderWidth Default="0.5pt" />
+        <Font Name="Segoe UI" Size="10pt" Bold="True" />
+        <Padding Left="0.1in" Right="0.1in" Top="0in" Bottom="0.08in" />
+      </Style>
+      <Selectors>
+        <StyleSelector Type="ReportItemBase" StyleName="Total" />
+      </Selectors>
+    </StyleRule>
+  </StyleSheet>
+  <PageSettings>
+    <PageSettings PaperKind="Letter" Landscape="False">
+      <Margins>
+        <MarginsU Left="0in" Right="0in" Top="0in" Bottom="0in" />
+      </Margins>
+    </PageSettings>
+  </PageSettings>
+  <Filters>
+    <Filter Expression="=Fields.SalesOrderID" Operator="Equal" Value="=Parameters.SaledOrderID.Value" />
+  </Filters>
+  <Groups>
+    <Group Name="labelsGroup">
+      <GroupHeader>
+        <GroupHeaderSection PrintOnEveryPage="True" Height="0.48in" Name="labelsGroupHeader">
+          <Items>
+            <Panel Width="8.09in" Height="0.48in" Left="0in" Top="0in" Name="panel1">
+              <Items>
+                <TextBox Width="1.6in" Height="0.48in" Left="0in" Top="0in" Value="Product No." Name="productNumberCaptionTextBox" StyleName="Caption">
+                  <Style>
+                    <BorderStyle Left="None" />
+                  </Style>
+                </TextBox>
+                <TextBox Width="3.7in" Height="0.48in" Left="1.6in" Top="0in" Value="Name" Name="nameCaptionTextBox" StyleName="Caption" />
+                <TextBox Width="0.8in" Height="0.48in" Left="5.3in" Top="0in" Value="Quantity" Name="orderQtyCaptionTextBox" StyleName="Caption">
+                  <Style TextAlign="Right" />
+                </TextBox>
+                <TextBox Width="0.9in" Height="0.48in" Left="6.1in" Top="0in" Value="Unit Price" Name="unitPriceCaptionTextBox" StyleName="Caption">
+                  <Style TextAlign="Right" />
+                </TextBox>
+                <TextBox Width="1.09in" Height="0.48in" Left="7in" Top="0in" Value="Line Total" Name="lineTotalCaptionTextBox" StyleName="Caption">
+                  <Style TextAlign="Right" />
+                </TextBox>
+              </Items>
+            </Panel>
+          </Items>
+        </GroupHeaderSection>
+      </GroupHeader>
+      <GroupFooter>
+        <GroupFooterSection Height="0.48in" Name="labelsGroupFooter">
+          <Items>
+            <TextBox Width="6.12in" Height="0.48in" Left="0in" Top="0in" Value="Total" Name="textBox1" StyleName="Total" />
+            <TextBox Width="1.97in" Height="0.48in" Left="6.12in" Top="0in" Value="=Sum(Fields.LineTotal)" Format="{0:C2}" Name="textBox2" StyleName="Total">
+              <Style TextAlign="Right" />
+            </TextBox>
+          </Items>
+        </GroupFooterSection>
+      </GroupFooter>
+    </Group>
+  </Groups>
+  <ReportParameters>
+    <ReportParameter Name="SaledOrderID">
+      <Value>
+        <String>=43860</String>
+      </Value>
+    </ReportParameter>
+  </ReportParameters>
+</Report>

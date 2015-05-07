@@ -1,0 +1,13 @@
+﻿/*normalize*/
+html, 
+body, 
+form {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font: normal 16px "Segoe UI", Arial, sans-serif;
+    color: #555555;
+}

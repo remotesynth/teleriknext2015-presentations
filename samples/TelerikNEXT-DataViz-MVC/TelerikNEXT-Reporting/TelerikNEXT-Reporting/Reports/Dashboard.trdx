@@ -1,0 +1,826 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report Width="10.41in" UnitOfMeasure="Mm" Name="DashBoard" SnapGridSize="0.1in" xmlns="http://schemas.telerik.com/reporting/2012/3.2">
+  <DataSources>
+    <SqlDataSource ConnectionString="Telerik.Reporting.Examples.CSharp.Properties.Settings.TelerikConnectionString" SelectCommand="SELECT DISTINCT YEAR(OrderDate) AS Year&#xD;&#xA;FROM         Sales.SalesOrderHeader&#xD;&#xA;ORDER BY Year" Name="yearDataSource" />
+    <SqlDataSource ConnectionString="Telerik.Reporting.Examples.CSharp.Properties.Settings.TelerikConnectionString" SelectCommand="SELECT&#xD;&#xA;&#x9;P.Name AS ProductName&#xD;&#xA;&#x9;, SOD.LineTotal / 1000 AS LineTotal&#xD;&#xA;&#x9;, SOH.OrderDate&#xD;&#xA;&#x9;, SS.Name AS StoreName&#xD;&#xA;&#x9;, C.FirstName + ' ' + COALESCE (C.MiddleName, '') + ' ' + C.LastName AS SalesPersonFullName&#xD;&#xA;FROM&#xD;&#xA;&#x9;Production. Product AS P&#xD;&#xA;&#x9;INNER JOIN Sales.SalesOrderDetail AS SOD ON P.ProductID = SOD.ProductID&#xD;&#xA;&#x9;INNER JOIN Sales.SalesOrderHeader AS SOH ON SOD.SalesOrderID = SOH.SalesOrderID&#xD;&#xA;&#x9;INNER JOIN Sales.Store AS SS             ON SS.CustomerID = SOH.CustomerID&#xD;&#xA;&#x9;INNER JOIN Sales.SalesPerson AS SP       ON SP.SalesPersonID = SOH.SalesPersonID&#xD;&#xA;&#x9;INNER JOIN HumanResources.Employee AS E  ON E.EmployeeID = SP.SalesPersonID&#xD;&#xA;&#x9;INNER JOIN Person.Contact AS C           ON C.ContactID = E.ContactID&#xD;&#xA;WHERE     (YEAR(SOH.OrderDate) = @Year)" Name="mainDataSource">
+      <Parameters>
+        <SqlDataSourceParameter DbType="Int32" Name="@Year">
+          <Value>
+            <String>=Parameters.ReportYear.Value</String>
+          </Value>
+        </SqlDataSourceParameter>
+      </Parameters>
+      <DefaultValues>
+        <SqlDataSourceParameter DbType="Int32" Name="@Year">
+          <Value>
+            <String>2001</String>
+          </Value>
+        </SqlDataSourceParameter>
+      </DefaultValues>
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <DetailSection Height="7.54in" Name="detail">
+      <Style LineWidth="5pt" />
+      <Items>
+        <Panel Width="10.41in" Height="2.5in" Left="0in" Top="0in" Name="panel2">
+          <Items>
+            <Panel Width="3.6in" Height="2.02in" Left="0in" Top="0.48in" Name="panel3">
+              <Items>
+                <Crosstab DataSourceName="mainDataSource" Width="57.5mm" Height="12.2mm" Left="0in" Top="0.32in" Name="SalesPersonQuarter">
+                  <Body>
+                    <Cells>
+                      <TableCell RowIndex="0" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                        <ReportItem>
+                          <TextBox Width="0.38in" Height="0.24in" Left="0in" Top="0in" Value="=Sum(Fields.LineTotal)" Format="{0:#.}" Name="spTotalQ">
+                            <Style TextAlign="Right" />
+                          </TextBox>
+                        </ReportItem>
+                      </TableCell>
+                      <TableCell RowIndex="0" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                        <ReportItem>
+                          <TextBox Width="0.38in" Height="0.24in" Left="0in" Top="0in" Value="=Sum(Fields.LineTotal)" Format="{0:#.}" Name="spTotal">
+                            <Style TextAlign="Right" />
+                          </TextBox>
+                        </ReportItem>
+                      </TableCell>
+                    </Cells>
+                    <Columns>
+                      <Column Width="9.7mm" />
+                      <Column Width="9.7mm" />
+                    </Columns>
+                    <Rows>
+                      <Row Height="6.1mm" />
+                    </Rows>
+                  </Body>
+                  <Corner>
+                    <Cells>
+                      <TableCell RowIndex="0" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                        <ReportItem>
+                          <TextBox Width="1.5in" Height="0.24in" Left="0in" Top="0in" Value="Sales Person" Name="spTextCorner">
+                            <Style Color="105, 40, 40" />
+                          </TextBox>
+                        </ReportItem>
+                      </TableCell>
+                    </Cells>
+                  </Corner>
+                  <Style VerticalAlign="Middle">
+                    <BorderStyle Default="None" />
+                    <Font Name="Segoe UI" Size="8pt" />
+                  </Style>
+                  <RowGroups>
+                    <TableGroup Name="SalesPersonFullName">
+                      <ReportItem>
+                        <TextBox Width="1.5in" Height="0.24in" Left="0in" Top="0in" Value="=Fields.SalesPersonFullName" Name="spLabelSalesPerson" />
+                      </ReportItem>
+                      <Groupings>
+                        <Grouping Expression="=Fields.SalesPersonFullName" />
+                      </Groupings>
+                      <Sortings>
+                        <Sorting Expression="=Sum(Fields.LineTotal)" Direction="Desc" />
+                      </Sortings>
+                      <Filters>
+                        <Filter Expression="=Sum(Fields.LineTotal)" Operator="TopN" Value="=5" />
+                      </Filters>
+                    </TableGroup>
+                  </RowGroups>
+                  <ColumnGroups>
+                    <TableGroup Name="Quater">
+                      <ReportItem>
+                        <TextBox Width="0.38in" Height="0.24in" Left="0in" Top="0in" Value="='Q'+ Quarter(Fields.OrderDate)" Name="spLabelTotalQ">
+                          <Style Color="105, 40, 40" TextAlign="Right" />
+                        </TextBox>
+                      </ReportItem>
+                      <Groupings>
+                        <Grouping Expression="=Quarter(Fields.OrderDate)" />
+                      </Groupings>
+                      <Sortings>
+                        <Sorting Expression="=Quarter(Fields.OrderDate)" Direction="Asc" />
+                      </Sortings>
+                    </TableGroup>
+                    <TableGroup>
+                      <ReportItem>
+                        <TextBox Width="0.38in" Height="0.24in" Left="0in" Top="0in" Value="Total" Name="spLabelTotal">
+                          <Style Color="105, 40, 40" TextAlign="Right" />
+                        </TextBox>
+                      </ReportItem>
+                    </TableGroup>
+                  </ColumnGroups>
+                </Crosstab>
+                <TextBox Width="3.6in" Height="0.32in" Left="0in" Top="0in" Value="SALES AMOUNT IN USD (THOUSANDS)" Name="textBox2" StyleName="legend" />
+              </Items>
+            </Panel>
+            <TextBox Width="3.08in" Height="0.32in" Left="3.6in" Top="0.48in" Value="YEARLY SALES DISTRIBUTION" Name="textBox11" StyleName="legend" />
+            <TextBox Width="3.71in" Height="0.32in" Left="6.68in" Top="0.48in" Value="QUATERLY SALES DISTRIBUTION" Name="textBox12" StyleName="legend">
+              <Style TextAlign="Right" />
+            </TextBox>
+            <TextBox Width="10.41in" Height="0.36in" Left="0in" Top="0in" Value="Top 5 performing agents" Anchoring="Left, Right" Name="textBox3">
+              <Style Color="236, 57, 27">
+                <BorderStyle Bottom="Solid" />
+                <BorderColor Bottom="202, 137, 104" />
+                <Font Size="16pt" />
+              </Style>
+            </TextBox>
+            <Graph DataSourceName="mainDataSource" Width="94.49mm" Height="43.18mm" Left="169.67mm" Top="20.32mm" Name="SalesPersonQuarterBar">
+              <Axes>
+                <GraphAxis Name="graphAxis3" MajorTickMarkDisplayType="Outside">
+                  <Scale>
+                    <NumericalScale />
+                  </Scale>
+                  <Style>
+                    <Font Size="8pt" />
+                  </Style>
+                  <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                  <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                </GraphAxis>
+                <GraphAxis Name="graphAxis4" MajorTickMarkDisplayType="None" Size="1.3in">
+                  <Scale>
+                    <CategoryScale SpacingSlotCount="0.4" />
+                  </Scale>
+                  <Style Visible="True" TextAlign="Right">
+                    <Font Size="7pt" />
+                  </Style>
+                  <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                  <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                </GraphAxis>
+              </Axes>
+              <CoordinateSystems>
+                <CartesianCoordinateSystem XAxis="graphAxis3" YAxis="graphAxis4" Name="cartesianCoordinateSystem1" />
+              </CoordinateSystems>
+              <Style>
+                <Font Name="Arial" Size="8pt" />
+                <Padding Left="10px" Right="10px" Top="10px" Bottom="5px" />
+              </Style>
+              <SeriesGroups>
+                <GraphGroup Label="='Q' + Quarter(Fields.OrderDate)" Name="OrderDate.QuarterGroup">
+                  <Groupings>
+                    <Grouping Expression="= Quarter(Fields.OrderDate)" />
+                  </Groupings>
+                  <Sortings>
+                    <Sorting Expression="= Quarter(Fields.OrderDate)" Direction="Asc" />
+                  </Sortings>
+                </GraphGroup>
+              </SeriesGroups>
+              <CategoryGroups>
+                <GraphGroup Label="= Fields.SalesPersonFullName" Name="SalesPersonGroup">
+                  <Groupings>
+                    <Grouping Expression="=Fields.SalesPersonFullName" />
+                  </Groupings>
+                  <Sortings>
+                    <Sorting Expression="=Sum(Fields.LineTotal)" Direction="Asc" />
+                  </Sortings>
+                  <Filters>
+                    <Filter Expression="=Sum(Fields.LineTotal)" Operator="TopN" Value="=5" />
+                  </Filters>
+                </GraphGroup>
+              </CategoryGroups>
+              <Series>
+                <BarSeries CoordinateSystem="cartesianCoordinateSystem1" CategoryGroup="SalesPersonGroup" SeriesGroup="OrderDate.QuarterGroup" X="=Sum(Fields.LineTotal)" ArrangeMode="Stacked" DataPointLabel="=Sum(Fields.LineTotal)" Legend="='Q' + Quarter(Fields.OrderDate)" LegendFormat="">
+                  <DataPointLabelStyle Visible="False" />
+                  <DataPointStyle Visible="True" LineWidth="0in" />
+                </BarSeries>
+              </Series>
+              <Legend Position="TopCenter">
+                <Style LineWidth="0in" LineColor="LightGray" />
+              </Legend>
+              <PlotAreaStyle LineWidth="0in" LineColor="LightGray" />
+              <ColorPalette>
+                <ColorPalette>
+                  <Colors>
+                    <Color>105, 40, 40</Color>
+                    <Color>196, 102, 0</Color>
+                    <Color>255, 147, 30</Color>
+                    <Color>177, 161, 82</Color>
+                    <Color>211, 191, 105</Color>
+                  </Colors>
+                </ColorPalette>
+              </ColorPalette>
+            </Graph>
+            <Graph DataSourceName="mainDataSource" Width="78.23mm" Height="43.18mm" Left="91.44mm" Top="20.32mm" Culture="(Default)" Name="SalesPersonQuarterPie">
+              <Axes>
+                <GraphAxis Name="graphAxis1">
+                  <Scale>
+                    <NumericalScale />
+                  </Scale>
+                  <Style Visible="False" />
+                  <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                  <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                </GraphAxis>
+                <GraphAxis Name="graphAxis2">
+                  <Scale>
+                    <CategoryScale PositionMode="OnTicks" SpacingSlotCount="0" />
+                  </Scale>
+                  <Style Visible="False" />
+                  <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                  <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                </GraphAxis>
+              </Axes>
+              <CoordinateSystems>
+                <PolarCoordinateSystem RadialAxis="graphAxis2" AngularAxis="graphAxis1" InnerRadiusRatio="0" Name="polarCoordinateSystem1" />
+              </CoordinateSystems>
+              <Style>
+                <Font Name="Arial" />
+                <Padding Left="0px" Right="10px" Top="5px" Bottom="5px" />
+              </Style>
+              <SeriesGroups>
+                <GraphGroup Name="ProductNameGroup">
+                  <Groupings>
+                    <Grouping Expression="=Fields.ProductName" />
+                  </Groupings>
+                  <Sortings>
+                    <Sorting Expression="=Fields.ProductName" Direction="Asc" />
+                  </Sortings>
+                  <Filters>
+                    <Filter Expression="=Sum(Fields.LineTotal)" Operator="TopN" Value="=5" />
+                  </Filters>
+                </GraphGroup>
+              </SeriesGroups>
+              <CategoryGroups>
+                <GraphGroup Name="categoryGroup" />
+              </CategoryGroups>
+              <Series>
+                <BarSeries CoordinateSystem="polarCoordinateSystem1" CategoryGroup="categoryGroup" SeriesGroup="ProductNameGroup" X="=Sum(Fields.LineTotal)" ArrangeMode="Stacked100" DataPointLabel="=Sum(Fields.LineTotal)" Legend="=Fields.ProductName" LegendFormat="">
+                  <DataPointLabelStyle Visible="False" />
+                  <DataPointStyle Visible="True" LineWidth="0in" />
+                </BarSeries>
+              </Series>
+              <Legend Position="RightCenter" Width="100px" Height="0in">
+                <Style LineWidth="0in" LineColor="LightGray">
+                  <Font Size="7pt" />
+                </Style>
+              </Legend>
+              <PlotAreaStyle LineWidth="0in" LineColor="LightGray" />
+              <ColorPalette>
+                <ColorPalette>
+                  <Colors>
+                    <Color>105, 40, 40</Color>
+                    <Color>196, 102, 0</Color>
+                    <Color>255, 147, 30</Color>
+                    <Color>177, 161, 82</Color>
+                    <Color>211, 191, 105</Color>
+                  </Colors>
+                </ColorPalette>
+              </ColorPalette>
+            </Graph>
+          </Items>
+        </Panel>
+        <Panel Width="10.4in" Height="2.52in" Left="0in" Top="2.5in" Name="panel1">
+          <Items>
+            <Panel Width="3.6in" Height="2.02in" Left="0in" Top="0.5in" Name="panel4">
+              <Items>
+                <Crosstab DataSourceName="mainDataSource" Width="57.5mm" Height="12.2mm" Left="0in" Top="0.32in" Name="StoreQuarter">
+                  <Body>
+                    <Cells>
+                      <TableCell RowIndex="0" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                        <ReportItem>
+                          <TextBox Width="0.38in" Height="0.24in" Left="0in" Top="0in" Value="=Sum(Fields.LineTotal)" Format="{0:#.}" Name="sTotalQ">
+                            <Style TextAlign="Right" />
+                          </TextBox>
+                        </ReportItem>
+                      </TableCell>
+                      <TableCell RowIndex="0" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                        <ReportItem>
+                          <TextBox Width="0.38in" Height="0.24in" Left="0in" Top="0in" Value="=Sum(Fields.LineTotal)" Format="{0:#.}" Name="sTotal">
+                            <Style TextAlign="Right" />
+                          </TextBox>
+                        </ReportItem>
+                      </TableCell>
+                    </Cells>
+                    <Columns>
+                      <Column Width="9.7mm" />
+                      <Column Width="9.7mm" />
+                    </Columns>
+                    <Rows>
+                      <Row Height="6.1mm" />
+                    </Rows>
+                  </Body>
+                  <Corner>
+                    <Cells>
+                      <TableCell RowIndex="0" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                        <ReportItem>
+                          <TextBox Width="1.5in" Height="0.24in" Left="0in" Top="0in" Value="Store" Name="sTextCorner">
+                            <Style Color="0, 105, 104" />
+                          </TextBox>
+                        </ReportItem>
+                      </TableCell>
+                    </Cells>
+                  </Corner>
+                  <Style>
+                    <Font Size="8pt" />
+                  </Style>
+                  <RowGroups>
+                    <TableGroup Name="StoreName">
+                      <ReportItem>
+                        <TextBox Width="1.5in" Height="0.24in" Left="0in" Top="0in" Value="=Fields.StoreName" Name="sLabelStore" />
+                      </ReportItem>
+                      <Groupings>
+                        <Grouping Expression="=Fields.StoreName" />
+                      </Groupings>
+                      <Sortings>
+                        <Sorting Expression="=Sum(Fields.LineTotal)" Direction="Desc" />
+                      </Sortings>
+                      <Filters>
+                        <Filter Expression="=Sum(Fields.LineTotal)" Operator="TopN" Value="=5" />
+                      </Filters>
+                    </TableGroup>
+                  </RowGroups>
+                  <ColumnGroups>
+                    <TableGroup Name="Quater">
+                      <ReportItem>
+                        <TextBox Width="0.38in" Height="0.24in" Left="0in" Top="0in" Value="='Q'+Quarter(Fields.OrderDate)" Name="sLabelTotalQ">
+                          <Style Color="0, 105, 104" TextAlign="Right" />
+                        </TextBox>
+                      </ReportItem>
+                      <Groupings>
+                        <Grouping Expression="=Quarter(Fields.OrderDate)" />
+                      </Groupings>
+                      <Sortings>
+                        <Sorting Expression="=Quarter(Fields.OrderDate)" Direction="Asc" />
+                      </Sortings>
+                    </TableGroup>
+                    <TableGroup>
+                      <ReportItem>
+                        <TextBox Width="0.38in" Height="0.24in" Left="0in" Top="0in" Value="Total" Name="sLabelTotal">
+                          <Style Color="0, 105, 104" TextAlign="Right" />
+                        </TextBox>
+                      </ReportItem>
+                    </TableGroup>
+                  </ColumnGroups>
+                </Crosstab>
+                <TextBox Width="2.7in" Height="0.32in" Left="0in" Top="0in" Value="SALES AMOUNT IN USD (THOUSANDS)" Name="textBox9" StyleName="legend" />
+              </Items>
+            </Panel>
+            <TextBox Width="3.08in" Height="0.32in" Left="3.6in" Top="0.5in" Value="YEARLY SALES DISTRIBUTION" Name="textBox13" StyleName="legend" />
+            <TextBox Width="3.72in" Height="0.32in" Left="6.68in" Top="0.5in" Value="QUATERLY SALES DISTRIBUTION" Name="textBox14" StyleName="legend">
+              <Style TextAlign="Right" />
+            </TextBox>
+            <TextBox Width="10.4in" Height="0.36in" Left="0in" Top="0in" Value="Top 5 performing stores" Name="textBox7">
+              <Style Color="236, 57, 27">
+                <BorderStyle Bottom="Solid" />
+                <BorderColor Bottom="202, 137, 104" />
+                <Font Size="16pt" />
+              </Style>
+            </TextBox>
+            <Graph DataSourceName="mainDataSource" Width="94.49mm" Height="43.18mm" Left="169.67mm" Top="20.83mm" Name="StoreQuarterBar">
+              <Axes>
+                <GraphAxis Name="graphAxis3" MajorTickMarkDisplayType="Outside">
+                  <Scale>
+                    <NumericalScale />
+                  </Scale>
+                  <Style>
+                    <Font Size="8pt" />
+                  </Style>
+                  <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                  <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                </GraphAxis>
+                <GraphAxis Name="graphAxis4" MajorTickMarkDisplayType="None" Size="1.3in">
+                  <Scale>
+                    <CategoryScale SpacingSlotCount="0.4" />
+                  </Scale>
+                  <Style Visible="True">
+                    <Font Size="7pt" />
+                  </Style>
+                  <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                  <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                </GraphAxis>
+              </Axes>
+              <CoordinateSystems>
+                <CartesianCoordinateSystem XAxis="graphAxis3" YAxis="graphAxis4" Name="cartesianCoordinateSystem1" />
+              </CoordinateSystems>
+              <Style>
+                <Font Name="Segoe UI" Size="8pt" />
+                <Padding Left="10px" Right="10px" Top="10px" Bottom="5px" />
+              </Style>
+              <SeriesGroups>
+                <GraphGroup Label="='Q' + Quarter(Fields.OrderDate)" Name="OrderDate.QuarterGroup">
+                  <Groupings>
+                    <Grouping Expression="= Quarter(Fields.OrderDate)" />
+                  </Groupings>
+                  <Sortings>
+                    <Sorting Expression="= Quarter(Fields.OrderDate)" Direction="Asc" />
+                  </Sortings>
+                </GraphGroup>
+              </SeriesGroups>
+              <CategoryGroups>
+                <GraphGroup Name="ProductNameGroup">
+                  <Groupings>
+                    <Grouping Expression="=Fields.StoreName" />
+                  </Groupings>
+                  <Sortings>
+                    <Sorting Expression="=Sum(Fields.LineTotal)" Direction="Asc" />
+                  </Sortings>
+                  <Filters>
+                    <Filter Expression="=Sum(Fields.LineTotal)" Operator="TopN" Value="=5" />
+                  </Filters>
+                </GraphGroup>
+              </CategoryGroups>
+              <Series>
+                <BarSeries CoordinateSystem="cartesianCoordinateSystem1" CategoryGroup="ProductNameGroup" SeriesGroup="OrderDate.QuarterGroup" X="=Sum(Fields.LineTotal)" ArrangeMode="Stacked" DataPointLabel="=Sum(Fields.LineTotal)" Legend="='Q' + Quarter(Fields.OrderDate)" LegendFormat="">
+                  <DataPointLabelStyle Visible="False" />
+                  <DataPointStyle Visible="True" LineWidth="0in" />
+                </BarSeries>
+              </Series>
+              <Legend Position="TopCenter">
+                <Style LineWidth="0in" LineColor="LightGray" />
+              </Legend>
+              <PlotAreaStyle LineWidth="0in" LineColor="LightGray" />
+              <ColorPalette>
+                <ColorPalette>
+                  <Colors>
+                    <Color>0, 105, 104</Color>
+                    <Color>88, 168, 35</Color>
+                    <Color>137, 203, 42</Color>
+                    <Color>34, 181, 115</Color>
+                    <Color>32, 176, 212</Color>
+                  </Colors>
+                </ColorPalette>
+              </ColorPalette>
+            </Graph>
+            <Graph DataSourceName="mainDataSource" Width="78.23mm" Height="43.18mm" Left="91.44mm" Top="20.83mm" Culture="(Default)" Name="StoreQuarterPie">
+              <Axes>
+                <GraphAxis Name="graphAxis1">
+                  <Scale>
+                    <NumericalScale />
+                  </Scale>
+                  <Style Visible="False" />
+                  <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                  <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                </GraphAxis>
+                <GraphAxis Name="graphAxis2">
+                  <Scale>
+                    <CategoryScale PositionMode="OnTicks" SpacingSlotCount="0" />
+                  </Scale>
+                  <Style Visible="False" />
+                  <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                  <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                </GraphAxis>
+              </Axes>
+              <CoordinateSystems>
+                <PolarCoordinateSystem RadialAxis="graphAxis2" AngularAxis="graphAxis1" InnerRadiusRatio="0" Name="polarCoordinateSystem1" />
+              </CoordinateSystems>
+              <Style>
+                <Font Name="Segoe UI" />
+                <Padding Left="0px" Right="10px" Top="5px" Bottom="5px" />
+              </Style>
+              <SeriesGroups>
+                <GraphGroup Name="ProductNameGroup">
+                  <Groupings>
+                    <Grouping Expression="=Fields.ProductName" />
+                  </Groupings>
+                  <Sortings>
+                    <Sorting Expression="=Fields.ProductName" Direction="Asc" />
+                  </Sortings>
+                  <Filters>
+                    <Filter Expression="=Sum(Fields.LineTotal)" Operator="TopN" Value="=5" />
+                  </Filters>
+                </GraphGroup>
+              </SeriesGroups>
+              <CategoryGroups>
+                <GraphGroup Name="categoryGroup" />
+              </CategoryGroups>
+              <Series>
+                <BarSeries CoordinateSystem="polarCoordinateSystem1" CategoryGroup="categoryGroup" SeriesGroup="ProductNameGroup" X="=Sum(Fields.LineTotal)" ArrangeMode="Stacked100" DataPointLabel="=Sum(Fields.LineTotal)" Legend="=Fields.ProductName" LegendFormat="">
+                  <DataPointLabelStyle Visible="False" />
+                  <DataPointStyle Visible="True" LineWidth="0in" />
+                </BarSeries>
+              </Series>
+              <Legend Position="RightCenter" Width="100px" Height="0in">
+                <Style LineWidth="0in" LineColor="LightGray">
+                  <Font Size="7pt" />
+                </Style>
+              </Legend>
+              <PlotAreaStyle LineWidth="0in" LineColor="LightGray" />
+              <ColorPalette>
+                <ColorPalette>
+                  <Colors>
+                    <Color>0, 105, 104</Color>
+                    <Color>88, 168, 35</Color>
+                    <Color>137, 203, 42</Color>
+                    <Color>34, 181, 115</Color>
+                    <Color>32, 176, 212</Color>
+                  </Colors>
+                </ColorPalette>
+              </ColorPalette>
+            </Graph>
+          </Items>
+        </Panel>
+        <Panel Width="10.4in" Height="2.52in" Left="0in" Top="5.02in" Name="panelSalesByProduct">
+          <Items>
+            <Panel Width="3.6in" Height="2.02in" Left="0in" Top="0.5in" Name="panel6">
+              <Items>
+                <Crosstab DataSourceName="mainDataSource" Width="57.5mm" Height="12.2mm" Left="0in" Top="0.32in" Name="ProductQuarter">
+                  <Body>
+                    <Cells>
+                      <TableCell RowIndex="0" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                        <ReportItem>
+                          <TextBox Width="0.38in" Height="0.24in" Left="0in" Top="0in" Value="=Sum(Fields.LineTotal)" Format="{0:#.}" Name="pTotalQ">
+                            <Style TextAlign="Right" />
+                          </TextBox>
+                        </ReportItem>
+                      </TableCell>
+                      <TableCell RowIndex="0" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                        <ReportItem>
+                          <TextBox Width="0.38in" Height="0.24in" Left="0in" Top="0in" Value="=Sum(Fields.LineTotal)" Format="{0:#.}" Name="pTotal">
+                            <Style TextAlign="Right" />
+                          </TextBox>
+                        </ReportItem>
+                      </TableCell>
+                    </Cells>
+                    <Columns>
+                      <Column Width="9.7mm" />
+                      <Column Width="9.7mm" />
+                    </Columns>
+                    <Rows>
+                      <Row Height="6.1mm" />
+                    </Rows>
+                  </Body>
+                  <Corner>
+                    <Cells>
+                      <TableCell RowIndex="0" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                        <ReportItem>
+                          <TextBox Width="1.5in" Height="0.24in" Left="0in" Top="0in" Value="Product" Name="pTextCorner">
+                            <Style Color="236, 57, 27" />
+                          </TextBox>
+                        </ReportItem>
+                      </TableCell>
+                    </Cells>
+                  </Corner>
+                  <Style>
+                    <Font Size="8pt" />
+                  </Style>
+                  <RowGroups>
+                    <TableGroup Name="ProductNameGroup">
+                      <ReportItem>
+                        <TextBox Width="1.5in" Height="0.24in" Left="0in" Top="0in" Value="=Fields.ProductName" Name="pProductName" />
+                      </ReportItem>
+                      <Groupings>
+                        <Grouping Expression="=Fields.ProductName" />
+                      </Groupings>
+                      <Sortings>
+                        <Sorting Expression="=Sum(Fields.LineTotal)" Direction="Desc" />
+                      </Sortings>
+                      <Filters>
+                        <Filter Expression="=Sum(Fields.LineTotal)" Operator="TopN" Value="=5" />
+                      </Filters>
+                    </TableGroup>
+                  </RowGroups>
+                  <ColumnGroups>
+                    <TableGroup Name="Quater">
+                      <ReportItem>
+                        <TextBox Width="0.38in" Height="0.24in" Left="0in" Top="0in" Value="='Q'+Quarter(Fields.OrderDate)" Name="pLabelTotalQ">
+                          <Style Color="236, 57, 27" TextAlign="Right" />
+                        </TextBox>
+                      </ReportItem>
+                      <Groupings>
+                        <Grouping Expression="=Quarter(Fields.OrderDate)" />
+                      </Groupings>
+                      <Sortings>
+                        <Sorting Expression="=Quarter(Fields.OrderDate)" Direction="Asc" />
+                      </Sortings>
+                    </TableGroup>
+                    <TableGroup>
+                      <ReportItem>
+                        <TextBox Width="0.38in" Height="0.24in" Left="0in" Top="0in" Value="Total" Name="pLabelTotal">
+                          <Style Color="236, 57, 27" TextAlign="Right" />
+                        </TextBox>
+                      </ReportItem>
+                    </TableGroup>
+                  </ColumnGroups>
+                </Crosstab>
+                <TextBox Width="2.7in" Height="0.32in" Left="0in" Top="0in" Value="SALES AMOUNT IN USD (THOUSANDS)" Name="textBox10" StyleName="legend" />
+              </Items>
+            </Panel>
+            <TextBox Width="3.08in" Height="0.32in" Left="3.6in" Top="0.5in" Value="YEARLY SALES DISTRIBUTION" Name="textBox15" StyleName="legend" />
+            <TextBox Width="3.72in" Height="0.32in" Left="6.68in" Top="0.5in" Value="QUATERLY SALES DISTRIBUTION" Name="textBox16" StyleName="legend">
+              <Style TextAlign="Right" />
+            </TextBox>
+            <TextBox Width="10.38in" Height="0.36in" Left="0in" Top="0in" Value="Top 5 performing products" Name="textBox8">
+              <Style Color="236, 57, 27">
+                <BorderStyle Bottom="Solid" />
+                <BorderColor Bottom="202, 137, 104" />
+                <Font Size="16pt" />
+              </Style>
+            </TextBox>
+            <Graph DataSourceName="mainDataSource" Width="78.23mm" Height="43.18mm" Left="91.44mm" Top="20.83mm" Culture="(Default)" Name="ProductQuarterPie">
+              <Axes>
+                <GraphAxis Name="graphAxis1">
+                  <Scale>
+                    <NumericalScale />
+                  </Scale>
+                  <Style Visible="False" />
+                  <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                  <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                </GraphAxis>
+                <GraphAxis Name="graphAxis2">
+                  <Scale>
+                    <CategoryScale PositionMode="OnTicks" SpacingSlotCount="0" />
+                  </Scale>
+                  <Style Visible="False" />
+                  <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                  <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                </GraphAxis>
+              </Axes>
+              <CoordinateSystems>
+                <PolarCoordinateSystem RadialAxis="graphAxis2" AngularAxis="graphAxis1" InnerRadiusRatio="0" Name="polarCoordinateSystem1" />
+              </CoordinateSystems>
+              <Style>
+                <Font Name="Segoe UI" Size="8pt" />
+                <Padding Left="0px" Right="10px" Top="5px" Bottom="5px" />
+              </Style>
+              <SeriesGroups>
+                <GraphGroup Name="ProductNameGroup">
+                  <Groupings>
+                    <Grouping Expression="=Fields.ProductName" />
+                  </Groupings>
+                  <Sortings>
+                    <Sorting Expression="=Fields.ProductName" Direction="Asc" />
+                  </Sortings>
+                  <Filters>
+                    <Filter Expression="=Sum(Fields.LineTotal)" Operator="TopN" Value="=5" />
+                  </Filters>
+                </GraphGroup>
+              </SeriesGroups>
+              <CategoryGroups>
+                <GraphGroup Name="categoryGroup" />
+              </CategoryGroups>
+              <Series>
+                <BarSeries CoordinateSystem="polarCoordinateSystem1" CategoryGroup="categoryGroup" SeriesGroup="ProductNameGroup" X="=Sum(Fields.LineTotal)" ArrangeMode="Stacked100" DataPointLabel="=Sum(Fields.LineTotal)" Legend="=Fields.ProductName" LegendFormat="">
+                  <DataPointLabelStyle Visible="False" />
+                  <DataPointStyle Visible="True" LineWidth="0in" />
+                </BarSeries>
+              </Series>
+              <Legend Position="RightCenter" Width="100px" Height="300px">
+                <Style LineWidth="0in" LineColor="LightGray">
+                  <Font Size="7pt" />
+                </Style>
+              </Legend>
+              <PlotAreaStyle LineWidth="0in" LineColor="LightGray" />
+              <ColorPalette>
+                <ColorPalette>
+                  <Colors>
+                    <Color>25, 7, 5</Color>
+                    <Color>87, 35, 17</Color>
+                    <Color>195, 47, 11</Color>
+                    <Color>236, 57, 27</Color>
+                    <Color>255, 89, 56</Color>
+                  </Colors>
+                </ColorPalette>
+              </ColorPalette>
+            </Graph>
+            <Graph DataSourceName="mainDataSource" Width="94.49mm" Height="43.18mm" Left="169.67mm" Top="20.83mm" Name="ProductQuarterBar">
+              <Axes>
+                <GraphAxis Name="graphAxis3" MajorTickMarkDisplayType="Outside" TitlePlacement="Auto">
+                  <Scale>
+                    <NumericalScale />
+                  </Scale>
+                  <Style>
+                    <Font Size="8pt" />
+                  </Style>
+                  <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                  <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                </GraphAxis>
+                <GraphAxis Name="graphAxis4" MajorTickMarkDisplayType="None" Size="1.3in">
+                  <Scale>
+                    <CategoryScale SpacingSlotCount="0.4" />
+                  </Scale>
+                  <Style Visible="True">
+                    <Font Size="7pt" />
+                  </Style>
+                  <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                  <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+                </GraphAxis>
+              </Axes>
+              <CoordinateSystems>
+                <CartesianCoordinateSystem XAxis="graphAxis3" YAxis="graphAxis4" Name="cartesianCoordinateSystem1" />
+              </CoordinateSystems>
+              <Style>
+                <Font Name="Segoe UI" Size="8pt" />
+                <Padding Left="10px" Right="10px" Top="10px" Bottom="5px" />
+              </Style>
+              <SeriesGroups>
+                <GraphGroup Label="='Q' + Quarter(Fields.OrderDate)" Name="OrderDate.QuarterGroup">
+                  <Groupings>
+                    <Grouping Expression="= Quarter(Fields.OrderDate)" />
+                  </Groupings>
+                  <Sortings>
+                    <Sorting Expression="= Quarter(Fields.OrderDate)" Direction="Asc" />
+                  </Sortings>
+                </GraphGroup>
+              </SeriesGroups>
+              <CategoryGroups>
+                <GraphGroup Name="ProductNameGroup">
+                  <Groupings>
+                    <Grouping Expression="=Fields.ProductName" />
+                  </Groupings>
+                  <Sortings>
+                    <Sorting Expression="=Sum(Fields.LineTotal)" Direction="Asc" />
+                  </Sortings>
+                  <Filters>
+                    <Filter Expression="=Sum(Fields.LineTotal)" Operator="TopN" Value="=5" />
+                  </Filters>
+                </GraphGroup>
+              </CategoryGroups>
+              <Series>
+                <BarSeries CoordinateSystem="cartesianCoordinateSystem1" CategoryGroup="ProductNameGroup" SeriesGroup="OrderDate.QuarterGroup" X="=Sum(Fields.LineTotal)" ArrangeMode="Stacked" DataPointLabel="=Sum(Fields.LineTotal)" Legend="='Q' + Quarter(Fields.OrderDate)" LegendFormat="">
+                  <DataPointLabelStyle Visible="False" />
+                  <DataPointStyle Visible="True" LineWidth="0in" />
+                </BarSeries>
+              </Series>
+              <Legend Position="TopCenter">
+                <Style LineWidth="0in" LineColor="LightGray" />
+              </Legend>
+              <PlotAreaStyle LineWidth="0in" LineColor="LightGray" />
+              <ColorPalette>
+                <ColorPalette>
+                  <Colors>
+                    <Color>25, 7, 5</Color>
+                    <Color>87, 35, 17</Color>
+                    <Color>195, 47, 11</Color>
+                    <Color>236, 57, 27</Color>
+                    <Color>255, 89, 56</Color>
+                  </Colors>
+                </ColorPalette>
+              </ColorPalette>
+            </Graph>
+          </Items>
+        </Panel>
+      </Items>
+    </DetailSection>
+    <ReportHeaderSection Height="0.7in" Name="reportHeaderSection1">
+      <Style Visible="True" />
+      <Items>
+        <Panel Width="10.41in" Height="17.78mm" Left="0.07mm" Top="0in" Name="panel5">
+          <Items>
+            <TextBox Width="4.21in" Height="0.6in" Left="0in" Top="0in" Value="Quarterly Sales {Parameters.ReportYear.Value}" Name="textBox1" StyleName="Header">
+              <Style LineWidth="34pt" />
+            </TextBox>
+            <Shape Width="10.4in" Height="3.75pt" Left="0in" Top="0.6in" Stretch="True" Name="shape5">
+              <Style Color="Transparent">
+                <BorderStyle Top="Solid" Bottom="Solid" />
+                <BorderWidth Top="3pt" />
+              </Style>
+              <ShapeType>
+                <LineShape Direction="EW" />
+              </ShapeType>
+            </Shape>
+            <TextBox Width="2.16in" Height="0.22in" Left="8.25in" Top="0.22in" Value="[INTERNAL PURPOSES ONLY]" Name="textBox6">
+              <Style Color="195, 47, 11" TextAlign="Right">
+                <Font Name="Segoe UI" />
+              </Style>
+            </TextBox>
+          </Items>
+        </Panel>
+      </Items>
+    </ReportHeaderSection>
+  </Items>
+  <StyleSheet>
+    <StyleRule>
+      <Style>
+        <Padding Left="2pt" Right="2pt" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextItemBase" />
+        <TypeSelector Type="HtmlTextBox" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style>
+        <Font Name="Segoe UI Light" Size="25pt" Bold="True" />
+      </Style>
+      <Selectors>
+        <StyleSelector Type="ReportItemBase" StyleName="Header" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style LineWidth="21pt">
+        <Font Name="Segoe UI Light" Size="10pt" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextBox" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style Color="152, 152, 152">
+        <Font Name="Segoe UI Light" Size="9pt" />
+      </Style>
+      <Selectors>
+        <StyleSelector Type="ReportItemBase" StyleName="legend" />
+      </Selectors>
+    </StyleRule>
+  </StyleSheet>
+  <PageSettings>
+    <PageSettings PaperKind="Letter" Landscape="True">
+      <Margins>
+        <MarginsU Left="0.2in" Right="0.2in" Top="0.1in" Bottom="0in" />
+      </Margins>
+    </PageSettings>
+  </PageSettings>
+  <ReportParameters>
+    <ReportParameter Name="ReportYear" Type="Integer" Text="Sales for Year" Visible="True" AutoRefresh="True">
+      <AvailableValues DataSourceName="yearDataSource" DisplayMember="Year" ValueMember="Year" />
+      <Value>
+        <String>=2001</String>
+      </Value>
+    </ReportParameter>
+  </ReportParameters>
+</Report>

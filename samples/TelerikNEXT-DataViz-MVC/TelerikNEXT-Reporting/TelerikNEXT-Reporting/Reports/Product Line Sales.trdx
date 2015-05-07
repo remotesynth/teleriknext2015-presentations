@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report Width="8.11in" Culture="en-US" DocumentName="= Parameters.ProductCategory.Value + 'Sales(' + Join(&quot;, &quot;, Parameters.ProductSubcategory.Value) + ')[' + NOW().ToString('MMMM yyyy') + ']'" Name="ProductLineSales" SnapGridSize="0.1in" xmlns="http://schemas.telerik.com/reporting/2012/3.2">
+  <DataSources>
+    <SqlDataSource ConnectionString="Telerik.Reporting.Examples.CSharp.Properties.Settings.TelerikConnectionString" SelectCommand="SELECT Production.ProductCategory.Name AS ProductCategory&#xD;&#xA;FROM Production.ProductCategory" Name="productCategoriesDataSource" />
+    <SqlDataSource ConnectionString="Telerik.Reporting.Examples.CSharp.Properties.Settings.TelerikConnectionString" SelectCommand="SELECT     Production.ProductCategory.ProductCategoryID, Production.ProductCategory.Name AS ProductCategory, &#xD;&#xA;                      Production.ProductSubcategory.Name AS ProductSubcategory, Production.ProductSubcategory.ProductSubcategoryID&#xD;&#xA;FROM         Production.ProductCategory INNER JOIN&#xD;&#xA;                      Production.ProductSubcategory ON Production.ProductCategory.ProductCategoryID = Production.ProductSubcategory.ProductCategoryID&#xD;&#xA;WHERE Production.ProductCategory.Name = @productCategory&#xD;&#xA;" Name="productSubcategoriesDataSource">
+      <Parameters>
+        <SqlDataSourceParameter DbType="String" Name="@productCategory">
+          <Value>
+            <String>=Parameters.ProductCategory.Value</String>
+          </Value>
+        </SqlDataSourceParameter>
+      </Parameters>
+    </SqlDataSource>
+    <SqlDataSource ConnectionString="Telerik.Reporting.Examples.CSharp.Properties.Settings.TelerikConnectionString" SelectCommand="--DECLARE @productCategory nvarchar(100) = 'Bikes'&#xD;&#xA;--DECLARE @FromDate date = '2001-01-01'&#xD;&#xA;--DECLARE @ToDate date = '2004-12-31'&#xD;&#xA;&#xD;&#xA;SELECT&#xD;&#xA;&#x9;C.FirstName + ' ' + COALESCE (C.MiddleName, '') + ' ' + C.LastName AS Employee&#xD;&#xA;&#x9;, E.EmployeeID&#xD;&#xA;&#x9;, SOH.SubTotal&#xD;&#xA;&#x9;, PC.Name AS ProductCategory&#xD;&#xA;&#x9;, PS.Name AS ProductSubcategory&#xD;&#xA;FROM&#xD;&#xA;&#x9;Sales.SalesPerson AS SP&#xD;&#xA;&#x9;INNER JOIN HumanResources.Employee AS E ON SP.SalesPersonID = E.EmployeeID&#xD;&#xA;&#x9;INNER JOIN Person.Contact AS C ON E.ContactID = C.ContactID&#xD;&#xA;&#x9;INNER JOIN Sales.SalesOrderHeader AS SOH ON SP.SalesPersonID = SOH.SalesPersonID&#xD;&#xA;&#x9;INNER JOIN Sales.SalesOrderDetail AS SOD ON SOH.SalesOrderID = SOD.SalesOrderID&#xD;&#xA;&#x9;INNER JOIN Production.Product AS P ON SOD.ProductID = P.ProductID&#xD;&#xA;&#x9;INNER JOIN Production.ProductSubcategory AS PS ON P.ProductSubcategoryID = PS.ProductSubcategoryID&#xD;&#xA;&#x9;INNER JOIN Production.ProductCategory AS PC ON PS.ProductCategoryID = PC.ProductCategoryID&#xD;&#xA;WHERE &#xD;&#xA;&#x9;SOH.OrderDate BETWEEN @FromDate AND @ToDate&#xD;&#xA;&#x9;AND PC.Name = @productCategory&#xD;&#xA;&#x9;AND PS.Name IN (@productSubCategory)&#xD;&#xA;" Name="employeesDataSource">
+      <Parameters>
+        <SqlDataSourceParameter DbType="String" Name="@productCategory">
+          <Value>
+            <String>=Parameters.ProductCategory.Value</String>
+          </Value>
+        </SqlDataSourceParameter>
+        <SqlDataSourceParameter DbType="DateTime" Name="@FromDate">
+          <Value>
+            <String>=Parameters.FromDate.Value</String>
+          </Value>
+        </SqlDataSourceParameter>
+        <SqlDataSourceParameter DbType="DateTime" Name="@ToDate">
+          <Value>
+            <String>=Parameters.ToDate.Value</String>
+          </Value>
+        </SqlDataSourceParameter>
+        <SqlDataSourceParameter DbType="String" Name="@productSubCategory">
+          <Value>
+            <String>=Parameters.ProductSubcategory.Value</String>
+          </Value>
+        </SqlDataSourceParameter>
+      </Parameters>
+      <DefaultValues>
+        <SqlDataSourceParameter DbType="String" Name="@productCategory">
+          <Value>
+            <String>Bikes</String>
+          </Value>
+        </SqlDataSourceParameter>
+        <SqlDataSourceParameter DbType="DateTime" Name="@FromDate">
+          <Value>
+            <String>2001-01-01</String>
+          </Value>
+        </SqlDataSourceParameter>
+        <SqlDataSourceParameter DbType="DateTime" Name="@ToDate">
+          <Value>
+            <String>2004-06-01</String>
+          </Value>
+        </SqlDataSourceParameter>
+        <SqlDataSourceParameter DbType="String" Name="@productSubCategory">
+          <Value>
+            <String>Mountain Bikes</String>
+          </Value>
+        </SqlDataSourceParameter>
+      </DefaultValues>
+    </SqlDataSource>
+    <SqlDataSource ConnectionString="Telerik.Reporting.Examples.CSharp.Properties.Settings.TelerikConnectionString" SelectCommand="--DECLARE @productCategory nvarchar(100) = 'Bikes'&#xD;&#xA;--DECLARE @FromDate date = '2001-01-01'&#xD;&#xA;--DECLARE @ToDate date = '2004-12-31'&#xD;&#xA;&#xD;&#xA;SELECT&#xD;&#xA;&#x9;S.Name AS StoreName&#xD;&#xA;&#x9;, SOH.SubTotal&#xD;&#xA;&#x9;, PS.Name AS ProductSubcategory&#xD;&#xA;&#x9;, PC.Name AS ProductCategory&#xD;&#xA;FROM&#xD;&#xA;&#x9;Production.Product P INNER JOIN&#xD;&#xA;&#x9;Production.ProductSubcategory PS ON P.ProductSubcategoryID = PS.ProductSubcategoryID INNER JOIN&#xD;&#xA;&#x9;Production.ProductCategory PC ON PC.ProductCategoryID = PS.ProductCategoryID INNER JOIN&#xD;&#xA;&#x9;Sales.SalesOrderDetail SOD ON P.ProductID = SOD.ProductID INNER JOIN&#xD;&#xA;&#x9;Sales.Customer CU INNER JOIN&#xD;&#xA;&#x9;Sales.SalesOrderHeader SOH ON CU.CustomerID = SOH.CustomerID INNER JOIN&#xD;&#xA;&#x9;Sales.Store S ON CU.CustomerID = S.CustomerID ON SOD.SalesOrderID = SOH.SalesOrderID&#xD;&#xA;WHERE&#xD;&#xA;&#x9;SOH.OrderDate BETWEEN @FromDate AND @ToDate&#xD;&#xA;" Name="storesDataSource">
+      <Parameters>
+        <SqlDataSourceParameter DbType="String" Name="@productCategory">
+          <Value>
+            <String>=Parameters.ProductCategory.Value</String>
+          </Value>
+        </SqlDataSourceParameter>
+        <SqlDataSourceParameter DbType="DateTime" Name="@FromDate">
+          <Value>
+            <String>=Parameters.FromDate.Value</String>
+          </Value>
+        </SqlDataSourceParameter>
+        <SqlDataSourceParameter DbType="DateTime" Name="@ToDate">
+          <Value>
+            <String>=Parameters.ToDate.Value</String>
+          </Value>
+        </SqlDataSourceParameter>
+      </Parameters>
+      <DefaultValues>
+        <SqlDataSourceParameter DbType="String" Name="@productCategory">
+          <Value>
+            <String>Bikes</String>
+          </Value>
+        </SqlDataSourceParameter>
+        <SqlDataSourceParameter DbType="DateTime" Name="@FromDate">
+          <Value>
+            <String>2001-01-01</String>
+          </Value>
+        </SqlDataSourceParameter>
+        <SqlDataSourceParameter DbType="DateTime" Name="@ToDate">
+          <Value>
+            <String>2004-06-01</String>
+          </Value>
+        </SqlDataSourceParameter>
+      </DefaultValues>
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <DetailSection KeepTogether="True" Height="7.13in" Name="detail">
+      <Items>
+        <TextBox Width="8.1in" Height="0.3in" Left="0in" Top="0in" Value="Top 10 Employees" Name="textBoxTopEmployeesHeader" StyleName="Category">
+          <Style Color="0, 105, 104" VerticalAlign="Top">
+            <BorderStyle Bottom="Solid" />
+          </Style>
+        </TextBox>
+        <TextBox Width="8.1in" Height="0.33in" Left="0in" Top="3.6in" Value="Top 10 Stores" Name="textBoxTopStoresHeader" StyleName="Category">
+          <Style Color="0, 105, 104">
+            <BorderStyle Bottom="Solid" />
+          </Style>
+        </TextBox>
+        <Graph DataSourceName="employeesDataSource" Width="8.1in" Height="2.93in" Left="0.01in" Top="0.4in" Name="graph1">
+          <Axes>
+            <GraphAxis Name="graphAxis3" MajorTickMarkDisplayType="None" LabelFormat="{0:C0}K">
+              <Scale>
+                <NumericalScale>
+                  <CrossAxisPositions>
+                    <NumericalScaleCrossAxisPosition Value="0" Position="Auto" />
+                  </CrossAxisPositions>
+                </NumericalScale>
+              </Scale>
+              <MajorGridLineStyle LineWidth="1px" LineColor="LightGray" />
+              <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+            </GraphAxis>
+            <GraphAxis Name="graphAxis4" MajorTickMarkDisplayType="None">
+              <Scale>
+                <CategoryScale SpacingSlotCount="0.4">
+                  <CrossAxisPositions>
+                    <CategoryScaleCrossAxisPosition Position="Auto" />
+                  </CrossAxisPositions>
+                </CategoryScale>
+              </Scale>
+              <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+              <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+            </GraphAxis>
+          </Axes>
+          <CoordinateSystems>
+            <CartesianCoordinateSystem XAxis="graphAxis3" YAxis="graphAxis4" Name="cartesianCoordinateSystem2" />
+          </CoordinateSystems>
+          <Style>
+            <Padding Left="10px" Right="10px" Top="10px" Bottom="10px" />
+          </Style>
+          <SeriesGroups>
+            <GraphGroup Name="seriesGroup1" />
+          </SeriesGroups>
+          <CategoryGroups>
+            <GraphGroup Name="employeeGroup1">
+              <Groupings>
+                <Grouping Expression="=Fields.Employee" />
+              </Groupings>
+              <Sortings>
+                <Sorting Expression="=Sum(Fields.SubTotal)" Direction="Asc" />
+              </Sortings>
+              <Filters>
+                <Filter Expression="=Sum(Fields.SubTotal)" Operator="TopN" Value="=10" />
+              </Filters>
+            </GraphGroup>
+          </CategoryGroups>
+          <Series>
+            <BarSeries CoordinateSystem="cartesianCoordinateSystem2" CategoryGroup="employeeGroup1" SeriesGroup="seriesGroup1" X="=Sum(Fields.SubTotal) /1000.0" DataPointLabel="=Sum(Fields.SubTotal)" Legend="SubTotal" LegendFormat="">
+              <DataPointLabelStyle Visible="False" />
+              <DataPointStyle Visible="True" LineWidth="0in" />
+            </BarSeries>
+          </Series>
+          <Legend>
+            <Style Visible="False" LineWidth="0in" LineColor="LightGray" />
+          </Legend>
+          <Titles>
+            <GraphTitle Text="graph1" Position="TopCenter">
+              <Style Visible="False" LineWidth="0in" LineColor="LightGray" />
+            </GraphTitle>
+          </Titles>
+          <PlotAreaStyle LineWidth="0in" LineColor="LightGray" />
+          <ColorPalette>
+            <ColorPalette>
+              <Colors>
+                <Color>21, 198, 198</Color>
+              </Colors>
+            </ColorPalette>
+          </ColorPalette>
+        </Graph>
+        <Graph DataSourceName="storesDataSource" Width="7.19in" Height="2.93in" Left="0.01in" Top="4.1in" Name="graph2">
+          <Axes>
+            <GraphAxis Name="graphAxis7">
+              <Scale>
+                <NumericalScale>
+                  <CrossAxisPositions>
+                    <NumericalScaleCrossAxisPosition Value="0" Position="Auto" />
+                  </CrossAxisPositions>
+                </NumericalScale>
+              </Scale>
+              <Style Visible="False" />
+              <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+              <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+            </GraphAxis>
+            <GraphAxis Name="graphAxis8">
+              <Scale>
+                <CategoryScale PositionMode="OnTicks" SpacingSlotCount="0">
+                  <CrossAxisPositions>
+                    <CategoryScaleCrossAxisPosition Position="Auto" />
+                  </CrossAxisPositions>
+                </CategoryScale>
+              </Scale>
+              <Style Visible="False" />
+              <MajorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+              <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+            </GraphAxis>
+          </Axes>
+          <CoordinateSystems>
+            <PolarCoordinateSystem RadialAxis="graphAxis8" AngularAxis="graphAxis7" InnerRadiusRatio="0" Name="polarCoordinateSystem3" />
+          </CoordinateSystems>
+          <Style>
+            <Padding Left="10px" Right="30px" Top="20px" Bottom="20px" />
+          </Style>
+          <SeriesGroups>
+            <GraphGroup Name="storeNameGroup1">
+              <Groupings>
+                <Grouping Expression="=Fields.StoreName" />
+              </Groupings>
+              <Sortings>
+                <Sorting Expression="=Sum(Fields.SubTotal)" Direction="Asc" />
+              </Sortings>
+              <Filters>
+                <Filter Expression="=Sum(Fields.SubTotal)" Operator="TopN" Value="=10" />
+              </Filters>
+            </GraphGroup>
+          </SeriesGroups>
+          <CategoryGroups>
+            <GraphGroup Name="categoryGroup1" />
+          </CategoryGroups>
+          <Series>
+            <BarSeries CoordinateSystem="polarCoordinateSystem3" CategoryGroup="categoryGroup1" SeriesGroup="storeNameGroup1" X="=Sum(Fields.SubTotal)" ArrangeMode="Stacked100" DataPointLabel="=Sum(Fields.SubTotal)/1000.0" DataPointLabelFormat="{0:C0}K" Legend="=Fields.StoreName" LegendFormat="">
+              <DataPointLabelStyle Visible="True" />
+              <DataPointStyle Visible="True" LineWidth="0in" />
+            </BarSeries>
+          </Series>
+          <Legend>
+            <Style LineWidth="0in" LineColor="LightGray">
+              <Font Name="Segoe UI" Size="8pt" />
+            </Style>
+          </Legend>
+          <Titles>
+            <GraphTitle Position="TopCenter">
+              <Style LineWidth="0in" LineColor="LightGray" />
+            </GraphTitle>
+          </Titles>
+          <PlotAreaStyle LineWidth="0in" LineColor="LightGray" />
+          <ColorPalette>
+            <ColorPalette>
+              <Colors>
+                <Color>92, 25, 18</Color>
+                <Color>194, 46, 10</Color>
+                <Color>255, 88, 55</Color>
+                <Color>177, 90, 40</Color>
+                <Color>202, 137, 104</Color>
+                <Color>211, 191, 105</Color>
+                <Color>137, 203, 42</Color>
+                <Color>33, 180, 114</Color>
+                <Color>21, 198, 198</Color>
+                <Color>0, 105, 104</Color>
+              </Colors>
+            </ColorPalette>
+          </ColorPalette>
+        </Graph>
+      </Items>
+    </DetailSection>
+    <PageFooterSection Height="0.32in" Name="pageFooterSection1">
+      <Items>
+        <TextBox Width="8.1in" Height="0.3in" Left="0in" Top="0.01in" Value="AdventureWorks {Now().Year}" Name="textBox1">
+          <Style TextAlign="Right">
+            <BorderStyle Bottom="Solid" />
+          </Style>
+        </TextBox>
+      </Items>
+    </PageFooterSection>
+  </Items>
+  <StyleSheet>
+    <StyleRule>
+      <Style>
+        <Padding Left="2pt" Right="2pt" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextItemBase" />
+        <TypeSelector Type="HtmlTextBox" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style>
+        <Font Name="Segoe UI Light" Size="25pt" Bold="True" />
+        <Padding Left="0in" />
+      </Style>
+      <Selectors>
+        <StyleSelector Type="ReportItemBase" StyleName="Header" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style VerticalAlign="Middle">
+        <Font Name="Segoe UI" Size="9pt" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextBox" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style>
+        <Font Name="Segoe UI" Size="13pt" />
+        <Padding Left="0in" />
+      </Style>
+      <Selectors>
+        <StyleSelector Type="ReportItemBase" StyleName="Category" />
+      </Selectors>
+    </StyleRule>
+  </StyleSheet>
+  <PageSettings>
+    <PageSettings PaperKind="Letter" Landscape="False">
+      <Margins>
+        <MarginsU Left="0.2in" Right="0.2in" Top="0.3in" Bottom="0.4in" />
+      </Margins>
+    </PageSettings>
+  </PageSettings>
+  <Groups>
+    <Group Name="group1">
+      <GroupHeader>
+        <GroupHeaderSection Height="1.2in" Name="groupHeaderSection1">
+          <Items>
+            <TextBox Width="8.1in" Height="0.6in" Left="0in" Top="0.21in" Value="= Parameters.ProductCategory+&quot; » &quot;+Join(&quot;, &quot;, Parameters.ProductSubcategory.Value)" Name="textBoxCategories" StyleName="Header" />
+            <TextBox Width="2.3in" Height="0.21in" Left="0in" Top="0in" Value="PRODUCT LINE SALES" Name="textBoxTitle">
+              <Style Color="195, 47, 11">
+                <Font Size="9pt" Bold="True" />
+              </Style>
+            </TextBox>
+            <TextBox Width="2.64in" Height="0.21in" Left="5.46in" Top="0in" Value="{Parameters.FromDate.Value.ToString(&quot;MMM yyyy&quot;)} - {Parameters.ToDate.Value.ToString(&quot;MMM yyyy&quot;)}" Name="textBoxTimeInterval">
+              <Style TextAlign="Right">
+                <Font Bold="True" />
+              </Style>
+            </TextBox>
+            <Shape Width="8.11in" Height="3.75pt" Left="0in" Top="0.84in" Stretch="True" Anchoring="Left, Right" Name="shape3">
+              <Style Color="Transparent">
+                <BorderStyle Top="Solid" Bottom="Solid" />
+                <BorderWidth Top="3pt" />
+              </Style>
+              <ShapeType>
+                <LineShape Direction="EW" />
+              </ShapeType>
+            </Shape>
+          </Items>
+        </GroupHeaderSection>
+      </GroupHeader>
+      <GroupFooter>
+        <GroupFooterSection Height="0.05in" Name="groupFooterSection1">
+          <Style Visible="False" />
+        </GroupFooterSection>
+      </GroupFooter>
+    </Group>
+  </Groups>
+  <ReportParameters>
+    <ReportParameter Name="ProductCategory" Text="Category" Visible="True" AutoRefresh="True">
+      <AvailableValues DataSourceName="productCategoriesDataSource" ValueMember="ProductCategory">
+        <Sortings>
+          <Sorting Expression="=Fields.ProductCategory" Direction="Asc" />
+        </Sortings>
+      </AvailableValues>
+      <Value>
+        <String>Bikes</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="ProductSubcategory" Text="Subcategory" Visible="True" MultiValue="True" AutoRefresh="True">
+      <AvailableValues DataSourceName="productSubcategoriesDataSource" ValueMember="ProductSubcategory">
+        <Sortings>
+          <Sorting Expression="=Fields.ProductSubcategory" Direction="Asc" />
+        </Sortings>
+      </AvailableValues>
+      <Value>
+        <String>=First(Fields.ProductSubcategory)</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="FromDate" Type="DateTime">
+      <Value>
+        <String>=#2001-01-01#</String>
+      </Value>
+    </ReportParameter>
+    <ReportParameter Name="ToDate" Type="DateTime">
+      <Value>
+        <String>=#2004-12-31#</String>
+      </Value>
+    </ReportParameter>
+  </ReportParameters>
+</Report>

@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <title>Kendo UI Responsive Panel and Menu</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="../styles/master.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/kendo/kendo.common.min.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/kendo/kendo.flat.min.css" type="text/css" />
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/kendo/jquery.min.js"></script>
+    <script src="../scripts/kendo/kendo.all.min.js"></script>
+  </head>
+  <body>
+
+    <div class="componentWrapper">
+      <button class="k-button k-button-icon menu-toggle"><span class="k-icon k-i-hbars"></span></button>
+      <div id="menuWrapper">
+        <ul id="sampleMenu" style="width: 100%">
+          <li>
+            Item 1
+            <ul>
+              <li>Item 1-1</li>
+              <li>Item 1-2</li>
+            </ul>
+          </li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+          <li>Item 4</li>
+          <li>
+            Item 5
+            <ul>
+              <li>Item 5-1</li>
+              <li>Item 5-2</li>
+              <li>Item 5-3</li>
+            </ul>
+          </li>
+          <li>Item 6</li>
+          <li>Item 7</li>
+          <li>Item 8</li>
+          <li>Item 9</li>
+          <li>Item 10</li>
+        </ul>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#sampleMenu").kendoMenu({
+          select: function(e) {
+            $(e.item).closest(".k-rpanel").data("kendoResponsivePanel").close();
+          }
+        });
+
+        $("#menuWrapper").kendoResponsivePanel({
+          breakpoint: 768,
+          toggleButton: ".menu-toggle",
+          orientation: "top",
+          open: function() {
+            $(".menu-toggle").addClass("k-state-focused");
+          },
+          close: function() {
+            $(".menu-toggle").removeClass("k-state-focused");
+          }
+        })
+      });
+    </script>
+
+  </body>
+</html>
